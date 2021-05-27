@@ -14,23 +14,21 @@ rssa = importr('Rssa')
 
 def findOvercomingMeanMax(ser, Q, tail, num, sheet, typeF='row'):
     maxVal = sheet[typeF][num*4 + 0]
-    breakNum = 0
+    breakNum = None
     for i in range(Q-tail, len(ser)):
         if round(ser[i], 15) > round(maxVal, 15):
-            breakNum = i
-            break
-    breakNum += tail
-    return [breakNum, ser[breakNum], ser[breakNum+10], ser[breakNum+20], ser[breakNum+30]]
+            breakNum = i + tail
+            return [breakNum, ser[breakNum], ser[breakNum+10], ser[breakNum+20], ser[breakNum+30]]
+    return [None, None, None, None, None]
         
 def findOvercoming95Procentile(ser, Q, tail, num, sheet, typeF='row'):
     maxVal = sheet[typeF][num*4 + 1]
-    breakNum = 0
+    breakNum = None
     for i in range(Q-tail, len(ser)):
         if round(ser[i], 15) > round(maxVal, 15):
-            breakNum = i
-            break
-    breakNum += tail    
-    return [breakNum, ser[breakNum], ser[breakNum+10], ser[breakNum+20], ser[breakNum+30]]
+            breakNum = i + tail
+            return [breakNum, ser[breakNum], ser[breakNum+10], ser[breakNum+20], ser[breakNum+30]]
+    return [None, None, None, None, None]
         
         
 def rateOfIncrease(hm, Q, num, sheet, typeInc='meanMax'):
@@ -49,15 +47,11 @@ def rateOfIncrease(hm, Q, num, sheet, typeInc='meanMax'):
             'Sym': findOvercoming95Procentile(hm.getSym(), Q, hm.T, num, sheet, 'sym'),
             'Diag': findOvercoming95Procentile(hm.getDiag(), Q, hm.B + hm.T + 1, num, sheet, 'diag')
         }
-    sorted_tuples = sorted(res.items(), key=lambda item: item[1])
-    sorted_res = {k: v for k, v in sorted_tuples}
 
-    return sorted_res
+    return res
 
 
 def insertRecord(sheet, num, colShift, valueMeanMax, value95):
-    
-    
     
     sheet.cell(row=num*9 + 4, column=1).value = 'Values of a series with an interval of 10'
 
