@@ -240,7 +240,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
                 tmp = statsMeanMax[:, 0, i]
                 tmp = tmp[tmp != np.array(None)]
                 valuesMeanMaxRow.append(len(tmp))
-                valuesMeanMaxRow.append(np.mean(tmp))
+                valuesMeanMaxRow.append(round(np.mean(tmp)))
             else:
                 tmp = statsMeanMax[:, 0, i]
                 tmp = np.mean(tmp[tmp != np.array(None)])
@@ -254,7 +254,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
                 tmp = statsMeanMax[:, 1, i]
                 tmp = tmp[tmp != np.array(None)]
                 valuesMeanMaxCol.append(len(tmp))
-                valuesMeanMaxCol.append(np.mean(tmp))
+                valuesMeanMaxCol.append(round(np.mean(tmp)))
             else:
                 tmp = statsMeanMax[:, 1, i]
                 tmp = np.mean(tmp[tmp != np.array(None)])
@@ -267,7 +267,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
                 tmp = statsMeanMax[:, 2, i]
                 tmp = tmp[tmp != np.array(None)]
                 valuesMeanMaxSym.append(len(tmp))
-                valuesMeanMaxSym.append(np.mean(tmp))
+                valuesMeanMaxSym.append(round(np.mean(tmp)))
             else:
                 tmp = statsMeanMax[:, 2, i]
                 tmp = np.mean(tmp[tmp != np.array(None)])
@@ -280,7 +280,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
                 tmp = statsMeanMax[:, 3, i]
                 tmp = tmp[tmp != np.array(None)]
                 valuesMeanMaxDiag.append(len(tmp))
-                valuesMeanMaxDiag.append(np.mean(tmp))
+                valuesMeanMaxDiag.append(round(np.mean(tmp)))
             else:
                 tmp = statsMeanMax[:, 3, i]
                 tmp = np.mean(tmp[tmp != np.array(None)])
@@ -301,7 +301,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
                 tmp = stats95[:, 0, i]
                 tmp = tmp[tmp != np.array(None)]
                 values95Row.append(len(tmp))
-                values95Row.append(np.mean(tmp))
+                values95Row.append(round(np.mean(tmp)))
             else:
                 tmp = stats95[:, 0, i]
                 tmp = np.mean(tmp[tmp != np.array(None)])
@@ -315,7 +315,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
                 tmp = stats95[:, 1, i]
                 tmp = tmp[tmp != np.array(None)]
                 values95Col.append(len(tmp))
-                values95Col.append(np.mean(tmp))
+                values95Col.append(round(np.mean(tmp)))
             else:
                 tmp = stats95[:, 1, i]
                 tmp = np.mean(tmp[tmp != np.array(None)])
@@ -328,7 +328,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
                 tmp = stats95[:, 2, i]
                 tmp = tmp[tmp != np.array(None)]
                 values95Sym.append(len(tmp))
-                values95Sym.append(np.mean(tmp))
+                values95Sym.append(round(np.mean(tmp)))
             else:
                 tmp = stats95[:, 2, i]
                 tmp = np.mean(tmp[tmp != np.array(None)])
@@ -341,7 +341,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
                 tmp = stats95[:, 3, i]
                 tmp = tmp[tmp != np.array(None)]
                 values95Diag.append(len(tmp))
-                values95Diag.append(np.mean(tmp))
+                values95Diag.append(round(np.mean(tmp)))
             else:
                 tmp = stats95[:, 3, i]
                 tmp = np.mean(tmp[tmp != np.array(None)])
