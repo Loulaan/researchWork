@@ -97,11 +97,8 @@ def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, 
 
 
 
-def findOvercomingMeanMax(ser, Q, tail, num, sheet, typeF='row', noise=True):
-    if noise:
-        maxVal = sheet[typeF][num*4 + 0]
-    else:
-        maxVal = 1e-10
+def findOvercomingMeanMax(ser, Q, tail, num, sheet, typeF='row'):
+    maxVal = sheet[typeF][num*4 + 0]
     breakNum = None
     for i in range(Q-tail, len(ser)):
         if round(ser[i], 10) > round(maxVal, 10):
@@ -109,11 +106,8 @@ def findOvercomingMeanMax(ser, Q, tail, num, sheet, typeF='row', noise=True):
             return [breakNum, ser[Q-tail], ser[Q-tail+10], ser[Q-tail+20], ser[Q-tail+30]]
     return [None, None, None, None, None]
         
-def findOvercoming95Procentile(ser, Q, tail, num, sheet, typeF='row', noise=True):
-    if noise:
-        maxVal = sheet[typeF][num*4 + 1]
-    else:
-        maxVal = 1e-10
+def findOvercoming95Procentile(ser, Q, tail, num, sheet, typeF='row'):
+    maxVal = sheet[typeF][num*4 + 1]
     breakNum = None
     for i in range(Q-tail, len(ser)):
         if round(ser[i], 10) > round(maxVal, 10):
@@ -122,21 +116,21 @@ def findOvercoming95Procentile(ser, Q, tail, num, sheet, typeF='row', noise=True
     return [None, None, None, None, None]
         
         
-def rateOfIncrease(hm, Q, num, sheet, typeInc='meanMax', noise=True):
+def rateOfIncrease(hm, Q, num, sheet, typeInc='meanMax'):
     if typeInc == 'meanMax':
         res = {
-            'Row': findOvercomingMeanMax(hm.getRow(), Q, hm.T, num, sheet, 'row', noise),
-            'Col': findOvercomingMeanMax(hm.getCol(), Q, hm.B, num, sheet, 'col', noise),
-            'Sym': findOvercomingMeanMax(hm.getSym(), Q, hm.T, num, sheet, 'sym', noise),
-            'Diag': findOvercomingMeanMax(hm.getDiag(), Q, hm.B + hm.T + 1, num, sheet, 'diag', noise)
+            'Row': findOvercomingMeanMax(hm.getRow(), Q, hm.T, num, sheet, 'row'),
+            'Col': findOvercomingMeanMax(hm.getCol(), Q, hm.B, num, sheet, 'col'),
+            'Sym': findOvercomingMeanMax(hm.getSym(), Q, hm.T, num, sheet, 'sym'),
+            'Diag': findOvercomingMeanMax(hm.getDiag(), Q, hm.B + hm.T + 1, num, sheet, 'diag')
         }
     
     if typeInc == '95':
         res = {
-            'Row': findOvercoming95Procentile(hm.getRow(), Q, hm.T, num, sheet, 'row', noise),
-            'Col': findOvercoming95Procentile(hm.getCol(), Q, hm.B, num, sheet, 'col', noise),
-            'Sym': findOvercoming95Procentile(hm.getSym(), Q, hm.T, num, sheet, 'sym', noise),
-            'Diag': findOvercoming95Procentile(hm.getDiag(), Q, hm.B + hm.T + 1, num, sheet, 'diag', noise)
+            'Row': findOvercoming95Procentile(hm.getRow(), Q, hm.T, num, sheet, 'row'),
+            'Col': findOvercoming95Procentile(hm.getCol(), Q, hm.B, num, sheet, 'col'),
+            'Sym': findOvercoming95Procentile(hm.getSym(), Q, hm.T, num, sheet, 'sym'),
+            'Diag': findOvercoming95Procentile(hm.getDiag(), Q, hm.B + hm.T + 1, num, sheet, 'diag')
         }
 
     return res
@@ -183,7 +177,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
     Modelling for series with noise
     :param dict dictSeries: The dictionary where key is the type of series and value is a series. Example: { 'Permanent': [x_1, ..., x_N] }.
     :param int iterNum: Number of iterations for modelling.
-    :param int N: The len of series.
+    :param int N: The len of original series.
     :param int B: The len of base subseries.
     :param int T: The len of test subseries.
     :param int Q: The point of perturbation.
@@ -356,7 +350,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
         }
 
 
-        sheet.cell(row=num*9 + 1, column=1).value = typeV
+        sheet.cell(row=num*10 + 1, column=1).value = typeV
 
         insertRecord(sheet, num, resMeanMax, res95)
 
@@ -365,11 +359,10 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
 
 
 
-def fixSeriesStatistics(dictSeries:dict, N:int, B:int, T:int, Q:int, L:int, r:int, method:str, destFile:str, modellingResultsPath:str, title:str):
+def fixSeriesStatistics(dictSeries:dict, B:int, T:int, Q:int, L:int, r:int, method:str, destFile:str, modellingResultsPath:str, title:str):
     '''
     Save results for series without noise
     :param dict dictSeries: The dictionary where key is the type of series and value is a series. Example: { 'Permanent': [x_1, ..., x_N] }.
-    :param int N: The len of series.
     :param int B: The len of base subseries.
     :param int T: The len of test subseries.
     :param int Q: The point of perturbation.
@@ -393,12 +386,14 @@ def fixSeriesStatistics(dictSeries:dict, N:int, B:int, T:int, Q:int, L:int, r:in
         wb = openpyxl.load_workbook(filename = destFile)
         sheet = wb.create_sheet(title=title)
 
+    modellingResults = pd.read_excel(modellingResultsPath, sheet_name='Modelling', engine='openpyxl')
+
     for num, typeV in enumerate(dictSeries.keys()):
         series = dictSeries[typeV]
         hm = Hmatr(series, B, T, L, neig=r, svdMethod=method)
         
-        resMeanMax = rateOfIncrease(hm, Q, num, modellingResultsPath, 'meanMax', False)
-        res95 = rateOfIncrease(hm, Q, num, modellingResultsPath, '95', False)
+        resMeanMax = rateOfIncrease(hm, Q, num, modellingResults, 'meanMax')
+        res95 = rateOfIncrease(hm, Q, num, modellingResults, '95')
 
         sheet.cell(row=num*10 + 1, column=1).value = typeV
         insertRecord(sheet, num, resMeanMax, res95, False)
