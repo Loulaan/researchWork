@@ -1,0 +1,30 @@
+\babel@toc {russian}{}
+\contentsline {chapter}{\cyrillictext \CYRV \cyrv \cyre \cyrd \cyre \cyrn \cyri \cyre }{4}{chapter*.2}%
+\contentsline {chapter}{\chaptername ~1.\hskip 1em Singular spectrum analysis}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1.\hskip 1em}Алгоритм базового метода SSA}{5}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1.\hskip 1em}Вложение}{5}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2.\hskip 1em}Сингулярное разложение}{5}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3.\hskip 1em}Группировка}{6}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4.\hskip 1em}Реконструкция}{6}{subsection.1.1.4}%
+\contentsline {section}{\numberline {1.2.\hskip 1em}Ранги ряда}{6}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1.\hskip 1em}Пример}{7}{subsection.1.2.1}%
+\contentsline {chapter}{\chaptername ~2.\hskip 1em Поиск разладки}{8}{chapter.2}%
+\contentsline {section}{\numberline {2.1.\hskip 1em}Матрица неоднородности и функции неоднородности}{8}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1.\hskip 1em}Матрица неоднородности}{8}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2.\hskip 1em}Функции обнаружения}{10}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2.\hskip 1em}Однородность и неоднородность}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1.\hskip 1em}Типы неоднородности}{11}{subsection.2.2.1}%
+\contentsline {chapter}{\chaptername ~3.\hskip 1em Обновление матрицы разладки}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1.\hskip 1em}Проблема}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2.\hskip 1em}Формализация реализации}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3.\hskip 1em}Реализация}{14}{section.3.3}%
+\contentsline {section}{\numberline {3.4.\hskip 1em}Тестирование}{14}{section.3.4}%
+\contentsline {chapter}{\chaptername ~4.\hskip 1em Сравнение функций разладки}{16}{chapter.4}%
+\contentsline {section}{\numberline {4.1.\hskip 1em}Постановка задачи}{16}{section.4.1}%
+\contentsline {section}{\numberline {4.2.\hskip 1em}Экспериментальные установки}{17}{section.4.2}%
+\contentsline {section}{\numberline {4.3.\hskip 1em}Моделирование}{17}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1.\hskip 1em}Ряды без шума}{18}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2.\hskip 1em}Ряды с шумом}{24}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3.\hskip 1em}Выводы}{31}{subsection.4.3.3}%
+\contentsline {chapter}{Заключение}{32}{chapter*.19}%
+\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{33}{chapter*.20}%
