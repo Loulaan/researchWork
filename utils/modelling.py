@@ -20,6 +20,7 @@ def measureStatistics(func, Q, tail):
 
 def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, Q:int, L:int, r:int, method:str, destFile:str, vareps:float):
     '''
+    Моделирование статистик ряда (95й процентиль и средний максимум) при различных реализациях шума до момента разладки методом Монте-Карло.
     :param dict dictSeries: The dictionary where key is the type of series and value is a series. Example: { 'Permanent': [x_1, ..., x_N] }.
     :param int iterNum: Number of iterations for modelling.
     :param int N: The len of series.
@@ -64,40 +65,23 @@ def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, 
         sheet.cell(row=num*4 + 2, column=1).value = 'meanMax'
         sheet.cell(row=num*4 + 3, column=1).value = '95 procentile'
 
-
-        sheet.cell(row=num*4 + 1, column=2).value = 'row'
-        i = 2
-        for rec in np.mean(statsRow, axis=0):
-            sheet.cell(row=num*4 + i, column=2).value = rec
-            i += 1
-
-
-        sheet.cell(row=num*4 + 1, column=3).value = 'col'
-        i = 2
-        for rec in np.mean(statsCol, axis=0):
-            sheet.cell(row=num*4 + i, column=3).value = rec
-            i += 1
-
-
-        sheet.cell(row=num*4 + 1, column=4).value = 'sym'
-        i = 2
-        for rec in np.mean(statsSym, axis=0):
-            sheet.cell(row=num*4 + i, column=4).value = rec
-            i += 1
-
-
-        sheet.cell(row=num*4 + 1, column=5).value = 'diag'
-        i = 2
-        for rec in np.mean(statsDiag, axis=0):
-            sheet.cell(row=num*4 + i, column=5).value = rec
-            i += 1
-
+        insert_cell(sheet=sheet, func_type='row', row_num=num*4 + 1, col_num=2, stats=statsRow)
+        insert_cell(sheet=sheet, func_type='col', row_num=num*4 + 1, col_num=3, stats=statsCol)
+        insert_cell(sheet=sheet, func_type='sym', row_num=num*4 + 1, col_num=4, stats=statsSym)
+        insert_cell(sheet=sheet, func_type='diag', row_num=num*4 + 1, col_num=5, stats=statsDiag)
 
     wb.save(filename = destFile)
 
-
+def insert_cell(sheet, func_type, row_num, col_num, stats):
+    # Вставляем значения статистик в таблицу
+    sheet.cell(row=row_num, column=col_num).value = func_type
+    i = 2
+    for rec in np.mean(stats, axis=0):
+        sheet.cell(row=row_num + i, column=col_num).value = rec
+        i += 1
 
 def findOvercomingMeanMax(ser, Q, tail, num, sheet, typeF='row'):
+    # Ищем точку преодоления среднего максимума (моделируемая характеристика при реализациях шума)
     maxVal = sheet[typeF][num*4 + 0]
     breakNum = None
     for i in range(Q-tail, len(ser)):
@@ -107,6 +91,7 @@ def findOvercomingMeanMax(ser, Q, tail, num, sheet, typeF='row'):
     return [None, None, None, None, None]
         
 def findOvercoming95Procentile(ser, Q, tail, num, sheet, typeF='row'):
+    # Ищем точку преодоления среднего 95го процентиля (моделируемая характеристика при реализациях шума)
     maxVal = sheet[typeF][num*4 + 1]
     breakNum = None
     for i in range(Q-tail, len(ser)):
@@ -204,8 +189,6 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
 
     modellingResults = pd.read_excel(modellingResultsPath, sheet_name='Modelling', engine='openpyxl')
 
-    # TODO: optimize homogeneous operations
-
     for num, typeV in enumerate(dictSeries.keys()):
 
         statsMeanMax = []
@@ -213,7 +196,6 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
 
         for i in range(iterNum):
             eps = np.random.randn(N) * vareps**2
-            
             if typeV == 'Temporary':
                 eps[:Q] = eps[:Q]/2
 
@@ -226,142 +208,54 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
         stats95 = np.array(stats95)
 
         # Process MeanMax
-        
-        # Get mean values of row function point of overcome, num that points and values of [Q, Q+10, Q+20, Q+30] points
-        valuesMeanMaxRow = []
-        for i in range(5):
-            if i==0:
-                tmp = statsMeanMax[:, 0, i]
-                tmp = tmp[tmp != np.array(None)]
-                valuesMeanMaxRow.append(len(tmp))
-                valuesMeanMaxRow.append(round(np.mean(tmp)))
-            else:
-                tmp = statsMeanMax[:, 0, i]
-                tmp = np.mean(tmp[tmp != np.array(None)])
-                valuesMeanMaxRow.append(tmp)
-
-
-        # Get mean values of col function point of overcome, num that points and values of [Q, Q+10, Q+20, Q+30] points
-        valuesMeanMaxCol = []
-        for i in range(5):
-            if i==0:
-                tmp = statsMeanMax[:, 1, i]
-                tmp = tmp[tmp != np.array(None)]
-                valuesMeanMaxCol.append(len(tmp))
-                valuesMeanMaxCol.append(round(np.mean(tmp)))
-            else:
-                tmp = statsMeanMax[:, 1, i]
-                tmp = np.mean(tmp[tmp != np.array(None)])
-                valuesMeanMaxCol.append(tmp)
-
-        # Get mean values of sym function point of overcome, num that points and values of [Q, Q+10, Q+20, Q+30] points
-        valuesMeanMaxSym = []
-        for i in range(5):
-            if i==0:
-                tmp = statsMeanMax[:, 2, i]
-                tmp = tmp[tmp != np.array(None)]
-                valuesMeanMaxSym.append(len(tmp))
-                valuesMeanMaxSym.append(round(np.mean(tmp)))
-            else:
-                tmp = statsMeanMax[:, 2, i]
-                tmp = np.mean(tmp[tmp != np.array(None)])
-                valuesMeanMaxSym.append(tmp)
-
-        # Get mean values of diag function point of overcome, num that points and values of [Q, Q+10, Q+20, Q+30] points
-        valuesMeanMaxDiag = []
-        for i in range(5):
-            if i==0:
-                tmp = statsMeanMax[:, 3, i]
-                tmp = tmp[tmp != np.array(None)]
-                valuesMeanMaxDiag.append(len(tmp))
-                valuesMeanMaxDiag.append(round(np.mean(tmp)))
-            else:
-                tmp = statsMeanMax[:, 3, i]
-                tmp = np.mean(tmp[tmp != np.array(None)])
-                valuesMeanMaxDiag.append(tmp)
-
+        resMeanMaxArr = []
+        # Get mean values of points of overcome of detection functions, num that points and values of [Q, Q+10, Q+20, Q+30]
+        for i in range(4):
+            resMeanMaxArr.append(get_statistics_for_detection_function_for_series_with_noise(stats=statsMeanMax, col_num=i))
         resMeanMax = {
-            'Row': valuesMeanMaxRow,
-            'Col': valuesMeanMaxCol,
-            'Sym': valuesMeanMaxSym,
-            'Diag': valuesMeanMaxDiag
+            'Row': resMeanMaxArr[0],
+            'Col': resMeanMaxArr[1],
+            'Sym': resMeanMaxArr[2],
+            'Diag': resMeanMaxArr[3]
         }
 
        # Process 95 Procentile
-       # Get mean values of row function point of overcome, num that points and values of [Q, Q+10, Q+20, Q+30] points
-        values95Row = []
-        for i in range(5):
-            if i==0:
-                tmp = stats95[:, 0, i]
-                tmp = tmp[tmp != np.array(None)]
-                values95Row.append(len(tmp))
-                values95Row.append(round(np.mean(tmp)))
-            else:
-                tmp = stats95[:, 0, i]
-                tmp = np.mean(tmp[tmp != np.array(None)])
-                values95Row.append(tmp)
-
-
-        # Get mean values of col function point of overcome, num that points and values of [Q, Q+10, Q+20, Q+30] points
-        values95Col = []
-        for i in range(5):
-            if i==0:
-                tmp = stats95[:, 1, i]
-                tmp = tmp[tmp != np.array(None)]
-                values95Col.append(len(tmp))
-                values95Col.append(round(np.mean(tmp)))
-            else:
-                tmp = stats95[:, 1, i]
-                tmp = np.mean(tmp[tmp != np.array(None)])
-                values95Col.append(tmp)
-
-        # Get mean values of sym function point of overcome, num that points and values of [Q, Q+10, Q+20, Q+30] points
-        values95Sym = []
-        for i in range(5):
-            if i==0:
-                tmp = stats95[:, 2, i]
-                tmp = tmp[tmp != np.array(None)]
-                values95Sym.append(len(tmp))
-                values95Sym.append(round(np.mean(tmp)))
-            else:
-                tmp = stats95[:, 2, i]
-                tmp = np.mean(tmp[tmp != np.array(None)])
-                values95Sym.append(tmp)
-
-        # Get mean values of diag function point of overcome, num that points and values of [Q, Q+10, Q+20, Q+30] points
-        values95Diag = []
-        for i in range(5):
-            if i==0:
-                tmp = stats95[:, 3, i]
-                tmp = tmp[tmp != np.array(None)]
-                values95Diag.append(len(tmp))
-                values95Diag.append(round(np.mean(tmp)))
-            else:
-                tmp = stats95[:, 3, i]
-                tmp = np.mean(tmp[tmp != np.array(None)])
-                values95Diag.append(tmp)
-
-
+        res95Arr = []
+        # Get mean values of points of overcome of detection functions, num that points and values of [Q, Q+10, Q+20, Q+30]
+        for i in range(4):
+            res95Arr.append(get_statistics_for_detection_function_for_series_with_noise(stats=stats95, col_num=i))
         res95 = {
-            'Row': values95Row,
-            'Col': values95Col,
-            'Sym': values95Sym,
-            'Diag': values95Diag
+            'Row': res95Arr[0],
+            'Col': res95Arr[1],
+            'Sym': res95Arr[2],
+            'Diag': res95Arr[3]
         }
-
-
         sheet.cell(row=num*10 + 1, column=1).value = typeV
-
         insertRecord(sheet, num, resMeanMax, res95)
 
-
     wb.save(filename = destFile)
+
+
+def get_statistics_for_detection_function_for_series_with_noise(stats, col_num):
+    # Вычленяем из общего набора статистик нужную нам функцию обнаружения и формируем средний результат для генерации таблицы.
+    ans = []
+    for i in range(5):
+        if i==0:
+            tmp = stats[:, col_num, i]
+            tmp = tmp[tmp != np.array(None)]
+            ans.append(len(tmp))
+            ans.append(round(np.mean(tmp)))
+        else:
+            tmp = stats[:, col_num, i]
+            tmp = np.mean(tmp[tmp != np.array(None)])
+            ans.append(tmp)
+    return ans
 
 
 
 def fixSeriesStatistics(dictSeries:dict, B:int, T:int, Q:int, L:int, r:int, method:str, destFile:str, modellingResultsPath:str, title:str):
     '''
-    Save results for series without noise
+    Save results (statistics) for series without noise
     :param dict dictSeries: The dictionary where key is the type of series and value is a series. Example: { 'Permanent': [x_1, ..., x_N] }.
     :param int B: The len of base subseries.
     :param int T: The len of test subseries.
