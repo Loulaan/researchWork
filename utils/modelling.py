@@ -54,6 +54,7 @@ def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, 
             if typeV == 'Temporary':
                 eps[:Q] = eps[:Q]/2
             
+            # Ошибка!!! Шум добавляется 2 раза, здесь и при изначальной генерации ряда.
             seriesNoise = dictSeries[typeV] + eps
             hm = Hmatr(seriesNoise, B, T, L, neig=r, svdMethod=method)
             statsRow.append(measureStatistics(hm.getRow(), Q, hm.T))

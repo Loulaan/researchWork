@@ -26,5 +26,5 @@
 \contentsline {subsection}{\numberline {4.3.1.\hskip 1em}Ряды без шума}{18}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2.\hskip 1em}Ряды с шумом}{24}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3.\hskip 1em}Выводы}{31}{subsection.4.3.3}%
-\contentsline {chapter}{Заключение}{32}{chapter*.19}%
-\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{33}{chapter*.20}%
+\contentsline {chapter}{Заключение}{32}{chapter*.20}%
+\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{33}{chapter*.21}%
