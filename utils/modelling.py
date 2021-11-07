@@ -18,9 +18,10 @@ def measureStatistics(func, Q, tail):
         return np.max(func[:(Q-tail)]), np.quantile(func[:(Q-tail)], 0.95)
 
 
-def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, Q:int, L:int, r:int, method:str, destFile:str, vareps:float):
+def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, Q:int, L:int, r:int, method:str, vareps:float):
     '''
-    Моделирование статистик ряда (95й процентиль и средний максимум) при различных реализациях шума до момента разладки методом Монте-Карло.
+    Моделирование статистик ряда (средний 95й процентиль и средний максимум) при различных реализациях шума до момента разладки методом Монте-Карло.
+    Внимание, шум добавляется внутри метода!
     :param dict dictSeries: The dictionary where key is the type of series and value is a series. Example: { 'Permanent': [x_1, ..., x_N] }.
     :param int iterNum: Number of iterations for modelling.
     :param int N: The len of series.
@@ -30,31 +31,21 @@ def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, 
     :param int L: The window len.
     :param int r: Number of eigen vectors.
     :param str method: SVD method.
-    :param str destFile: Name of the file for saving results.
     :param float vareps: Variance of the noise.
+    :return: Pandas DataFrame
     '''
-
-    try:
-        wb = openpyxl.load_workbook(filename = destFile)
-        sheet = wb['Modelling']
-    except FileNotFoundError:
-        wb = openpyxl.Workbook()
-        sheet = wb.active
-        sheet.title = "Modelling"
-        sheet = wb['Modelling']
-
-    for num, typeV in enumerate(dictSeries.keys()):
-        statsRow = []
-        statsCol = []
-        statsSym = []
-        statsDiag = []
+    ds = pd.DataFrame(columns=["HeterType", "StatType", "row", "col", "sym", "diag"])
+    ds["HeterType"] = ['Permanent', 'Permanent', 'Temporary', 'Temporary', 'Shifted', 'Shifted', 'Outlier', 'Outlier']
+    ds["StatType"] = ["meanMax", "mean95Procentile"]*4
+    
+    row, col, sym, diag = [], [], [], []
+    for typeV in dictSeries.keys():
+        statsRow, statsCol, statsSym, statsDiag = [], [], [], []
+        
         
         for i in range(iterNum):
-            eps = np.random.randn(N) * vareps**2
-            if typeV == 'Temporary':
-                eps[:Q] = eps[:Q]/2
+            eps = np.random.randn(N) * vareps**2 if typeV != 'Temporary' else np.random.randn(N) * vareps**2/2
             
-            # Ошибка!!! Шум добавляется 2 раза, здесь и при изначальной генерации ряда.
             seriesNoise = dictSeries[typeV] + eps
             hm = Hmatr(seriesNoise, B, T, L, neig=r, svdMethod=method)
             statsRow.append(measureStatistics(hm.getRow(), Q, hm.T))
@@ -62,16 +53,17 @@ def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, 
             statsSym.append(measureStatistics(hm.getSym(), Q, hm.T))
             statsDiag.append(measureStatistics(hm.getDiag(), Q, hm.B + hm.T + 1))
 
-        sheet.cell(row=num*4 + 1, column=1).value = typeV    
-        sheet.cell(row=num*4 + 2, column=1).value = 'meanMax'
-        sheet.cell(row=num*4 + 3, column=1).value = '95 procentile'
+        row.append(np.mean(statsRow, axis=0))
+        col.append(np.mean(statsCol, axis=0))
+        sym.append(np.mean(statsSym, axis=0))
+        diag.append(np.mean(statsDiag, axis=0))
 
-        insert_cell(sheet=sheet, func_type='row', row_num=num*4 + 1, col_num=2, stats=statsRow)
-        insert_cell(sheet=sheet, func_type='col', row_num=num*4 + 1, col_num=3, stats=statsCol)
-        insert_cell(sheet=sheet, func_type='sym', row_num=num*4 + 1, col_num=4, stats=statsSym)
-        insert_cell(sheet=sheet, func_type='diag', row_num=num*4 + 1, col_num=5, stats=statsDiag)
-
-    wb.save(filename = destFile)
+    ds["row"] = np.array(row).reshape(-1, 1)
+    ds["col"] = np.array(col).reshape(-1, 1)
+    ds["sym"] = np.array(sym).reshape(-1, 1)
+    ds["diag"] = np.array(diag).reshape(-1, 1)
+    
+    return ds
 
 def insert_cell(sheet, func_type, row_num, col_num, stats):
     # Вставляем значения статистик в таблицу
@@ -83,7 +75,7 @@ def insert_cell(sheet, func_type, row_num, col_num, stats):
 
 def findOvercomingMeanMax(ser, Q, tail, num, sheet, typeF='row'):
     # Ищем точку преодоления среднего максимума (моделируемая характеристика при реализациях шума)
-    maxVal = sheet[typeF][num*4 + 0]
+    maxVal = sheet[typeF][num*2 + 0]
     breakNum = None
     for i in range(Q-tail, len(ser)):
         if round(ser[i], 10) > round(maxVal, 10):
@@ -93,7 +85,7 @@ def findOvercomingMeanMax(ser, Q, tail, num, sheet, typeF='row'):
         
 def findOvercoming95Procentile(ser, Q, tail, num, sheet, typeF='row'):
     # Ищем точку преодоления среднего 95го процентиля (моделируемая характеристика при реализациях шума)
-    maxVal = sheet[typeF][num*4 + 1]
+    maxVal = sheet[typeF][num*2 + 1]
     breakNum = None
     for i in range(Q-tail, len(ser)):
         if round(ser[i], 10) > round(maxVal, 10):
@@ -156,8 +148,6 @@ def insertRecord(sheet, num, valueMeanMax, value95, noise=True):
             i += 1
 
 
-
-
 def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, Q:int, L:int, r:int, method:str, destFile:str, modellingResultsPath:str, title:str, vareps:float):
     '''
     Modelling for series with noise
@@ -188,7 +178,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
         wb = openpyxl.load_workbook(filename = destFile)
         sheet = wb.create_sheet(title=title)
 
-    modellingResults = pd.read_excel(modellingResultsPath, sheet_name='Modelling', engine='openpyxl')
+    modellingResults = pd.read_csv(modellingResultsPath)
 
     for num, typeV in enumerate(dictSeries.keys()):
 
@@ -196,9 +186,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
         stats95 = []
 
         for i in range(iterNum):
-            eps = np.random.randn(N) * vareps**2
-            if typeV == 'Temporary':
-                eps[:Q] = eps[:Q]/2
+            eps = np.random.randn(N) * vareps**2 if typeV == 'Temporary' else np.random.randn(N) * vareps**2/2
 
             seriesNoise = dictSeries[typeV] + eps
             hm = Hmatr(seriesNoise, B, T, L, neig=r, svdMethod=method)
@@ -245,10 +233,18 @@ def get_statistics_for_detection_function_for_series_with_noise(stats, col_num):
             tmp = stats[:, col_num, i]
             tmp = tmp[tmp != np.array(None)]
             ans.append(len(tmp))
-            ans.append(round(np.mean(tmp)))
+            # Средняя точка преодоления промоделированного значения
+            if len(tmp) == 0:
+                ans.append(None)
+            else:
+                ans.append(round(np.mean(tmp)))
         else:
+            # Добавление средних значений для [Q, Q+10, Q+20, Q+30]
             tmp = stats[:, col_num, i]
-            tmp = np.mean(tmp[tmp != np.array(None)])
+            if len(tmp[tmp != np.array(None)]) == 0:
+                tmp = None
+            else:
+                tmp = np.mean(tmp[tmp != np.array(None)])
             ans.append(tmp)
     return ans
 
