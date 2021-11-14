@@ -14,8 +14,8 @@ utils.chooseCRANmirror(ind=1)
 rssa = importr('Rssa')
 
 
-def measureStatistics(func, Q, tail):
-        return np.max(func[:(Q-tail)]), np.quantile(func[:(Q-tail)], 0.95)
+def measureStatistics(func, Q):
+        return np.max(func[:(Q-1)]), np.quantile(func[:(Q-1)], 0.95)
 
 
 def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, Q:int, L:int, r:int, method:str, vareps:float):
@@ -74,24 +74,26 @@ def insert_cell(sheet, func_type, row_num, col_num, stats):
         i += 1
 
 def findOvercomingMeanMax(ser, Q, tail, num, sheet, typeF='row'):
+    # tail нужен для синхронизации функции разладки со значениями ряда. Q - точка возмущения в ряде, поэтому отнимаем для получения правильного значения функции разладки в точке возмущения. 
     # Ищем точку преодоления среднего максимума (моделируемая характеристика при реализациях шума)
     maxVal = sheet[typeF][num*2 + 0]
     breakNum = None
-    for i in range(Q-tail, len(ser)):
+    for i in range(len(ser)):
         if round(ser[i], 10) > round(maxVal, 10):
             breakNum = i + tail
-            return [breakNum, ser[Q-tail], ser[Q-tail+10], ser[Q-tail+20], ser[Q-tail+30]]
-    return [None, None, None, None, None]
+            return [breakNum, ser[i], ser[Q-tail], ser[Q-tail+10], ser[Q-tail+20], ser[Q-tail+30]]
+    return [None, None, None, None, None, None]
         
 def findOvercoming95Procentile(ser, Q, tail, num, sheet, typeF='row'):
+    # tail нужен для синхронизации функции разладки со значениями ряда. Q - точка возмущения в ряде, поэтому отнимаем для получения правильного значения функции разладки в точке возмущения.
     # Ищем точку преодоления среднего 95го процентиля (моделируемая характеристика при реализациях шума)
     maxVal = sheet[typeF][num*2 + 1]
     breakNum = None
-    for i in range(Q-tail, len(ser)):
+    for i in range(len(ser)):
         if round(ser[i], 10) > round(maxVal, 10):
             breakNum = i + tail
-            return [breakNum, ser[Q-tail], ser[Q-tail+10], ser[Q-tail+20], ser[Q-tail+30]]
-    return [None, None, None, None, None]
+            return [breakNum, ser[i], ser[Q-tail], ser[Q-tail+10], ser[Q-tail+20], ser[Q-tail+30]]
+    return [None, None, None, None, None, None]
         
         
 def rateOfIncrease(hm, Q, num, sheet, typeInc='meanMax'):
@@ -128,12 +130,13 @@ def insertRecord(sheet, num, valueMeanMax, value95, noise=True):
 
         if noise:
             sheet.cell(row=num*multipRow + 3, column=j*multipCol+1).value = 'Num Points of overcoming'
-        sheet.cell(row=num*multipRow + 4 - int(not noise), column=j*multipCol+1).value = 'Point of overcoming'
+        sheet.cell(row=num*multipRow + 4 - int(not noise), column=j*multipCol+1).value = 'detected Q'
 
-        sheet.cell(row=num*multipRow + 5 - int(not noise), column=j*multipCol+1).value = 'X[Q]'
-        sheet.cell(row=num*multipRow + 6 - int(not noise), column=j*multipCol+1).value = 'X[Q+10]'
-        sheet.cell(row=num*multipRow + 7 - int(not noise), column=j*multipCol+1).value = 'X[Q+20]'
-        sheet.cell(row=num*multipRow + 8 - int(not noise), column=j*multipCol+1).value = 'X[Q+30]'
+        sheet.cell(row=num*multipRow + 5 - int(not noise), column=j*multipCol+1).value = 'X[detected Q]'
+        sheet.cell(row=num*multipRow + 6 - int(not noise), column=j*multipCol+1).value = 'X[Q]'
+        sheet.cell(row=num*multipRow + 7 - int(not noise), column=j*multipCol+1).value = 'X[Q+10]'
+        sheet.cell(row=num*multipRow + 8 - int(not noise), column=j*multipCol+1).value = 'X[Q+20]'
+        sheet.cell(row=num*multipRow + 9 - int(not noise), column=j*multipCol+1).value = 'X[Q+30]'
 
         # Process the functions with meanMax
         i = 3
@@ -186,7 +189,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
         stats95 = []
 
         for i in range(iterNum):
-            eps = np.random.randn(N) * vareps**2 if typeV == 'Temporary' else np.random.randn(N) * vareps**2/2
+            eps = np.random.randn(N) * vareps**2 if typeV != 'Temporary' else np.random.randn(N) * vareps**2/2
 
             seriesNoise = dictSeries[typeV] + eps
             hm = Hmatr(seriesNoise, B, T, L, neig=r, svdMethod=method)
@@ -228,7 +231,7 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
 def get_statistics_for_detection_function_for_series_with_noise(stats, col_num):
     # Вычленяем из общего набора статистик нужную нам функцию обнаружения и формируем средний результат для генерации таблицы.
     ans = []
-    for i in range(5):
+    for i in range(6):
         if i==0:
             tmp = stats[:, col_num, i]
             tmp = tmp[tmp != np.array(None)]
@@ -239,7 +242,7 @@ def get_statistics_for_detection_function_for_series_with_noise(stats, col_num):
             else:
                 ans.append(round(np.mean(tmp)))
         else:
-            # Добавление средних значений для [Q, Q+10, Q+20, Q+30]
+            # Добавление средних значений для [Q_det, Q, Q+10, Q+20, Q+30]
             tmp = stats[:, col_num, i]
             if len(tmp[tmp != np.array(None)]) == 0:
                 tmp = None
@@ -252,7 +255,7 @@ def get_statistics_for_detection_function_for_series_with_noise(stats, col_num):
 
 def fixSeriesStatistics(dictSeries:dict, B:int, T:int, Q:int, L:int, r:int, method:str, destFile:str, modellingResultsPath:str, title:str):
     '''
-    Save results (statistics) for series without noise
+    Save results (statistics) for series without noise: point where value of detection function greater than modelled values.
     :param dict dictSeries: The dictionary where key is the type of series and value is a series. Example: { 'Permanent': [x_1, ..., x_N] }.
     :param int B: The len of base subseries.
     :param int T: The len of test subseries.
@@ -288,6 +291,87 @@ def fixSeriesStatistics(dictSeries:dict, B:int, T:int, Q:int, L:int, r:int, meth
 
         sheet.cell(row=num*10 + 1, column=1).value = typeV
         insertRecord(sheet, num, resMeanMax, res95, False)
+
+    
+    wb.save(filename = destFile)
+
+
+def findNonZeroPoint(ser, Q):
+    maxVal = 0
+    breakNum = None
+    for i in range(len(ser)):
+        if round(ser[i], 10) > round(maxVal, 10):
+            breakNum = i
+            return [breakNum, ser[Q], ser[Q+10], ser[Q+20], ser[Q+30]]
+    return [None, None, None, None, None]
+
+
+def rateOfIncreaseNonModelling(hm, Q):
+    return {
+        'Row': findNonZeroPoint(hm.getRow(sync=True), Q),
+        'Col': findNonZeroPoint(hm.getCol(sync=True), Q),
+        'Sym': findNonZeroPoint(hm.getSym(sync=True), Q),
+        'Diag': findNonZeroPoint(hm.getDiag(sync=True), Q)
+    }
+    
+
+def insert(sheet, num, values):
+
+    multipRow = 9
+    multipCol = 3
+
+    for j, typeV in enumerate(values.keys()):
+        # Insert info cells
+        sheet.cell(row=num*multipRow + 2, column=j*multipCol+1).value = typeV
+        sheet.cell(row=num*multipRow + 2, column=j*multipCol+2).value = 'ZeroValue'
+        sheet.cell(row=num*multipRow + 3, column=j*multipCol+1).value = 'detected Q'
+        sheet.cell(row=num*multipRow + 4, column=j*multipCol+1).value = 'X[Q]'
+        sheet.cell(row=num*multipRow + 5, column=j*multipCol+1).value = 'X[Q+10]'
+        sheet.cell(row=num*multipRow + 6, column=j*multipCol+1).value = 'X[Q+20]'
+        sheet.cell(row=num*multipRow + 7, column=j*multipCol+1).value = 'X[Q+30]'
+
+        # Process the functions
+        i = 3
+        # print(values[typeV])
+        for rec in values[typeV]:
+            sheet.cell(row=num*multipRow + i, column=j*multipCol+2).value = rec
+            i += 1
+
+
+def find_points_whith_non_zero_value(dictSeries:dict, B:int, T:int, Q:int, L:int, r:int, method:str, destFile:str, title:str):
+    '''
+    Save results (statistics) for series without noise: point where value of detection function greater than 0.
+    :param dict dictSeries: The dictionary where key is the type of series and value is a series. Example: { 'Permanent': [x_1, ..., x_N] }.
+    :param int B: The len of base subseries.
+    :param int T: The len of test subseries.
+    :param int Q: The point of perturbation.
+    :param int L: The window len.
+    :param int r: Number of eigen vectors.
+    :param str method: SVD method.
+    :param str destFile: Name of the file for saving results.
+    :param str title: Sheet title where results will be stored.
+    '''
+
+    try:
+        wb = openpyxl.load_workbook(filename = destFile)
+        sheet = wb[title]
+    except FileNotFoundError:
+        wb = openpyxl.Workbook()
+        sheet = wb.active
+        sheet.title = title
+        sheet = wb[title]
+    except KeyError:
+        wb = openpyxl.load_workbook(filename = destFile)
+        sheet = wb.create_sheet(title=title)
+
+    for num, typeV in enumerate(dictSeries.keys()):
+        series = dictSeries[typeV]
+        hm = Hmatr(series, B, T, L, neig=r, svdMethod=method)
+        
+        res = rateOfIncreaseNonModelling(hm, Q)
+
+        sheet.cell(row=num*9 + 1, column=1).value = typeV
+        insert(sheet, num, res)
 
     
     wb.save(filename = destFile)
