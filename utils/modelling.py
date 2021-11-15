@@ -14,8 +14,9 @@ utils.chooseCRANmirror(ind=1)
 rssa = importr('Rssa')
 
 
-def measureStatistics(func, Q):
-        return np.max(func[:(Q-1)]), np.quantile(func[:(Q-1)], 0.95)
+def measureStatistics(func, Q, tail):
+    # tail нужен для синхронизации функции разладки со значениями ряда. Q - точка возмущения в ряде, поэтому отнимаем для получения правильного значения функции разладки в точке возмущения. 
+    return np.max(func[:(Q-tail)]), np.quantile(func[:(Q-tail)], 0.95)
 
 
 def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, Q:int, L:int, r:int, method:str, vareps:float):
@@ -51,7 +52,7 @@ def modellingNoiseStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int, 
             statsRow.append(measureStatistics(hm.getRow(), Q, hm.T))
             statsCol.append(measureStatistics(hm.getCol(), Q, hm.B))
             statsSym.append(measureStatistics(hm.getSym(), Q, hm.T))
-            statsDiag.append(measureStatistics(hm.getDiag(), Q, hm.B + hm.T + 1))
+            statsDiag.append(measureStatistics(hm.getDiag(), Q,  hm.B + hm.T + 1))
 
         row.append(np.mean(statsRow, axis=0))
         col.append(np.mean(statsCol, axis=0))
