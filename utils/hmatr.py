@@ -12,7 +12,6 @@ rssa = importr('Rssa')
 
 
 class Hmatr:
-    
     def __init__(self, f, B = 0, T = 0, L = 0, neig = 0, svdMethod = 'propack'):
         self.f = f
         self.N = len(f)
