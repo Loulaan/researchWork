@@ -1,6 +1,7 @@
 from collections import defaultdict
-from typing import DefaultDict
+from typing import DefaultDict, List, Tuple
 import numpy as np
+from numpy import pi, cos, sin
 import matplotlib.pyplot as plt
 import rpy2.robjects as robjects
 import rpy2.robjects.numpy2ri
@@ -19,13 +20,16 @@ class Hmatr:
         self.f = f
         self.N = len(f)
         self.L = L if L != 0 else B // 4
-        self.K = self.N - self.L + 1
+        self.K = self.N - self.L
         self.B = B if B != 0 else self.N // 4
         self.T = T if T != 0 else self.N // 4
 
-        self.NT = self.N - self.T + 1
-        self.KT = self.T - self.L + 1
-        
+        self.NT = self.N - self.T
+        self.KT = self.T - self.L
+
+        self.NB = self.N - self.B
+        self.KB = self.B - self.L
+
         self.neig = neig if neig != 0 else 10
         self.svdMethod = svdMethod
         
@@ -36,23 +40,56 @@ class Hmatr:
         
     def __call__(self):
         return self.hmatr
-        
 
     def __compute_cXU2(self, i):
         return np.r_[0, np.cumsum(np.sum((np.matmul(self.th, self.U[i]))**2, axis=1))]
 
+    def _compute_ratio(self, idx, numer, denom):
+        numerator = np.sum(numer[idx:(idx+self.KT)])
+        denominator = np.sum(denom[idx:(idx+self.KT)])
+        return np.round(numerator/denominator, 8)
+
+    def compute_single_row(self, row_id):
+        Fb = self.f[row_id:(row_id + self.B)]
+        s = rssa.ssa(robjects.FloatVector(Fb), L=self.L, neig=min(2 * self.neig, 50), svd_method=self.svdMethod)
+        self.U = np.array(rssa._U_ssa(s))[:, :self.neig]
+        data_for_numerator = np.square(np.dot(self.th, self.U))
+        data_for_denominator = np.square(np.linalg.norm((self.th), axis=1))
+        ratio = np.array([self._compute_ratio(idx, data_for_numerator, data_for_denominator) for idx in range(self.NT)])
+        return 1 - ratio
+
+    def compute_single_val_analytical(self, w1, w2):
+        eps = 1e-15
+        a = w1+w2
+        b = w1-w2 + eps
+        first = sin(2 * pi * self.L * b) / (4 * pi * b) - sin(2 * pi * self.L * a) / (4 * pi * a)
+        second = np.square(sin(pi * self.L * a)) / (2 * pi * a) - np.square(sin(pi * self.L * b)) / (2 * pi * b)
+        # TODO: why works without squares??
+        ratio = np.round((first + second) / (self.L / 2), 8)
+        return 1 - ratio
+
+    def compute_row_analytical(self, omegas: List[Tuple|List] | np.ndarray) -> List | np.ndarray:
+        return [self.compute_single_val_analytical(*ws) for ws in omegas]
+
+    # def compute_hm_analytical(self, ):
+
+    def compute_hm(self):
+        self.th = np.transpose(np.array(rssa.hankel(robjects.FloatVector(self.f), L=self.L)))
+        hm = np.array([self.compute_single_row(i) for i in range(self.NB)])
+        return hm
+
     def __compute_hmatr(self):
         self.th = np.transpose(np.array(rssa.hankel(robjects.FloatVector(self.f), L = self.L)))
         self.cth2_cumsum = np.r_[0, np.cumsum(np.sum(self.th**2, axis=1))]
-        cth2 = (self.cth2_cumsum[self.KT:self.K] - self.cth2_cumsum[:self.NT - 1])
+        cth2 = (self.cth2_cumsum[self.KT:self.K] - self.cth2_cumsum[:self.NT])
         self.STATISTICS['norm'] = cth2
         def hc(idx):
             Fb = self.f[idx:(idx + self.B)]
             s = rssa.ssa(robjects.FloatVector(Fb), L=self.L, neig=min(2 * self.neig, 50), svd_method=self.svdMethod)
             self.U.append(np.array(rssa._U_ssa(s))[:, :self.neig])
             cXU2 = self.__compute_cXU2(-1)
-            sumDist = (cXU2[self.KT:(self.N - self.L + 1)] - cXU2[:self.NT - 1])
-            return 1 - sumDist/cth2
+            sumDist = (cXU2[self.KT:(self.K)] - cXU2[:self.NT])
+            return 1 - np.round(sumDist/cth2, 8)
         h = np.r_[[hc(i) for i in range(0, self.N - self.B)]]
         return h
 
@@ -117,6 +154,6 @@ class Hmatr:
     def plotHm(self, title='HM', w=4, h=4):
         plt.figure(figsize=(w, h))
         plt.title(title)
-        plt.xlim([0, self.N - self.T + 1])
-        plt.ylim([0, self.N - self.B + 1])
+        plt.xlim([0, self.NT])
+        plt.ylim([0, self.NB])
         plt.imshow(self.hmatr)
