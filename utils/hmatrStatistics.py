@@ -16,7 +16,8 @@ rssa = importr('Rssa')
 
 class Hmatr:
     STATISTICS = defaultdict()
-    def __init__(self, f, B = 0, T = 0, L = 0, neig = 0, svdMethod = 'propack'):
+
+    def __init__(self, f, B=0, T=0, L=0, neig=0, svdMethod='propack'):
         self.f = f
         self.N = len(f)
         self.L = L if L != 0 else B // 4
@@ -44,34 +45,64 @@ class Hmatr:
     def __compute_cXU2(self, i):
         return np.r_[0, np.cumsum(np.sum((np.matmul(self.th, self.U[i]))**2, axis=1))]
 
-    def _compute_ratio(self, idx, numer, denom):
-        numerator = np.sum(numer[idx:(idx+self.KT)])
-        denominator = np.sum(denom[idx:(idx+self.KT)])
-        return np.round(numerator/denominator, 8)
-
     def compute_single_row(self, row_id):
+        """
+        Подсчет строковой функции разладки номер row_id. Более медленный метод, но зато намного нагляднее.
+        :param row_id: int
+        :return:
+        """
+
+        def _compute_ratio(idx, numer, denom):
+            numerator = np.sum(numer[idx:(idx + self.KT)])
+            denominator = np.sum(denom[idx:(idx + self.KT)])
+            return np.round(numerator / denominator, 8)
+
         Fb = self.f[row_id:(row_id + self.B)]
         s = rssa.ssa(robjects.FloatVector(Fb), L=self.L, neig=min(2 * self.neig, 50), svd_method=self.svdMethod)
         self.U = np.array(rssa._U_ssa(s))[:, :self.neig]
         data_for_numerator = np.square(np.dot(self.th, self.U))
-        data_for_denominator = np.square(np.linalg.norm((self.th), axis=1))
-        ratio = np.array([self._compute_ratio(idx, data_for_numerator, data_for_denominator) for idx in range(self.NT)])
+        data_for_denominator = np.square(np.linalg.norm(self.th, axis=1))
+        ratio = np.array([_compute_ratio(idx, data_for_numerator, data_for_denominator) for idx in range(self.NT)])
+        return 1-ratio
+
+    def compute_single_row_interm(self, row_id, where):
+        """
+        Промежуточные вычисления: K_2 * (<X_l, U_1>^2 + <X_l, U_2>^2).
+        Проверяем правильность хода аналитических вычислений.
+        :param row_id: int
+        :param where: int
+        :return:
+        """
+
+        def _compute_ratio_iterm(idx, numer, denom):
+            numerator = self.KT * (numer[idx:(idx + self.KT)][0][0] + numer[idx:(idx + self.KT)][0][1])
+            denominator = np.sum(denom[idx:(idx + self.KT)])
+            return np.round(numerator / denominator, 8)
+
+        Fb = self.f[row_id:(row_id + self.B)]
+        s = rssa.ssa(robjects.FloatVector(Fb), L=self.L, neig=min(2 * self.neig, 50), svd_method=self.svdMethod)
+        self.U = np.array(rssa._U_ssa(s))[:, :self.neig]
+        data_for_numerator = np.square(np.dot(self.th, self.U))
+        data_for_denominator = np.square(np.linalg.norm(self.th, axis=1))
+        ratio = np.array(_compute_ratio_iterm(where, data_for_numerator, data_for_denominator))
         return 1 - ratio
 
     def compute_single_val_analytical(self, w1, w2):
-        eps = 1e-15
         a = w1+w2
-        b = w1-w2 + eps
-        first = sin(2 * pi * self.L * b) / (4 * pi * b) - sin(2 * pi * self.L * a) / (4 * pi * a)
-        second = np.square(sin(pi * self.L * a)) / (2 * pi * a) - np.square(sin(pi * self.L * b)) / (2 * pi * b)
-        # TODO: why works without squares??
-        ratio = np.round((first + second) / (self.L / 2), 8)
+        b = w1-w2
+        if w1 == w2:
+            first = (self.L/2 - sin(4*pi*self.L*w1)/(8*pi*w1))**2
+            second = (sin(2*pi*self.L*w1)**2/(4*pi*w1))**2
+        else:
+            first = (sin(2*pi*self.L*b)/(4*pi*b) - sin(2*pi*self.L*a)/(4*pi*a))**2
+            second = ((a*cos(2*pi*self.L*b) - b*cos(2*pi*self.L*a) - 2*w2)/(4*pi*a*b))**2
+        numerator = first + second
+        denom = np.square(self.L/2 - sin(4*pi*self.L*w2)/(8*pi*w2))
+        ratio = numerator / denom
         return 1 - ratio
 
     def compute_row_analytical(self, omegas: List[Tuple|List] | np.ndarray) -> List | np.ndarray:
         return [self.compute_single_val_analytical(*ws) for ws in omegas]
-
-    # def compute_hm_analytical(self, ):
 
     def compute_hm(self):
         self.th = np.transpose(np.array(rssa.hankel(robjects.FloatVector(self.f), L=self.L)))
@@ -95,7 +126,8 @@ class Hmatr:
 
     def getNewRow(self):
         cth2 = self.cth2_cumsum[(self.T - self.L + 1):(self.N - self.L + 1)] - self.cth2_cumsum[:(self.N - self.T)]
-        s = rssa.ssa(robjects.FloatVector(self.f[(self.N - self.B):self.N]), L = self.L, neig = min(2 * self.neig, 50), svd_method = self.svdMethod)
+        s = rssa.ssa(robjects.FloatVector(self.f[(self.N - self.B):self.N]), L=self.L,
+                     neig=min(2 * self.neig, 50), svd_method=self.svdMethod)
         self.U.append(np.array(rssa._U_ssa(s))[:, :self.neig])
         cXU2 = self.__compute_cXU2(-1)
         sumDist = cXU2[self.KT:(self.N - self.L + 1)] - cXU2[:self.N - self.T]
@@ -133,12 +165,14 @@ class Hmatr:
     
     def getSym(self, sync=False):
         if sync:
-            return np.r_[np.zeros(self.N - len(self.hmatr.diagonal())) + np.mean(self.hmatr[:self.B, 0]), self.hmatr.diagonal()]
+            return np.r_[np.zeros(self.N - len(self.hmatr.diagonal())) +
+                         np.mean(self.hmatr[:self.B, 0]), self.hmatr.diagonal()]
         return self.hmatr.diagonal()
     
     def getDiag(self, sync=False):
         if sync:
-            return np.r_[np.zeros(self.N - len(self.hmatr.diagonal(self.B+1))) + np.mean(self.hmatr.diagonal(self.B+1)[:self.B]), self.hmatr.diagonal(self.B+1)]
+            return np.r_[np.zeros(self.N - len(self.hmatr.diagonal(self.B+1))) +
+                         np.mean(self.hmatr.diagonal(self.B+1)[:self.B]), self.hmatr.diagonal(self.B+1)]
         return self.hmatr.diagonal(self.B+1)
     
     def plotHeterFunc(self, title='Heterogenety Functions', w=16, h=4):

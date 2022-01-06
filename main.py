@@ -41,4 +41,4 @@ def analytical_computation():
 
 
 if __name__ == "__main__":
-    analytical_computation()
+    new_computation()
