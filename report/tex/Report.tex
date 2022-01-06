@@ -694,50 +694,101 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 
 
 \newpage
-\chapter{Аналитическая оценка индекса неоднородности}
-Индекс неоднородности задается формулой (2.1):
-$$g(F^{(1)}; F^{(2)}) = 1 - \frac{\sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2} . \eqno{(2.1)}$$
+\chapter{Аналитическая оценка индекса неоднородности при изменении частоты гармоники}
+
+Рассмотрим ряд $ F_N = (f_0, \dots f_{N-1}) $, причем  
+\begin{equation*} 
+	f_n = 
+	\begin{cases} 
+		C_1\sin(2\pi\omega_1 n + \phi_1),\ n \in [0, Q-1] \\ 
+		C_2\sin(2\pi\omega_2 n + \phi_2),\ n \in [Q, N-1] 
+	\end{cases} 
+\end{equation*} 
+
+Обозначим 
+$$ F^{(1)} = f_n^{(1)}|_{n=0}^{B},\ B \in [0, Q-1], $$
+$$ F^{(2)} = f_n^{(2)}|_{n=Q}^{Q+T-1},\ T \in [Q, N-Q-1], $$
+$$X_l^{(2)} = (f_{l}^{(2)}, \dotsc, f_{l+L-1}^{(2)})^\mathrm{T}, \;\;\; 0 \leq l < K_2$$
+
+
+В соответствии с формулой (2.1), индекс неоднородности задается как:
+$$ g(F^{(1)}; F^{(2)}) = 1 - \frac{\sum\limits_{l=0}^{K_2-1}\;\sum\limits_{i=0}^{r-1}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=0}^{K_2-1}\|X_l^{(2)}\|^2} $$
+
+Для простоты зададим амплитуды $ C_1 = C_2 = 1 $.
 
 Попробуем аналитически упростить данную формулу, чтобы явно увидеть, как разности частот ряда до и после разладки влияют на значения $ g $.
-
-Для простоты, пусть ряды задаются следующим образом: 
-$$F^{(1)} = x_n|_{n=0}^{L-1} = \sin(2\pi\omega_1 n)|_{n=0}^{L-1},$$ $$F^{(2)} = x_n|_{n=0}^{L-1} = \sin(2\pi\omega_2 n)|_{n=0}^{L-1}$$.
 
 \section{Отношение}
 \subsection{Знаменатель}
 Начнем со знаменателя $\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2$, а точнее, с квадрата нормы $\|X_l^{(2)}\|^2$. Оценим его:
 
-$$ \|X_l^{(2)}\|^2 = \sum\limits_{i=1}^{L}(X_{l_i}^{(2)}) = \int\limits_{0}^{L}X_{l_i}^{(2)} = \int\limits_{0}^{L}\sin^2{(2\pi\omega_2 y)}dy = \frac{L}{2} - \frac{\sin(4\pi L\omega_2)}{8\pi\omega_2} \approx \frac{L}{2} $$
+$$ \|X_l^{(2)}\|^2 = \sum\limits_{i=1}^{L}(X_{l}^{(2)})_i^2 \approx \int\limits_{0}^{L}\sin^2{(2\pi\omega_2 y + \psi_l)}dy = \frac{L}{2} - \frac{\sin(4\pi L\omega_2 + \psi_l) - \sin(2\psi_l)}{8\pi\omega_2} \approx \frac{L}{2}, $$
+где $ \psi_l $ формируется из $ \phi_2 $ и сдвига, порождаемого номером вектора вложения.
 
 Отсюда $\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2 \approx K_2\cdot\frac{L}{2}$.
 
 
 \subsection{Числитель}
-Для простоты мы взяли ряд, состоящий из синусов. Его ранг равен $ 2 $ и скалярное произведение будет состоять из одинаковых слагаемых.
+$$ \sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2 = 
+\sum\limits_{l=1}^{K_2}\;\left ( \langle X_l^{(2)}, U_1^{(1)}\rangle^2 + \langle X_l^{(2)}, U_2^{(1)}\rangle^2 \right ) = $$
+$$ =  \sum\limits_{l=1}^{K_2}\; \left [ \left (\sum\limits_{j=1}^{L}(X_{l}^{(2)})_j\cdot (U_{1}^{(1)})_j\right )^2 + \left ( \sum\limits_{j=1}^{L}(X_{l}^{(2)})_j\cdot (U_{2}^{(1)})_j\right )^2 \right ]$$
+
+Рассмотрим $ U_{1}^{(1)} $ и $U_{2}^{(1)} $. В силу задания ряда, базисом $ U_{1}^{(1)} $ и $U_{2}^{(1)} $ пространства $ \mathfrak{L}_r^{(1)} $, порожденного элементами $ f_n^{(1)} = \sin(2\pi\omega_1 n + \phi_1) $ являются некие нормированные $ \sin(2\pi\omega_1 n + \psi) $ и $ \cos(2\pi\omega_1 n + \psi) $.
+
+Пусть $ p_1 = \sin(2\pi\omega_1 n + \psi) $, $ p_2 = \cos(2\pi\omega_1 n + \psi) $. Вычислим нормы $ p_1 $ и $ p_2 $ для поиска $ U_{1}^{(1)} $ и $U_{2}^{(1)} $. 
+По аналогии со знаменателем индекса неоднородности (п. 5.1.1.), $ \|p_1\| = \|p_2\| \approx \sqrt{\frac{L}{2}} $, откуда $ U_{1}^{(1)} = \frac{\sin(2\pi\omega_1 n + \psi)}{\sqrt{L/2}} $, $ U_{2}^{(1)} = \frac{\cos(2\pi\omega_1 n + \psi)}{\sqrt{L/2}} $.
+
+Пусть  
+$$ I_l =  \left (\sum\limits_{j=1}^{L}(X_{l}^{(2)})_j\cdot (U_{1}^{(1)})_j\right )^2 $$
+$$ J_l =  \left (\sum\limits_{j=1}^{L}(X_{l}^{(2)})_j\cdot (U_{2}^{(1)})_j\right )^2 $$
+$$ a = \omega_1 + \omega_2,\ b = \omega_1 - \omega_2 $$
+
+Тогда
+$$ I_l \approx \left( \int\limits_{0}^{L}\sin(2\pi\omega_2 y + \psi_l) \cdot \frac{\sin(2\pi\omega_1 y + \psi)}{\sqrt{L/2}}dy \right)^2 = $$
+$$ = \frac{2}{L} \left(\int\limits_{0}^{L}\sin(2\pi\omega_2 y + \psi_l) \cdot \sin(2\pi\omega_1 y + \psi)dy\right )^2 = $$
+$$ = \frac{2}{L} 
+\left(  
+\frac{\sin(2\pi Lb + \psi - \psi_l) - \sin(\psi - \psi_l)}{4\pi b} - \frac{\sin(2\pi La + \psi + \psi_l) - \sin(\psi + \psi_l)}{4\pi a}
+\right)^2 = 
+$$
+$$ = \frac{2}{L} \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2$$
 
 
 
-$$ \sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2 = \sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\;\left (\sum\limits_{j=1}^{L}X_{l_j}^{(2)}\cdot U_{i_j}^{(1)}\right )^2 \approx \sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r} \left (\int\limits_{0}^{L}(X_{l}^{(2)} \cdot U_{i}^{(1)})dy\right )^2 = $$
-$$ = \sum\limits_{l=1}^{K_2}\;\left[\left(\int\limits_{0}^{L}(X_{l}^{(2)} \cdot U_{1}^{(1)})dy\right )^2 + \left(\int\limits_{0}^{L}(X_{l}^{(2)} \cdot U_{2}^{(1)})dy\right )^2\right ] \approx $$ 
-$$ \approx K_2 \cdot\left[\left(\int\limits_{0}^{L}(X_{l}^{(2)} \cdot U_{1}^{(1)})dy\right )^2 + \left(\int\limits_{0}^{L}(X_{l}^{(2)} \cdot U_{2}^{(1)})dy\right )^2\right ] = $$
+$$ J_l \approx \left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y + \psi_l) \cdot \frac{\cos(2\pi\omega_1 y + \psi)}{\sqrt{L/2}})dy\right)^2 = $$
+$$ = \frac{2}{L}\left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y + \psi_l) \cdot\cos(2\pi\omega_1 y + \psi))dy\right )^2 = $$
+$$ = \frac{2}{L} 
+\left(  
+\frac{\cos(2\pi Lb + \psi - \psi_l) - \cos(\psi - \psi_l)}{4\pi b} - \frac{\cos(2\pi La + \psi + \psi_l) - \cos(\psi + \psi_l)}{4\pi a}
+\right)^2 = 
+$$
+$$ = \frac{2}{L} \left(  \frac{\cos(2\pi Lb)}{4\pi b} - \frac{\cos(2\pi La)}{4\pi a}  \right)^2 $$
 
-$$ = K_2 \cdot\left[\left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \frac{\sin(2\pi\omega_1 y)}{\sqrt{L/2}}dy\right )^2 + \left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \frac{\cos(2\pi\omega_1 y)}{\sqrt{L/2}})dy\right )^2\right ] = $$ 
-$$ = K_2 \cdot \frac{2}{L} \cdot\left[\left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \sin(2\pi\omega_1 y)dy\right )^2 + \left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \cos(2\pi\omega_1 y))dy\right )^2\right ] $$
+Получили, что числитель в индексе неоднородности не зависит от фаз $ \psi_l $ и $ \psi $. Тогда 
+
+$$ \sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2 \approx K_2 \cdot \left [ I_l + J_l \right] = $$
+$$ = \frac{K_2 \cdot 2}{L} \cdot \left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb)}{4\pi b} - \frac{\cos(2\pi La)}{4\pi a}  \right)^2 \right]$$
 
 
-
-\subsection{Индекс неоднородности}
+\section{Индекс неоднородности}
 Собирая все вместе, получаем:
 
-$$ 1 - \frac{\sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2} \approx  $$
-$$ \approx 1 - \frac{K_2 \cdot \frac{2}{L} \cdot\left[\left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \sin(2\pi\omega_1 y)dy\right )^2 + \left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \cos(2\pi\omega_1 y))dy\right )^2\right ]}{K_2\cdot\frac{L}{2}} = $$
-$$ = 1 - \frac{\left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \sin(2\pi\omega_1 y)dy\right )^2 + \left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \cos(2\pi\omega_1 y))dy\right )^2}{\frac{L^2}{4}} = $$
-$$ =  1 - \frac{\left ( \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a} \right )^2 + \left ( \frac{\cos(2\pi Lb)}{4\pi b} - \frac{\cos(2\pi La)}{4\pi a} - \frac{\omega_2}{2\pi ab}\right )^2}{\frac{L^2}{4}},$$
-
-где $a = \omega_1 + \omega_2$, $b = \omega_1 - \omega_2$.
+$$ g(F^{(1)}; F^{(2)}) = 1 - \frac{\sum\limits_{l=0}^{K_2-1}\;\sum\limits_{i=0}^{r-1}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=0}^{K_2-1}\|X_l^{(2)}\|^2} \approx $$
+$$ \approx 1 - \frac{\frac{K_2 \cdot 2}{L} \cdot \left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb)}{4\pi b} - \frac{\cos(2\pi La)}{4\pi a}  \right)^2 \right]}{K_2\cdot\frac{L}{2}} = $$
+$$ = 1 - \frac{\left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb)}{4\pi b} - \frac{\cos(2\pi La)}{4\pi a}  \right)^2 \right]}{\frac{L^2}{4}} $$
 
 
+\section{Проверка точности аппроксимации}
+При сравнении индекса неоднородности, вычисленного классическим способом и аналитически упрощенным, результаты оказались примерно равны, причем при $L \rightarrow \infty $ оба значения сходятся друг к другу. Все тесты доступны в \href{https://github.com/Loulaan/researchWork}{\textbf{гитхаб}} репозитории в файле \href{https://github.com/Loulaan/researchWork/blob/main/Analytical.ipynb}{\textbf{Analytical.ipynb}}.
 
+
+\section{Анализ}
+Оценим числитель в правой части формулы $(5.1)$. 
+Рассмотрим 2 случая.
+\begin{enumerate}
+	\item Частота после разладки увеличилась: $ \omega_1 - \mathbf{const}$, $ \omega_2 < \omega_1 $. В таком случае $ a $ уменьшается, $ b $ увеличивается и для первых скобок получаем $ \lim\limits_{a \rightarrow 0} \frac{\sin(2\pi La)}{4\pi a} = \frac{L}{2} $, $  \lim\limits_{b \rightarrow \infty} \frac{\sin(2\pi Lb)}{4\pi b} = 0 $, откуда первое из двух слагаемых в числителе будет равно $ \frac{L^2}{4} $
+\end{enumerate}
+С ростом разницы в частотах, знаменатель в $\frac{\sin(2\pi Lb)}{4\pi b}$ также увеличивается, а значит все выражение стремится к 0, что справедливо и для $\frac{\cos(2\pi Lb)}{4\pi b}$. Получаем более 
 
 
 

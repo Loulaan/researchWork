@@ -95,11 +95,14 @@ class Hmatr:
             second = (sin(2*pi*self.L*w1)**2/(4*pi*w1))**2
         else:
             first = (sin(2*pi*self.L*b)/(4*pi*b) - sin(2*pi*self.L*a)/(4*pi*a))**2
+            # TODO: Replace current formulae with one from the report.
             second = ((a*cos(2*pi*self.L*b) - b*cos(2*pi*self.L*a) - 2*w2)/(4*pi*a*b))**2
         numerator = first + second
         denom = np.square(self.L/2 - sin(4*pi*self.L*w2)/(8*pi*w2))
+        # print(f"Numer: {numerator}")
+        # print(f"Denom: {denom}")
         ratio = numerator / denom
-        return 1 - ratio
+        return 1 - ratio, numerator, denom, ratio
 
     def compute_row_analytical(self, omegas: List[Tuple|List] | np.ndarray) -> List | np.ndarray:
         return [self.compute_single_val_analytical(*ws) for ws in omegas]
