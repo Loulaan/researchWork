@@ -694,6 +694,54 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 
 
 \newpage
+\chapter{Аналитическая оценка индекса неоднородности}
+Индекс неоднородности задается формулой (2.1):
+$$g(F^{(1)}; F^{(2)}) = 1 - \frac{\sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2} . \eqno{(2.1)}$$
+
+Попробуем аналитически упростить данную формулу, чтобы явно увидеть, как разности частот ряда до и после разладки влияют на значения $ g $.
+
+Для простоты, пусть ряды задаются следующим образом: 
+$$F^{(1)} = x_n|_{n=0}^{L-1} = \sin(2\pi\omega_1 n)|_{n=0}^{L-1},$$ $$F^{(2)} = x_n|_{n=0}^{L-1} = \sin(2\pi\omega_2 n)|_{n=0}^{L-1}$$.
+
+\section{Отношение}
+\subsection{Знаменатель}
+Начнем со знаменателя $\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2$, а точнее, с квадрата нормы $\|X_l^{(2)}\|^2$. Оценим его:
+
+$$ \|X_l^{(2)}\|^2 = \sum\limits_{i=1}^{L}(X_{l_i}^{(2)}) = \int\limits_{0}^{L}X_{l_i}^{(2)} = \int\limits_{0}^{L}\sin^2{(2\pi\omega_2 y)}dy = \frac{L}{2} - \frac{\sin(4\pi L\omega_2)}{8\pi\omega_2} \approx \frac{L}{2} $$
+
+Отсюда $\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2 \approx K_2\cdot\frac{L}{2}$.
+
+
+\subsection{Числитель}
+Для простоты мы взяли ряд, состоящий из синусов. Его ранг равен $ 2 $ и скалярное произведение будет состоять из одинаковых слагаемых.
+
+
+
+$$ \sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2 = \sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\;\left (\sum\limits_{j=1}^{L}X_{l_j}^{(2)}\cdot U_{i_j}^{(1)}\right )^2 \approx \sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r} \left (\int\limits_{0}^{L}(X_{l}^{(2)} \cdot U_{i}^{(1)})dy\right )^2 = $$
+$$ = \sum\limits_{l=1}^{K_2}\;\left[\left(\int\limits_{0}^{L}(X_{l}^{(2)} \cdot U_{1}^{(1)})dy\right )^2 + \left(\int\limits_{0}^{L}(X_{l}^{(2)} \cdot U_{2}^{(1)})dy\right )^2\right ] \approx $$ 
+$$ \approx K_2 \cdot\left[\left(\int\limits_{0}^{L}(X_{l}^{(2)} \cdot U_{1}^{(1)})dy\right )^2 + \left(\int\limits_{0}^{L}(X_{l}^{(2)} \cdot U_{2}^{(1)})dy\right )^2\right ] = $$
+
+$$ = K_2 \cdot\left[\left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \frac{\sin(2\pi\omega_1 y)}{\sqrt{L/2}}dy\right )^2 + \left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \frac{\cos(2\pi\omega_1 y)}{\sqrt{L/2}})dy\right )^2\right ] = $$ 
+$$ = K_2 \cdot \frac{2}{L} \cdot\left[\left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \sin(2\pi\omega_1 y)dy\right )^2 + \left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \cos(2\pi\omega_1 y))dy\right )^2\right ] $$
+
+
+
+\subsection{Индекс неоднородности}
+Собирая все вместе, получаем:
+
+$$ 1 - \frac{\sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2} \approx  $$
+$$ \approx 1 - \frac{K_2 \cdot \frac{2}{L} \cdot\left[\left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \sin(2\pi\omega_1 y)dy\right )^2 + \left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \cos(2\pi\omega_1 y))dy\right )^2\right ]}{K_2\cdot\frac{L}{2}} = $$
+$$ = 1 - \frac{\left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \sin(2\pi\omega_1 y)dy\right )^2 + \left(\int\limits_{0}^{L}(\sin(2\pi\omega_2 y) \cdot \cos(2\pi\omega_1 y))dy\right )^2}{\frac{L^2}{4}} = $$
+$$ =  1 - \frac{\left ( \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a} \right )^2 + \left ( \frac{\cos(2\pi Lb)}{4\pi b} - \frac{\cos(2\pi La)}{4\pi a} - \frac{\omega_2}{2\pi ab}\right )^2}{\frac{L^2}{4}},$$
+
+где $a = \omega_1 + \omega_2$, $b = \omega_1 - \omega_2$.
+
+
+
+
+
+
+\newpage
 \chapter*{Заключение}
 \addcontentsline{toc}{chapter}{Заключение}
 
