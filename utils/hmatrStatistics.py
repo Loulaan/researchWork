@@ -45,7 +45,7 @@ class Hmatr:
     def __compute_cXU2(self, i):
         return np.r_[0, np.cumsum(np.sum((np.matmul(self.th, self.U[i]))**2, axis=1))]
 
-    def compute_single_row(self, row_id):
+    def compute_single_row(self, row_id, L=None, f=None):
         """
         Подсчет строковой функции разладки номер row_id. Более медленный метод, но зато намного нагляднее.
         :param row_id: int
@@ -56,7 +56,13 @@ class Hmatr:
             numerator = np.sum(numer[idx:(idx + self.KT)])
             denominator = np.sum(denom[idx:(idx + self.KT)])
             return np.round(numerator / denominator, 8)
+        if L is not None:
+            self.L = L
 
+        if f is not None:
+            self.f = f
+
+        self.th = np.transpose(np.array(rssa.hankel(robjects.FloatVector(self.f), L=self.L)))
         Fb = self.f[row_id:(row_id + self.B)]
         s = rssa.ssa(robjects.FloatVector(Fb), L=self.L, neig=min(2 * self.neig, 50), svd_method=self.svdMethod)
         self.U = np.array(rssa._U_ssa(s))[:, :self.neig]
@@ -95,13 +101,14 @@ class Hmatr:
             second = (sin(2*pi*self.L*w1)**2/(4*pi*w1))**2
         else:
             first = (sin(2*pi*self.L*b)/(4*pi*b) - sin(2*pi*self.L*a)/(4*pi*a))**2
-            # second = ((a*cos(2*pi*self.L*b) - b*cos(2*pi*self.L*a) - 2*w2)/(4*pi*a*b))**2
-            second = (cos(2*pi*self.L*b)/(4*pi*b) - cos(2*pi*self.L*a)/(4*pi*a))**2
+            second = ((cos(2*pi*self.L*b) - 1)/(4*pi*b) - (cos(2*pi*self.L*a) - 1)/(4*pi*a))**2
         numerator = first + second
         # denom = np.square(self.L/2 - sin(4*pi*self.L*w2)/(8*pi*w2))
         denom = np.square(self.L/2)
+
         # print(f"Numer: {numerator}")
         # print(f"Denom: {denom}")
+
         ratio = numerator / denom
         if not verbose:
             return 1-ratio
