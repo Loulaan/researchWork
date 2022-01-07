@@ -87,7 +87,7 @@ class Hmatr:
         ratio = np.array(_compute_ratio_iterm(where, data_for_numerator, data_for_denominator))
         return 1 - ratio
 
-    def compute_single_val_analytical(self, w1, w2):
+    def compute_single_val_analytical(self, w1, w2, verbose=False):
         a = w1+w2
         b = w1-w2
         if w1 == w2:
@@ -95,14 +95,18 @@ class Hmatr:
             second = (sin(2*pi*self.L*w1)**2/(4*pi*w1))**2
         else:
             first = (sin(2*pi*self.L*b)/(4*pi*b) - sin(2*pi*self.L*a)/(4*pi*a))**2
-            # TODO: Replace current formulae with one from the report.
-            second = ((a*cos(2*pi*self.L*b) - b*cos(2*pi*self.L*a) - 2*w2)/(4*pi*a*b))**2
+            # second = ((a*cos(2*pi*self.L*b) - b*cos(2*pi*self.L*a) - 2*w2)/(4*pi*a*b))**2
+            second = (cos(2*pi*self.L*b)/(4*pi*b) - cos(2*pi*self.L*a)/(4*pi*a))**2
         numerator = first + second
-        denom = np.square(self.L/2 - sin(4*pi*self.L*w2)/(8*pi*w2))
+        # denom = np.square(self.L/2 - sin(4*pi*self.L*w2)/(8*pi*w2))
+        denom = np.square(self.L/2)
         # print(f"Numer: {numerator}")
         # print(f"Denom: {denom}")
         ratio = numerator / denom
-        return 1 - ratio, numerator, denom, ratio
+        if not verbose:
+            return 1-ratio
+        else:
+            return 1 - ratio, numerator, denom, ratio
 
     def compute_row_analytical(self, omegas: List[Tuple|List] | np.ndarray) -> List | np.ndarray:
         return [self.compute_single_val_analytical(*ws) for ws in omegas]
