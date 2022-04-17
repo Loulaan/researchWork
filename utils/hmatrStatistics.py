@@ -62,7 +62,7 @@ class Hmatr:
         if f is not None:
             self.f = f
 
-        self.th = np.transpose(np.array(rssa.hankel(robjects.FloatVector(self.f), L=self.L)))
+        # self.th = np.transpose(np.array(rssa.hankel(robjects.FloatVector(self.f), L=self.L)))
         Fb = self.f[row_id:(row_id + self.B)]
         s = rssa.ssa(robjects.FloatVector(Fb), L=self.L, neig=min(2 * self.neig, 50), svd_method=self.svdMethod)
         self.U = np.array(rssa._U_ssa(s))[:, :self.neig]
@@ -115,7 +115,7 @@ class Hmatr:
         else:
             return 1 - ratio, numerator, denom, ratio
 
-    def compute_row_analytical(self, omegas: List[Tuple|List] | np.ndarray) -> List | np.ndarray:
+    def compute_row_analytical(self, omegas):
         return [self.compute_single_val_analytical(*ws) for ws in omegas]
 
     def compute_hm(self):
@@ -194,9 +194,17 @@ class Hmatr:
         plt.title(title)
         plt.plot(np.arange(self.T, self.N), self.getRow(0), label='row')
         plt.plot(np.arange(self.B, self.N), self.getCol(0), label='col')
-        plt.plot(np.arange(self.T, self.N), self.getSym(), label='symmetric')  # self.T - seems to be wrong.
-        plt.plot(np.arange(self.B + self.T + 1, self.N), self.getDiag(), label='diag')
+        # plt.plot(np.arange(self.T, self.N), self.getSym(), label='symmetric')  # self.T - seems to be wrong.
+        # plt.plot(np.arange(self.B + self.T + 1, self.N), self.getDiag(), label='diag')
+
+        # plt.plot(np.arange(self.T, self.N), self.getRow(0), marker='.', linestyle='-', label='row')
+        # plt.plot(np.arange(self.B, self.N), self.getCol(0), marker='o', linestyle='-', label='col')
+        # plt.plot(np.arange(self.T, self.N), self.getSym(), marker='+', linestyle='-',
+        #          label='symmetric')  # self.T - seems to be wrong.
+        # plt.plot(np.arange(self.B + self.T + 1, self.N), self.getDiag(), marker='^', linestyle='-', label='diag')
+
         plt.legend()
+        plt.savefig('future_plans.png')
         plt.show()
         
     def plotHm(self, title='HM', w=4, h=4):
