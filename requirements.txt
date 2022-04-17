@@ -5,3 +5,4 @@ pandas
 matplotlib
 rpy2
 openpyxl
+scipy
