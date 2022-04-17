@@ -82,16 +82,16 @@ def main():
 def test():
     N = 700  # Длина ряда
     w1 = 1 / 10  # Начальная частота
-    w_min = w1 + 1 / 100  # Минимальная разница в частотах для обнаружения неоднородности
+    w_min = w1 + 1 / 200  # Минимальная разница в частотах для обнаружения неоднородности
     k = 30  # Кол-во точек, за которые нужно обнаружить разладку
-    w2 = 1 / 5
+    w2 = 1 / 10
     C = 1
     phi1 = 0
     phi2 = 0
     Q = 301
     B = 100
     T_ = 100
-    L = 60
+    L = 80
     r = 2
     method = "svd"
     print(f"Params: w1 = {w1}, w2 = {w2}, w_min = {round(w_min, 5)}, L = {L}, k = {k}")
@@ -105,22 +105,25 @@ def test():
     hm = Hmatr(f=original_series, B=B, T=T_, L=L, neig=r, svdMethod=method)
     row = hm.getRow(sync=True)
     Q_hat = find_Q_hat(row, g_analytical.thresh)
-    print(f"Q_hat using analytical thresh: {Q_hat}, found using {Q_hat - Q} points, k = {k}")
+    if Q_hat is None:
+        print("Неоднородность не обнаружена")
+    else:
+        print(f"Q_hat using analytical thresh: {Q_hat}, found using {Q_hat - Q} points, k = {k}")
 
-    # Generate analytical approximation to row function
-    approx = [0 for i in range(Q-1)]
-    approx = [*approx, *g_analytical.transition_interval.tolist()]
-    approx = [*approx, *[g_analytical.value_after_heterogeneity for i in range(len(row) - len(approx))]]
-    assert len(approx) == len(row), f"Length are different: {len(approx)}, {len(row)}"
+        # Generate analytical approximation to row function
+        approx = [0 for i in range(Q-1)]
+        approx = [*approx, *g_analytical.transition_interval.tolist()]
+        approx = [*approx, *[g_analytical.value_after_heterogeneity for i in range(len(row) - len(approx))]]
+        assert len(approx) == len(row), f"Length are different: {len(approx)}, {len(row)}"
 
-    plt.figure(figsize=(7, 5))
-    plt.plot(row, label='Row')
-    plt.plot(approx, label='Approximation')
-    plt.plot(np.arange(len(row)), [row[Q_hat]]*len(row), '--', label='Thresh')
-    plt.plot(Q_hat, row[Q_hat], marker='o')
-    plt.title(f"w1 = {w1}, w2 = {w2}, w_min = {round(w_min, 5)}, L = {L}, k = {k}")
-    plt.legend()
-    plt.show()
+        plt.figure(figsize=(7, 5))
+        plt.plot(row, label='Row')
+        plt.plot(approx, label='Approximation')
+        plt.plot(np.arange(len(row)), [row[Q_hat]]*len(row), '--', label='Thresh')
+        plt.plot(Q_hat, row[Q_hat], marker='o')
+        plt.title(f"w1 = {w1}, w2 = {w2}, w_min = {round(w_min, 5)}, L = {L}, k = {k}")
+        plt.legend()
+        plt.show()
 
 
 if __name__ == "__main__":
