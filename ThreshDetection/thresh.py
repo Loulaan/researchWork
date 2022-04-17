@@ -19,18 +19,15 @@ class ThreshAnalytical:
         :param omega_1: Начальная частота ряда
         :param omega_2: Минимальная частота для детекции разладки
         :param L: Длина окна
-        :param k: Количество точек для определения неоднородности, s < L
+        :param T_: Длина тестовых подрядов (в т.ч. и переходного интервала)
+        :param k: Количество точек для определения неоднородности, k < T_
         """
         assert k < T_, "Parameter k is too large"
         self.k = k
-
         self.omega_1 = omega_1
         self.omega_2 = omega_2
         self.L = L
-        self.N = int(10 * self.L)
-        self.K = self.N - self.L
         self.T = T_
-        self.Q = int(self.N / 2)
         self.value_after_heterogeneity = self.compute_val_analytical()
         self.transition_interval = np.linspace(0, self.value_after_heterogeneity, self.T)
         self.thresh = self.transition_interval[self.k]
