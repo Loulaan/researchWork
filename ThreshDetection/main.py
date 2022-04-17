@@ -84,7 +84,7 @@ def test():
     w1 = 1 / 10  # Начальная частота
     w_min = w1 + 1 / 200  # Минимальная разница в частотах для обнаружения неоднородности
     k = 30  # Кол-во точек, за которые нужно обнаружить разладку
-    w2 = 1 / 10
+    w2 = 1 / 5
     C = 1
     phi1 = 0
     phi2 = 0
@@ -111,7 +111,7 @@ def test():
         print(f"Q_hat using analytical thresh: {Q_hat}, found using {Q_hat - Q} points, k = {k}")
 
         # Generate analytical approximation to row function
-        approx = [0 for i in range(Q-1)]
+        approx = [0 for i in range(Q)]
         approx = [*approx, *g_analytical.transition_interval.tolist()]
         approx = [*approx, *[g_analytical.value_after_heterogeneity for i in range(len(row) - len(approx))]]
         assert len(approx) == len(row), f"Length are different: {len(approx)}, {len(row)}"
