@@ -15,5 +15,18 @@ def generate_series(w1, w2, Q, N):
     return [series(i) for i in range(N)]
 
 
+def find_fpr_corr_to_thresh(threshes, fprs, analytical_thresh):
+    array = np.asarray(threshes)
+    idx = (np.abs(array - analytical_thresh)).argmin()
+    return fprs[idx]
+
+
+def find_Q_hat(series, thresh):
+    for idx, val in enumerate(series):
+        if val >= thresh:
+            return idx
+    return None
+
+
 def get_confidence_interval(statistics, iters):
     return np.array(norm.interval(0.95, loc=np.mean(statistics, axis=0), scale=np.std(statistics, axis=0) / iters))

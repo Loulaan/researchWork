@@ -6,3 +6,4 @@ matplotlib
 rpy2
 openpyxl
 scipy
+tqdm

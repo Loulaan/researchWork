@@ -5,14 +5,7 @@ import numpy as np
 
 from utils.hmatr import Hmatr
 from ThreshDetection.thresh import ThreshAnalytical
-from utils.utils import generate_series
-
-
-def find_Q_hat(series, thresh):
-    for idx, val in enumerate(series):
-        if val >= thresh:
-            return idx
-    return None
+from utils.utils import generate_series, find_Q_hat
 
 
 def main():
@@ -82,19 +75,20 @@ def main():
 def test():
     N = 700  # Длина ряда
     w1 = 1 / 10  # Начальная частота
-    w_min = w1 + 1 / 200  # Минимальная разница в частотах для обнаружения неоднородности
+    w_min = w1 + 1 / 10  # Минимальная разница в частотах для обнаружения неоднородности
     k = 30  # Кол-во точек, за которые нужно обнаружить разладку
-    w2 = 1 / 5
+    w2 = w_min
     C = 1
     phi1 = 0
     phi2 = 0
     Q = 301
+    r = 2
+    method = "svd"
+
     B = 100
     T_ = 100
     L = 80
-    r = 2
-    method = "svd"
-    print(f"Params: w1 = {w1}, w2 = {w2}, w_min = {round(w_min, 5)}, L = {L}, k = {k}")
+    print(f"Params: w1 = {w1}, w2 = {w2}, w_min = {round(w_min, 5)}, L = {L}, k = {k}, T = {T_}")
 
     g_analytical = ThreshAnalytical(w1, w_min, L, T_, k)
     print(f"Analytical thresh: {round(g_analytical.thresh, 5)}, "
@@ -102,6 +96,8 @@ def test():
     print()
 
     original_series = generate_series(w1, w2, Q, N)
+    noise = np.random.randn(N) * 0.5 ** 2
+    original_series += noise
     hm = Hmatr(f=original_series, B=B, T=T_, L=L, neig=r, svdMethod=method)
     row = hm.getRow(sync=True)
     Q_hat = find_Q_hat(row, g_analytical.thresh)
@@ -116,12 +112,13 @@ def test():
         approx = [*approx, *[g_analytical.value_after_heterogeneity for i in range(len(row) - len(approx))]]
         assert len(approx) == len(row), f"Length are different: {len(approx)}, {len(row)}"
 
-        plt.figure(figsize=(7, 5))
+        plt.figure(figsize=(20, 10))
         plt.plot(row, label='Row')
         plt.plot(approx, label='Approximation')
         plt.plot(np.arange(len(row)), [row[Q_hat]]*len(row), '--', label='Thresh')
         plt.plot(Q_hat, row[Q_hat], marker='o')
-        plt.title(f"w1 = {w1}, w2 = {w2}, w_min = {round(w_min, 5)}, L = {L}, k = {k}")
+        plt.plot(Q+k, approx[Q+k], marker='o')
+        plt.title(f"w1 = {w1}, w2 = {w2}, w_min = {round(w_min, 5)}, L = {L}, k = {k}, T = {T_}")
         plt.legend()
         plt.show()
 
