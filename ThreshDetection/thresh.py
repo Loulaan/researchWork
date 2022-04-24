@@ -14,22 +14,24 @@ class ThreshAnalytical:
     Класс аналитической строковой функции разладки, вычисленной для ряда, заданного синусом или косинусом
     """
 
-    def __init__(self, omega_1, omega_2, L=0, T_=100, k=5):
+    def __init__(self, omega_1, omega_2, L=0, T_=100, k=5, initial_value=None):
         """
         :param omega_1: Начальная частота ряда
         :param omega_2: Минимальная частота для детекции разладки
         :param L: Длина окна
         :param T_: Длина тестовых подрядов (в т.ч. и переходного интервала)
         :param k: Количество точек для определения неоднородности, k < T_
+        :param initial_value: Значение кривой аппроксимации до момента возмузения (случай когда в исходном ряде есть шум)
         """
         assert k < T_, "Parameter k is too large"
+        self.initial_value = 0 if initial_value is None else initial_value
         self.k = k
         self.omega_1 = omega_1
         self.omega_2 = omega_2
         self.L = L
         self.T = T_
         self.value_after_heterogeneity = self.compute_val_analytical()
-        self.transition_interval = np.linspace(0, self.value_after_heterogeneity, self.T)
+        self.transition_interval = np.linspace(self.initial_value, self.value_after_heterogeneity, self.T)
         self.thresh = self.transition_interval[self.k]
 
     def compute_val_analytical(self):
