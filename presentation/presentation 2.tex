@@ -139,9 +139,14 @@
 	
 	\begin{frame}
 		\frametitle{Индекс неоднородности: аппроксимация}
+		Пусть $ F^{(1)} $ - часть ряда $ F_N $ при $ n < Q $, а $ F^{(2)} $, при $ n >= Q $.
+				
+		\begin{figure}[b]
+			\centering
+			\includegraphics[width=0.75\linewidth]{imgs/heterogeneity_index_row.png}
+		\end{figure}
 		\small
 		$$ g(F^{(1)}; F^{(2)}) = 1 - \frac{\sum\limits_{l=0}^{K_2-1}\;\sum\limits_{i=0}^{r-1}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=0}^{K_2-1}\|X_l^{(2)}\|^2} \approx $$
-		$$ \approx 1 - \frac{\frac{K_2 \cdot 2}{L} \cdot \left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2 \right]}{K_2\cdot\frac{L}{2}} = $$
 		$$ 1 - \frac{\left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2 \right]}{\frac{L^2}{4}} = g_a(\omega_1, \omega_2),$$
 		где $ a = \omega_1 + \omega_2, b = \omega_1 - \omega_2 $.
 	\end{frame}
@@ -156,7 +161,12 @@
 		
 		\begin{figure}[b]
 			\centering
-			\includegraphics[width=\linewidth]{imgs/dynamics_L}
+			\includegraphics[width=0.6\linewidth]{imgs/dynamics_L}
+		\end{figure}
+		
+		\begin{figure}[b]
+			\centering
+			\includegraphics[width=0.6\linewidth]{imgs/dynamics_L_1}
 		\end{figure}
 		
 	\end{frame}
@@ -191,6 +201,11 @@
 			\begin{enumerate}
 				\item $ \hat{Q} $ --- момент обнаружения неоднородности.
 			\end{enumerate}
+			\item Алгоритм:
+			\begin{enumerate}
+				\item Вычисляем порог $ \gamma $;
+				\item Определяем $ \hat{Q} $ как преодоление порога $ \gamma $ кривой $ d_n $.
+			\end{enumerate}
 		\end{itemize}
 		Задача:
 		
@@ -199,9 +214,9 @@
 	
 	\begin{frame}
 		\frametitle{Оценка $ \gamma $}
-		В качестве верхней границы можно взять значение $ \gamma = 1 $, однако в таком случае $ \hat{Q} $ будет либо больше $ Q+k $, либо, при $ \omega_1 \approx \omega_2 $ функция $ d_n $ никогда не достигнет $ 1 $.
+		В качестве верхней границы $ \gamma $ можно взять значение переходного интервала в точке $ k $.
 		
-		При добавлении шума с дисперсией $ \sigma^2 $ строковая функция неоднородности $ d_n $ до разладки смещается от $ 0 $. Если взять слишком маленькое значение $ \gamma $, $ \hat{Q} < Q $. 
+		При добавлении шума с дисперсией $ \sigma^2 $ строковая функция неоднородности $ d_n $ до разладки смещается от $ 0 $. Если взять слишком маленькое значение $ \gamma $, $ \hat{Q} < Q $, поэтому нижняя граница зависит от дисперсии шума $ \sigma^2 $.
 		
 		Для таких рядов надо либо знать $ \sigma^2 $, либо иметь данные для оценки значений $ d_n $ где точно отсутствует неоднородность. 
 		
@@ -214,29 +229,25 @@
 	\begin{frame}
 		\frametitle{Оценка $ \gamma $: нижняя граница}
 		Предположим, у нас есть нужные данные и мы смогли оценить нижнюю границу $ \gamma = \gamma_{min} $.
+		
+		\bigskip
+		Если мы знаем $ \sigma^2 $, то $ \gamma_{min} \approx \frac{\sigma^2}{C^2/2+\sigma^2} $.
+		
+		\begin{figure}[b]
+			\centering
+			\includegraphics[width=\linewidth]{imgs/estimate_noise}
+		\end{figure}
+		
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Оценка $ \gamma $: верхняя граница}
-		Для определения верхней границы $ \gamma = \gamma_{max} $ мы можем воспользоваться аналитической аппроксимацией $ g_a $. 
-		
-		При достаточно больших $ L $ $ g_a \approx g $.
-		
-		\begin{figure}[b]
-			\centering
-			\includegraphics[width=0.55\linewidth]{imgs/dynamics_L}
-		\end{figure}
-		
-		\begin{figure}[b]
-			\centering
-			\includegraphics[width=0.55\linewidth]{imgs/dynamics_L_1}
-		\end{figure}
-	Однако, для того, чтобы использовать $ g_a(\omega_1, \omega_2) $, нам нужно знать частоты до и после разладки.
+		Для определения верхней границы $ \gamma $ мы можем воспользоваться аналитической аппроксимацией $ g_a(\omega_1, \omega_2) $, однако для этого нам нужно знать частоты до и после разладки.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Предпосылки: влияние изменения частот.}
-		По свойству индекса неоднородности, чем больше $ |\omega_2 - \omega_1| $, тем ближе $ g $ к $ 1 $ после переходного интервала.
+		По свойству индекса неоднородности, чем больше $ |\omega_2 - \omega_1| $, тем ближе $ g $ к $ 1 $ после переходного интервала, следовательно, кривая $ d_n $ на переходном интервале будет иметь более крутой наклон.
 		
 		\begin{figure}[b]
 			\centering
@@ -253,11 +264,10 @@
 			\item $ \omega_{min} = \omega_1 + \Delta_{min} $, где $ \Delta_{min} $ --- минимальное для обнаружения неоднородности отклонение частоты ряда от $ \omega_1 $;
 		\end{itemize}
 		
-		Таким образом, можем взять $ \gamma_{max} = g(\omega_1, \omega_{min}) $.
+		Таким образом, имея значение $ g(\omega_1, \omega_{min}) $, для определения порога $ \gamma $, мы можем попытаться аппроксимировать переходный интервал функции обнаружения $ d_n $. 
 		
-		\bigskip
+		Обозначим эту аппроксимацию $ a_T $.
 		
-		Так как мы не значем значения $ \omega_2 $, а $ \omega_{min} $ --- входной параметр, мы не можем положить $ \gamma = \gamma_{max} $ по тем же причинам, почему и $ \gamma_{max} = 1 $. Однако при наличии аппроксимации $ a_T $ переходного интервала кривой $ d_n $, мы можем взять $ \gamma $ как значение $ a_T $ в точке $ k $.
 	\end{frame}
 	
 
@@ -275,30 +285,31 @@
 		
 		\begin{itemize}
 			\item $ n_B = n_B(j) $ векторов вложений, лежащих в $ \mathfrak{L}_r^{(1)} $;
-			\item $ n_T = n_T(j) $ векторов вложений, содержащих момент возмущения;
-			\item $ n_H = n_H(j) $ векторов вложений, содержащих только значения ряда после разладки.
+			\item $ n_Q = n_Q(j) $ векторов вложений, содержащих момент возмущения;
+			\item $ n_A = n_A(j) $ векторов вложений, содержащих только значения ряда после разладки.
 		\end{itemize}
 		
-		Причем $ K_{test} = n_B + n_T + n_H $
+		Причем $ K_{test} = n_B + n_Q + n_A $
 		
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Предпосылки: переходный интервал}
 		Пусть $ L $ --- фиксировано. 
-		\small
+		\tiny
 		$$ 1 - \frac{\sum\limits_{l=1}^{K_{test}}\;\sum\limits_{i=1}^{r}\langle X_l, U_i^{(1)}\rangle^2}{\sum\limits_{l=1}^{K_{test}}\|X_l\|^2} = $$
-		$$ = 1 - \frac{\sum\limits_{l=1}^{n_B}\;\sum\limits_{i=1}^{r}\langle X_l, U_i^{(1)}\rangle^2 + \sum\limits_{l=n_B}^{n_B + n_T}\;\sum\limits_{i=1}^{r}\langle X_l, U_i^{(1)}\rangle^2 + \sum\limits_{l=n_B + n_T}^{K_{test}}\;\sum\limits_{i=1}^{r}\langle X_l, U_i^{(1)}\rangle^2}{\sum\limits_{l=1}^{n_B}\|X_l\|^2 + \sum\limits_{l=n_B}^{n_B+n_T}\|X_l\|^2 + \sum\limits_{l=n_B+n_T}^{K_{test}}\|X_l\|^2} = $$
-		$$ = 1 - \frac{0 + \sum\limits_{l=n_B}^{n_B+n_T}\;\sum\limits_{i=1}^{r}\langle X_l, U_i^{(1)}\rangle^2 + n_H(j) \cdot c_H}{c_1 + \sum\limits_{l=n_B}^{n_B+n_T}\|X_l\|^2 + c_2} \approx 1 - \frac{n_H(j) \cdot c_H}{c_1 + c_2}.$$
+		$$ = 1 - \frac{\sum\limits_{l=1}^{n_B}\;\sum\limits_{i=1}^{r}\langle X_l, U_i^{(1)}\rangle^2 + \sum\limits_{l=n_B}^{n_B + n_Q}\;\sum\limits_{i=1}^{r}\langle X_l, U_i^{(1)}\rangle^2 + \sum\limits_{l=n_B + n_Q}^{K_{test}}\;\sum\limits_{i=1}^{r}\langle X_l, U_i^{(1)}\rangle^2}{\sum\limits_{l=1}^{n_B}\|X_l\|^2 + \sum\limits_{l=n_B}^{n_B+n_Q}\|X_l\|^2 + \sum\limits_{l=n_B+n_Q}^{K_{test}}\|X_l\|^2} = $$
+		$$ = 1 - \frac{0 + \sum\limits_{l=n_B}^{n_B+n_Q}\;\sum\limits_{i=1}^{r}\langle X_l, U_i^{(1)}\rangle^2 + n_A(j) \cdot c_H}{c_1 + \sum\limits_{l=n_B}^{n_B+n_Q}\|X_l\|^2 + c_2} \approx 1 - \frac{n_A(j) \cdot c_H}{c_1 + c_2},$$
+		\small
+		при $ T \rightarrow \infty $ в силу $ n_Q = o(T) $.
 		
-		При $ j \in [Q-T+L, Q] $, $ n_H(j) = j - Q + T - L $.
+		Так как для вычисления $ d_n $ мы последовательно смещаем тестовые ряды на $ 1 $ элемент, $ n_A(j) $ возрастает линейно, начиная c $ j = Q-T+L $, $ n_A(j) = j - Q + T - L $.
 		
-		Отсюда, при $ T \rightarrow \infty, n_H \rightarrow \infty $ и переходный интервал $ d_n $ более линеен.
 	\end{frame}
 	
 	\begin{frame}
 		\frametitle{Предпосылки: переходный интервал}
-		Аналогично, увеличивается $ n_T(j) $ и при уменьшении $ L $.
+		Аналогично, при уменьшении $ L $ переходный интервал также становится более линейным в силу увеличения $ K_{test}^{(j)} $ и, следовательно, $ n_A(j) $.
 		\begin{figure}[b]
 			\centering
 			\includegraphics[width=\linewidth]{imgs/row_linear_growth}
@@ -307,7 +318,7 @@
 	
 	\begin{frame}
 		\frametitle{Аппроксимация: Идея}
-		Таким образом, мы можем аппроксимировать переходный интервал от $ \gamma_{min} $ до $ \gamma_{max} $ прямой $ a_T $. 
+		Таким образом, мы можем аппроксимировать переходный интервал от $ \gamma_{min} $ до $ g(\omega_1, \omega_{min}) $ прямой $ a_T $. 
 		\begin{figure}[b]
 			\centering
 			\includegraphics[width=0.6\linewidth]{imgs/row_linear_approximation_1}
@@ -322,21 +333,31 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{Определение $ \hat{Q} $}
-		Таким образом, выбрав $ \gamma = \gamma_a $ --- значение линейной аппроксимации $ a_T $ переходного интервала функции $ d_n $ в точке k, будем сигнализировать об обнаружении неизвестного момента возмущения $ Q $ как момент $ \hat{Q} $ преодоления $ \gamma_a $.
+		\frametitle{Алгоритм выбора $ \gamma $}
+		Таким образом, мы выбраем $ \gamma $ как значение линейной аппроксимации $ a_T $ переходного интервала функции $ d_n $ в точке k.
+		
+		\bigskip
+		Алгоритм:
+		\begin{enumerate}
+			\item Оцениваем $ \gamma_{min} $;
+			\item Вычисляем $ g(\omega_1, \omega_{min}) $;
+			\item Строим $ a_T $;
+			\item Фиксируем $ \gamma $.
+		\end{enumerate}
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Алгоритм работы}
-		Формализуем систему:
+		Собирая все вместе, получаем систему:
 		\begin{itemize}
 			\item Входные данные: $ F_N $, $\omega_1$, $\omega_{min}$, $ k $;
 			\item Результат: $\hat{Q}$;
 			\item Алгоритм:
 			\begin{enumerate}
-				\item Вычисление $ \gamma_{min} $, $ \gamma_{max} $;
-				\item Аппроксимация переходного интервала $ a_T $;
-				\item Фиксирование $ \gamma_a $;
+				\item Оцениваем $ \gamma_{min} $;
+				\item Вычисляем $ g(\omega_1, \omega_{min}) $;
+				\item Строим $ a_T $;
+				\item Фиксируем $ \gamma $.
 				\item Определение $ \hat{Q} $ как момент преодоления $ d_n $ значения $ \gamma_a $.
 			\end{enumerate}	
 		\end{itemize}		
