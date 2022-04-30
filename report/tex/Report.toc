@@ -1,4 +1,4 @@
-\babel@toc {russian}{}
+\babel@toc {russian}{}\relax 
 \contentsline {chapter}{\cyrillictext \CYRV \cyrv \cyre \cyrd \cyre \cyrn \cyri \cyre }{4}{chapter*.2}%
 \contentsline {chapter}{\chaptername ~1.\hskip 1em Singular spectrum analysis}{5}{chapter.1}%
 \contentsline {section}{\numberline {1.1.\hskip 1em}Алгоритм базового метода SSA}{5}{section.1.1}%
@@ -29,7 +29,8 @@
 \contentsline {section}{\numberline {4.3.\hskip 1em}Проверка точности аппроксимации}{33}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1.\hskip 1em}Одинаковые частоты}{33}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2.\hskip 1em}$L\omega _1$ и $L\omega _2 $ целые, $\omega _1 \neq \omega _2 $}{33}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3.\hskip 1em}Предположения об $ L $}{33}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.3.\hskip 1em}Предположения об $ L $}{34}{subsection.4.3.3}%
 \contentsline {subsection}{\numberline {4.3.4.\hskip 1em}Разность $\omega _1$ и $ \omega _2 $}{34}{subsection.4.3.4}%
-\contentsline {chapter}{Заключение}{36}{chapter*.23}%
-\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{37}{chapter*.24}%
+\contentsline {chapter}{\chaptername ~5.\hskip 1em Система обнаружения структурной неоднородности ряда с автоматически выстраиваемым порогом срабатывания на основе выведенной аналитической формулы.}{36}{chapter.5}%
+\contentsline {chapter}{Заключение}{37}{chapter*.23}%
+\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{38}{chapter*.24}%

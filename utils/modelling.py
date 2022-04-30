@@ -196,15 +196,21 @@ def modellingSeriesStatistics(dictSeries:dict, iterNum:int, N:int, B:int, T:int,
 
     modellingResults = pd.read_csv(modellingResultsPath)
     confidence_intervals = dict()
+
+    np.random.seed(12345)
     for num, typeV in enumerate(dictSeries.keys()):
 
         statsMeanMax = []
         stats95 = []
 
         for i in range(iterNum):
-            eps = np.random.randn(N) * vareps**2 if typeV != 'Temporary' else np.random.randn(N) * vareps**2/2
+            eps = np.random.normal(scale=vareps, size=N) if typeV != 'Temporary' else \
+                np.random.normal(scale=vareps/2, size=N)
 
             seriesNoise = dictSeries[typeV] + eps
+
+
+
             hm = Hmatr(seriesNoise, B, T, L, neig=r, svdMethod=method)
             statsMeanMax.append(list(rateOfIncrease(hm, Q, num, modellingResults, 'meanMax').values()))
             stats95.append(list(rateOfIncrease(hm, Q, num, modellingResults, '95').values()))

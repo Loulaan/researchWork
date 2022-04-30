@@ -56,11 +56,14 @@ class Hmatr:
             numerator = np.sum(numer[idx:(idx + self.KT)])
             denominator = np.sum(denom[idx:(idx + self.KT)])
             return np.round(numerator / denominator, 8)
+
         if L is not None:
             self.L = L
 
         if f is not None:
             self.f = f
+
+        self.th = np.transpose(np.array(rssa.hankel(robjects.FloatVector(self.f), L=self.L)))
 
         # self.th = np.transpose(np.array(rssa.hankel(robjects.FloatVector(self.f), L=self.L)))
         Fb = self.f[row_id:(row_id + self.B)]
@@ -69,7 +72,9 @@ class Hmatr:
         data_for_numerator = np.square(np.dot(self.th, self.U))
         data_for_denominator = np.square(np.linalg.norm(self.th, axis=1))
         ratio = np.array([_compute_ratio(idx, data_for_numerator, data_for_denominator) for idx in range(self.NT)])
-        return 1-ratio
+        row = 1-ratio
+        return row
+        # return np.r_[np.zeros(self.T) + np.mean(row[:self.T]), row]
 
     def compute_single_row_interm(self, row_id, where):
         """
