@@ -704,9 +704,13 @@ $$ = \frac{2}{L}
 \right)^2. $$
 
 
-Предположим $ \psi = \psi_l = 0 $, тогда
-$$ I_l \approx \frac{2}{L} \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2. $$
-$$ J_l \approx \frac{2}{L} \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2. $$
+Так как $ \frac{\sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2} $ - линейная проекция на пространство $ \mathfrak{L}_r^{(1)} $, эта проекция не должна зависеть от базиса, поэтому $ \psi = 0 $.
+
+Так как $ \psi_l $ формируются из сдвига, порождаемого номером вектора вложения, а исходный ряд $ F_N $ задан синусом, при суммировании и достаточно большом значении $ K_2 $, сумма по периоду обращается в $ 0 $, поэтому при переходе к сумме по элементам $ X_l^{(2)}, l=1, \dots, K_2 $, зависимость от $ \psi_l $ пропадает.
+
+Обозначим
+$$ I = \frac{2}{L} \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2. $$
+$$ J = \frac{2}{L} \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2. $$
 
 
 С учетом предположения выше, получаем:
@@ -720,8 +724,7 @@ $$ = \frac{K_2 \cdot 2}{L} \cdot \left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \
 
 $$ g(F^{(1)}; F^{(2)}) = 1 - \frac{\sum\limits_{l=0}^{K_2-1}\;\sum\limits_{i=0}^{r-1}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=0}^{K_2-1}\|X_l^{(2)}\|^2} \approx $$
 $$ \approx 1 - \frac{\frac{K_2 \cdot 2}{L} \cdot \left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2 \right]}{K_2\cdot\frac{L}{2}} = $$
-$$ 1 - \frac{\left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2 \right]}{\frac{L^2}{4}}, \eqno(5.1)$$
-при условии $ \psi = \psi_l = 0 $.
+$$ = 1 - \frac{\left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2 \right]}{\frac{L^2}{4}} = g_a(\omega_1, \omega_2). \eqno(5.1)$$
 
 \section{Проверка точности аппроксимации}
 При сравнении индекса неоднородности, вычисленного классическим способом и аналитически упрощенным, результаты оказались довольно похожи, причем при $L \rightarrow \infty $ оба значения сходятся друг к другу. Все тесты доступны в \textbf{гитхаб}\footnote{https://github.com/Loulaan/researchWork} репозитории в файле \textbf{Analytical.ipynb}\footnote{https://github.com/Loulaan/researchWork/blob/main/Analytical.ipynb}.
@@ -741,29 +744,25 @@ $$ 1 - \frac{\left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{
 
 \subsection{Предположения об $ L $}
 
-Зафиксируем $ w2 = \frac{1}{11} $ и будем изменять $ L $. В таблице \ref{tab:L_vs_g_c_vs_g_a} показаны значения индексов неоднородности при разных $ L $.
+Зафиксируем $ \omega_2 $ и будем изменять $ L $. 
 
-\begin{table}[!hhh]
-	\centering
-	\caption{Зависимость значений индекса неоднородности, вычисленного классическим $ g_c $ и аналитически упрощенным $ g_a $ способами от величины $ L $.}
-	\begin{tabular}{lll}
-		$ L $  & $ g_c $     & $ g_a $       \\
-		$ 50 $ & $ 0.518365 $ & $ 0.562352 $ \\
-		$ 80 $ & $ 0.890753 $ & $ 0.891823 $ \\
-		$ 90 $ & $ 0.955854 $ & $ 0.953909 $
-	\end{tabular}
-\label{tab:L_vs_g_c_vs_g_a}
-\end{table}
+Чтобы наглядно продемонстрировать стремление значений друг к другу, посмотрим на Рис. \ref{pic:g_c_vs_g_a_from_L} и \ref{pic:g_c_vs_g_a_from_L_1}.
 
-
-Чтобы наглядно продемонстрировать стремление значений друг к другу, посмотрим на Рис. \ref{pic:g_c_vs_g_a_from_L}.
 \begin{figure}[!hhh]
 	\center{\includegraphics[width=1.0\linewidth]{dynamics_L}}
-	\caption{Зависимость индексов $ g_c $ и $ g_a $ от $ L $.}
+	\caption{Зависимость индексов $ g $ и $ g_a $ от $ L $ при $ \omega_2 = 0.11 $.}
 	\label{pic:g_c_vs_g_a_from_L}
 \end{figure}
 
-Исходя из кривых на Рис. \ref{pic:g_c_vs_g_a_from_L}, $ g \rightarrow 1 \text{ при } L \rightarrow \infty$ --- справедливо для обеих формул $ (2.1), \; (5.1) $. 
+\begin{figure}[!hhh]
+	\center{\includegraphics[width=1.0\linewidth]{dynamics_L_1}}
+	\caption{Зависимость индексов $ g $ и $ g_a $ от $ L $ при $ \omega_2 = 0.2 $.}
+	\label{pic:g_c_vs_g_a_from_L_1}
+\end{figure}
+
+
+
+Исходя из кривых на Рис. \ref{pic:g_c_vs_g_a_from_L} и \ref{pic:g_c_vs_g_a_from_L_1}, $ g \rightarrow 1 \text{ при } L \rightarrow \infty$ --- справедливо для обеих формул $ (2.1), \; (5.1) $. 
 
 Данный эксперименты подтверждает что при достаточно больших $ L $ аппроксимация индекса неоднородности выведенной аналитической формулой $ (5.1) $ точна.
 
@@ -784,11 +783,50 @@ $$ 1 - \frac{\left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{
 
 \begin{figure}[!hhh]
 	\center{\includegraphics[width=1.0\linewidth]{dynamics_w2}}
-	\caption{Зависимость индексов $ g_c $ и $ g_a $ от $ \omega_2 $.}
+	\caption{Зависимость индексов $ g $ и $ g_a $ от $ \omega_2 $.}
 	\label{pic:g_c_vs_g_a_from_w_2}
 \end{figure}
 
 По кривым на Рис. \ref{pic:g_c_vs_g_a_from_w_2} видим, что чем ближе частоты друг к другу, тем ближе индекс неоднородности к $ 0 $, и, соответственно, чем дальше, тем ближе $ g $ к $ 1 $, что подтверждает \textbf{Утверждение 1.}
+
+
+\newpage
+\chapter{Система обнаружения структурной неоднородности ряда с автоматически выстраиваемым порогом срабатывания на основе выведенной аналитической формулы.}
+
+
+Рассмотрим ряд 
+\begin{equation*} 
+	F_N = 
+	\begin{cases} 
+		C\sin(2\pi\omega_1 n + \phi_1),\ n \in [0, Q-1], \\ 
+		C\sin(2\pi\omega_2 n + \phi_2),\ n \in [Q, N-1], 
+	\end{cases} 
+\end{equation*}
+где $ Q $ --- момент возмущения. 
+
+
+Система: 
+
+\begin{itemize}
+	\item Вход:
+	\begin{enumerate}
+		\item $ F_N $;
+		\item $ k $ --- длина интервала, за который нужно определить момент возмущения $ \hat{Q} $.
+	\end{enumerate}
+	\item Выход:
+	\begin{enumerate}
+		\item $ \hat{Q} $ --- момент обнаружения неоднородности.
+	\end{enumerate}
+	\item Алгоритм:
+	\begin{enumerate}
+		\item Вычисляем порог $ \gamma $;
+		\item Определяем $ \hat{Q} $ как преодоление порога $ \gamma $ кривой $ d_n $.
+	\end{enumerate}
+\end{itemize}
+Задача:
+
+Выбрать порог $ \gamma $ так, чтобы $ \hat{Q} \in [Q, Q+k] $.
+
 
 
 
