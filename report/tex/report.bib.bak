@@ -1,0 +1,11 @@
+@Article{Golyandina2001,
+  author  = {Golyandina, Nina and Nekrutkin, Vladimir and Zhigljavsky, Anatoly},
+  journal = {Monographs on Statistics and Applied Probability},
+  title   = {Analysis of Time Series Structure: SSA and Related Techniques},
+  year    = {2001},
+  month   = jan,
+  volume  = {90},
+  doi     = {10.1201/9781420035841},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
