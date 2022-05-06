@@ -17,10 +17,9 @@
 \contentsline {chapter}{\chaptername ~3.\hskip 1em Численное сравнение функций разладки}{14}{chapter.3}%
 \contentsline {section}{\numberline {3.1.\hskip 1em}Постановка задачи}{14}{section.3.1}%
 \contentsline {section}{\numberline {3.2.\hskip 1em}Организация численного эксперимента}{15}{section.3.2}%
-\contentsline {section}{\numberline {3.3.\hskip 1em}Моделирование}{16}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1.\hskip 1em}Ряды без шума}{17}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2.\hskip 1em}Ряды с шумом}{23}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3.\hskip 1em}Выводы}{30}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.2.1.\hskip 1em}Ряды без шума}{17}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2.\hskip 1em}Ряды с шумом}{23}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3.\hskip 1em}Выводы}{30}{section.3.3}%
 \contentsline {chapter}{\chaptername ~4.\hskip 1em Аналитическая оценка индекса неоднородности при изменении частоты гармоники}{31}{chapter.4}%
 \contentsline {section}{\numberline {4.1.\hskip 1em}Вычисление индекса однородности}{32}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1.\hskip 1em}Знаменатель}{32}{subsection.4.1.1}%
@@ -36,11 +35,18 @@
 \contentsline {subsection}{\numberline {5.1.1.\hskip 1em}Нижняя граница}{38}{subsection.5.1.1}%
 \contentsline {subsection}{\numberline {5.1.2.\hskip 1em}Верхняя граница}{38}{subsection.5.1.2}%
 \contentsline {section}{\numberline {5.2.\hskip 1em}Аппроксимация переходного интервала}{39}{section.5.2}%
-\contentsline {section}{\numberline {5.3.\hskip 1em}Алгоритм работы}{41}{section.5.3}%
+\contentsline {section}{\numberline {5.3.\hskip 1em}Алгоритм работы}{42}{section.5.3}%
 \contentsline {section}{\numberline {5.4.\hskip 1em}Оценка системы}{42}{section.5.4}%
 \contentsline {section}{\numberline {5.5.\hskip 1em}Оценка параметров}{44}{section.5.5}%
 \contentsline {subsection}{\numberline {5.5.1.\hskip 1em}Оценка параметров: T}{45}{subsection.5.5.1}%
 \contentsline {subsection}{\numberline {5.5.2.\hskip 1em}Оценка параметров: B}{49}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3.\hskip 1em}Оценка параметров: L}{49}{subsection.5.5.3}%
-\contentsline {chapter}{Заключение}{51}{chapter*.42}%
-\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{52}{chapter*.43}%
+\contentsline {chapter}{Заключение}{50}{chapter*.49}%
+\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{51}{chapter*.50}%
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\babel@toc {russian}{}\relax 

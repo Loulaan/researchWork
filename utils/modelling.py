@@ -300,7 +300,8 @@ def fixSeriesStatistics(dictSeries:dict, B:int, T:int, Q:int, L:int, r:int, meth
         wb = openpyxl.load_workbook(filename = destFile)
         sheet = wb.create_sheet(title=title)
 
-    modellingResults = pd.read_excel(modellingResultsPath, sheet_name='Modelling', engine='openpyxl')
+    # modellingResults = pd.read_excel(modellingResultsPath, sheet_name='Modelling', engine='openpyxl')
+    modellingResults = pd.read_csv(modellingResultsPath)
 
     for num, typeV in enumerate(dictSeries.keys()):
         series = dictSeries[typeV]
