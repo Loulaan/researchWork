@@ -1,3 +1,32 @@
+@Article{RSSA_BASIC,
+  author  = {Golyandina, Nina and Korobeynikov, Anton},
+  journal = {Computational Statistics and Data Analysis},
+  title   = {Basic Singular Spectrum Analysis and Forecasting with R},
+  year    = {2014},
+  note    = {R package version 1.0.4},
+  pages   = {934--954},
+  volume  = {71},
+}
+
+@Article{RSSA_MULTIVATIATE,
+  author  = {Golyandina, Nina and Korobeynikov, Anton and Shlemov, Alex and Usevich, Konstantin},
+  journal = {Journal of Statistical Software},
+  title   = {Multivariate and 2D Extensions of Singular Spectrum Analysis with the {Rssa} Package},
+  year    = {2015},
+  number  = {2},
+  pages   = {1--78},
+  volume  = {67},
+  doi     = {10.18637/jss.v067.i02},
+}
+
+@Book{rssa_package,
+  author    = {Nina Golyandina and Anton Korobeynikov and Anatoly Zhigljavsky},
+  publisher = {Springer-Verlag Berlin Heidelberg},
+  title     = {Singular spectrum analysis with {R}},
+  year      = {2018},
+  series    = {Use R!},
+}
+
 @Article{Golyandina2001,
   author  = {Golyandina, Nina and Nekrutkin, Vladimir and Zhigljavsky, Anatoly},
   journal = {Monographs on Statistics and Applied Probability},
@@ -6,6 +35,15 @@
   month   = jan,
   volume  = {90},
   doi     = {10.1201/9781420035841},
+}
+
+@Electronic{github,
+  author = {Кононыхин, И.},
+  month  = may,
+  title  = {Код для НИР на тему «Обнаружение разладки с помощью метода SSA»},
+  url    = {https://github.com/Loulaan/researchWork},
+  year   = {2022},
+  language = {russian}
 }
 
 @Article{rssa,
@@ -19,16 +57,12 @@
   volume  = {3},
 }
 
-@Book{rssa_package,
-  author = {Nina Golyandina and Anton Korobeynikov and Anatoly Zhigljavsky},
-  title  = {Singular spectrum analysis with {R}},
-  year   = {2018},
-  publisher = {Springer-Verlag Berlin Heidelberg},
-  series = {Use R!},
-}
-
-@Electronic{github,
-  url = {https://github.com/Loulaan/researchWork},
+@InProceedings{Moskvina2010ChangeP,
+  author = {Valentina Moskvina and Anatoly Zhigljavsky},
+  title  = {Change -- Point Detection in Time Series by means of the Singular Spectrum Analysis},
+  year   = {2010},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
+
+@Comment{jabref-meta: saveOrderConfig:specified;author;false;title;true;citationkey;false;}
