@@ -76,6 +76,29 @@ class Hmatr:
         return row
         # return np.r_[np.zeros(self.T) + np.mean(row[:self.T]), row]
 
+    def compute_distance(self, row_id):
+        """
+        Подсчет строковой функции разладки номер row_id. Более медленный метод, но зато намного нагляднее.
+        :param row_id: int
+        :return:
+        """
+
+        def _compute_ratio(idx, numer, denom):
+            numerator = np.sum(numer[idx:(idx + self.KT)], axis=1)
+            denominator = denom[idx:(idx + self.KT)]
+            assert numerator.shape == denominator.shape
+            return [np.round(numerator, 6), np.round(denominator, 6)]
+
+        self.th = np.transpose(np.array(rssa.hankel(robjects.FloatVector(self.f), L=self.L)))
+        Fb = self.f[row_id:(row_id + self.B)]
+        s = rssa.ssa(robjects.FloatVector(Fb), L=self.L, neig=min(2 * self.neig, 50), svd_method=self.svdMethod)
+        self.U = np.array(rssa._U_ssa(s))[:, :self.neig]
+        data_for_numerator = np.square(np.dot(self.th, self.U))
+        data_for_denominator = np.square(np.linalg.norm(self.th, axis=1))
+        ratio = [_compute_ratio(idx, data_for_numerator, data_for_denominator) for idx in range(self.NT)]
+        # row = 1-ratio
+        return np.array(ratio)
+
     def compute_single_row_interm(self, row_id, where):
         """
         Промежуточные вычисления: K_2 * (<X_l, U_1>^2 + <X_l, U_2>^2).
