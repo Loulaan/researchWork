@@ -1,48 +1,48 @@
 \babel@toc {russian}{}\relax 
-\contentsline {chapter}{\cyrillictext \CYRV \cyrv \cyre \cyrd \cyre \cyrn \cyri \cyre }{4}{chapter*.2}%
-\contentsline {chapter}{\chaptername ~1.\hskip 1em Singular spectrum analysis}{6}{chapter.1}%
-\contentsline {section}{\numberline {1.1.\hskip 1em}Алгоритм базового метода SSA}{6}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1.\hskip 1em}Вложение}{6}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2.\hskip 1em}Сингулярное разложение}{6}{subsection.1.1.2}%
-\contentsline {subsection}{\numberline {1.1.3.\hskip 1em}Группировка}{7}{subsection.1.1.3}%
-\contentsline {subsection}{\numberline {1.1.4.\hskip 1em}Реконструкция}{7}{subsection.1.1.4}%
-\contentsline {section}{\numberline {1.2.\hskip 1em}Ранги ряда}{7}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1.\hskip 1em}Пример}{8}{subsection.1.2.1}%
-\contentsline {chapter}{\chaptername ~2.\hskip 1em Поиск разладки}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1.\hskip 1em}Матрица неоднородности и функции неоднородности}{9}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1.\hskip 1em}Матрица неоднородности}{9}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2.\hskip 1em}Функции обнаружения}{11}{subsection.2.1.2}%
-\contentsline {section}{\numberline {2.2.\hskip 1em}Однородность и неоднородность}{12}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1.\hskip 1em}Типы неоднородности}{12}{subsection.2.2.1}%
-\contentsline {chapter}{\chaptername ~3.\hskip 1em Численное сравнение функций разладки}{14}{chapter.3}%
-\contentsline {section}{\numberline {3.1.\hskip 1em}Постановка задачи}{14}{section.3.1}%
-\contentsline {section}{\numberline {3.2.\hskip 1em}Организация численного эксперимента}{15}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1.\hskip 1em}Ряды без шума}{17}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2.\hskip 1em}Ряды с шумом}{23}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3.\hskip 1em}Выводы}{30}{section.3.3}%
-\contentsline {chapter}{\chaptername ~4.\hskip 1em Аналитическая оценка индекса неоднородности при изменении частоты гармоники}{31}{chapter.4}%
-\contentsline {section}{\numberline {4.1.\hskip 1em}Аппроксимация индекса однородности}{31}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1.\hskip 1em}Знаменатель}{32}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2.\hskip 1em}Числитель}{32}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2.\hskip 1em}Индекс неоднородности}{33}{section.4.2}%
-\contentsline {section}{\numberline {4.3.\hskip 1em}Проверка точности аппроксимации}{34}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1.\hskip 1em}Одинаковые частоты}{34}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2.\hskip 1em}$L\omega _1$ и $L\omega _2 $ целые, $\omega _1 \neq \omega _2 $}{34}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3.\hskip 1em}Зависимость от $ L $}{34}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4.\hskip 1em}Зависимость от разности $\omega _1$ и $ \omega _2 $}{35}{subsection.4.3.4}%
-\contentsline {chapter}{\chaptername ~5.\hskip 1em Система обнаружения структурной неоднородности ряда с автоматически выстраиваемым порогом срабатывания}{37}{chapter.5}%
-\contentsline {section}{\numberline {5.1.\hskip 1em}Оценка $ \gamma ^* $}{38}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1.\hskip 1em}Нижняя граница}{38}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2.\hskip 1em}Верхняя граница}{38}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2.\hskip 1em}Аппроксимация переходного интервала}{39}{section.5.2}%
-\contentsline {section}{\numberline {5.3.\hskip 1em}Алгоритм работы}{42}{section.5.3}%
-\contentsline {section}{\numberline {5.4.\hskip 1em}Оценка системы}{42}{section.5.4}%
-\contentsline {section}{\numberline {5.5.\hskip 1em}Параметры системы}{45}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1.\hskip 1em}Оценка параметров: T}{45}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2.\hskip 1em}Оценка параметров: B}{50}{subsection.5.5.2}%
-\contentsline {section}{\numberline {5.6.\hskip 1em}Выводы}{50}{section.5.6}%
-\contentsline {chapter}{Заключение}{51}{chapter*.50}%
-\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{52}{chapter*.51}%
+\contentsline {chapter}{\cyrillictext \CYRV \cyrv \cyre \cyrd \cyre \cyrn \cyri \cyre }{5}{chapter*.2}%
+\contentsline {chapter}{\chaptername ~1.\hskip 1em Singular spectrum analysis}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1.\hskip 1em}Алгоритм базового метода SSA}{7}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1.\hskip 1em}Вложение}{7}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2.\hskip 1em}Сингулярное разложение}{7}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3.\hskip 1em}Группировка}{8}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4.\hskip 1em}Реконструкция}{8}{subsection.1.1.4}%
+\contentsline {section}{\numberline {1.2.\hskip 1em}Ранги ряда}{8}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1.\hskip 1em}Пример}{9}{subsection.1.2.1}%
+\contentsline {chapter}{\chaptername ~2.\hskip 1em Поиск разладки}{10}{chapter.2}%
+\contentsline {section}{\numberline {2.1.\hskip 1em}Матрица неоднородности и функции неоднородности}{10}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1.\hskip 1em}Матрица неоднородности}{10}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2.\hskip 1em}Функции обнаружения}{12}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2.\hskip 1em}Однородность и неоднородность}{13}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1.\hskip 1em}Типы неоднородности}{13}{subsection.2.2.1}%
+\contentsline {chapter}{\chaptername ~3.\hskip 1em Численное сравнение функций разладки}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1.\hskip 1em}Постановка задачи}{15}{section.3.1}%
+\contentsline {section}{\numberline {3.2.\hskip 1em}Организация численного эксперимента}{16}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1.\hskip 1em}Ряды без шума}{18}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2.\hskip 1em}Ряды с шумом}{24}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3.\hskip 1em}Выводы}{31}{section.3.3}%
+\contentsline {chapter}{\chaptername ~4.\hskip 1em Аналитическая оценка индекса неоднородности при изменении частоты гармоники}{32}{chapter.4}%
+\contentsline {section}{\numberline {4.1.\hskip 1em}Аппроксимация индекса однородности}{32}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1.\hskip 1em}Знаменатель}{33}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2.\hskip 1em}Числитель}{33}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2.\hskip 1em}Индекс неоднородности}{34}{section.4.2}%
+\contentsline {section}{\numberline {4.3.\hskip 1em}Проверка точности аппроксимации}{35}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1.\hskip 1em}Одинаковые частоты}{35}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2.\hskip 1em}$L\omega _1$ и $L\omega _2 $ целые, $\omega _1 \neq \omega _2 $}{35}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3.\hskip 1em}Зависимость от $ L $}{35}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4.\hskip 1em}Зависимость от разности $\omega _1$ и $ \omega _2 $}{36}{subsection.4.3.4}%
+\contentsline {chapter}{\chaptername ~5.\hskip 1em Система обнаружения структурной неоднородности ряда с автоматически выстраиваемым порогом срабатывания}{38}{chapter.5}%
+\contentsline {section}{\numberline {5.1.\hskip 1em}Оценка $ \gamma ^* $}{39}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1.\hskip 1em}Нижняя граница}{39}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2.\hskip 1em}Верхняя граница}{39}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2.\hskip 1em}Аппроксимация переходного интервала}{40}{section.5.2}%
+\contentsline {section}{\numberline {5.3.\hskip 1em}Алгоритм работы}{43}{section.5.3}%
+\contentsline {section}{\numberline {5.4.\hskip 1em}Оценка системы}{43}{section.5.4}%
+\contentsline {section}{\numberline {5.5.\hskip 1em}Параметры системы}{46}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1.\hskip 1em}Оценка параметров: T}{46}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2.\hskip 1em}Оценка параметров: B}{51}{subsection.5.5.2}%
+\contentsline {section}{\numberline {5.6.\hskip 1em}Выводы}{51}{section.5.6}%
+\contentsline {chapter}{Заключение}{52}{chapter*.50}%
+\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{53}{chapter*.51}%
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 

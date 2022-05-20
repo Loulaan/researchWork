@@ -12,6 +12,9 @@ rssa = importr('Rssa')
 
 
 class Hmatr:
+    """
+    Main class of heterogeneity matrix. Able to use in real-time (method update_hmatr).
+    """
     def __init__(self, f, B=0, T=0, L=0, neig=0, svdMethod='propack'):
         self.f = f
         self.N = len(f)

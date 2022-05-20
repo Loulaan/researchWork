@@ -15,6 +15,9 @@ rssa = importr('Rssa')
 
 
 class Hmatr:
+    """
+    Additional functionality for tests
+    """
     STATISTICS = defaultdict()
 
     def __init__(self, f, B=0, T=0, L=0, neig=0, svdMethod='propack'):
@@ -232,7 +235,7 @@ class Hmatr:
         # plt.plot(np.arange(self.B + self.T + 1, self.N), self.getDiag(), marker='^', linestyle='-', label='diag')
 
         plt.legend()
-        plt.savefig('future_plans.png')
+        # plt.savefig('future_plans.png')
         plt.show()
         
     def plotHm(self, title='HM', w=4, h=4):

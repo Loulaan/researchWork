@@ -98,9 +98,11 @@ def log_statistics(typeV, serieses, rows, cols, syms, diags, modelled_statistics
 
 def modelling_series_statistics(dictSeries: dict, iterNum: int, N: int, B: int, T: int, Q: int, L: int, r: int,
                               method: str, destFile: str, title: str, vareps: float):
-    '''
+    """
     Modelling for series with noise
-    :param dict dictSeries: The dictionary where key is the type of series and value is a series. Example: { 'Permanent': [x_1, ..., x_N] }.
+    Modelling noise, get statistics, get values and after iterNum we output mean.
+    :param dict dictSeries: The dictionary where key is the type of series and value is a series.
+           Example: { 'Permanent': [x_1, ..., x_N] }.
     :param int iterNum: Number of iterations for modelling.
     :param int N: The len of original series.
     :param int B: The len of base subseries.
@@ -113,7 +115,7 @@ def modelling_series_statistics(dictSeries: dict, iterNum: int, N: int, B: int, 
     :param str modellingResultsPath: Name of the file with modelling results.
     :param str title: Sheet title where results will be stored.
     :param float vareps: Variance of the noise.
-    '''
+    """
 
     try:
         wb = openpyxl.load_workbook(filename=destFile)
