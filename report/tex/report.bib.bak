@@ -37,15 +37,6 @@
   doi     = {10.1201/9781420035841},
 }
 
-@Electronic{github,
-  author = {Кононыхин, И.},
-  month  = may,
-  title  = {Код для НИР на тему «Обнаружение разладки с помощью метода SSA»},
-  url    = {https://github.com/Loulaan/researchWork},
-  year   = {2022},
-  language = {russian}
-}
-
 @Article{rssa,
   author  = {Anton Korobeynikov},
   journal = {Statistics and Its Interface},
@@ -61,6 +52,15 @@
   author = {Valentina Moskvina and Anatoly Zhigljavsky},
   title  = {Change -- Point Detection in Time Series by means of the Singular Spectrum Analysis},
   year   = {2010},
+}
+
+@Electronic{github,
+  author   = {Иван Кононыхин},
+  language = {russian},
+  month    = may,
+  title    = {Код для НИР на тему «Обнаружение разладки с помощью метода SSA»},
+  url      = {https://github.com/Loulaan/researchWork},
+  year     = {2022},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
