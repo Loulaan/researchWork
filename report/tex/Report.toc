@@ -44,7 +44,7 @@
 \contentsline {subsection}{\numberline {5.6.1.\hskip 1em}Упрощение: $ \sigma ^2 $}{52}{subsection.5.6.1}%
 \contentsline {subsection}{\numberline {5.6.2.\hskip 1em}Упрощение: $ \omega _1 $}{52}{subsection.5.6.2}%
 \contentsline {section}{\numberline {5.7.\hskip 1em}Упрощенный алгоритм}{52}{section.5.7}%
-\contentsline {section}{\numberline {5.8.\hskip 1em}Выводы}{53}{section.5.8}%
+\contentsline {section}{\numberline {5.8.\hskip 1em}Тестирование}{53}{section.5.8}%
 \contentsline {chapter}{Заключение}{54}{chapter*.50}%
 \contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{55}{chapter*.51}%
 \babel@toc {english}{}\relax 

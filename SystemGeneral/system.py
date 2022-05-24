@@ -1,16 +1,17 @@
-import numpy as np
-import matplotlib.pyplot as plt
+import warnings
+
 import numpy as np
 import rpy2.robjects as robjects
 import rpy2.robjects.numpy2ri
 from rpy2.robjects.packages import importr
-import warnings
 
 from System.thresh import ThreshAnalytical
 from utils.hmatr import Hmatr
 from utils.utils import find_Q_hat
+from rpy2.rinterface import RRuntimeWarning
 
-warnings.filterwarnings('ignore')
+warnings.filterwarnings("ignore", category=RRuntimeWarning)
+# warnings.filterwarnings('ignore')
 
 rpy2.robjects.numpy2ri.activate()
 utils = importr('utils')
@@ -22,20 +23,24 @@ rssa = importr('Rssa')
 class System:
     def __init__(self, f, k, delta_min):
         self.series = f
+        self.series_homogen = self.series[:int(len(self.series)/4)]
         self.k = k
         self.delta_min = delta_min
+
+        self.B = int(len(self.series) / 6)
+        self.T = int(0.6 * self.B)
+        self.L = int(0.9 * self.T)
 
         self.w1 = self._estimate_omega_1()
         self.w_min = self.w1 + self.delta_min
         self.r = 2
 
-        self.B = int(len(self.series) / 10)
-        self.T = self.B
-        self.L = int(0.4 * self.T)
+        self.row = Hmatr(f=self.series, B=self.B, T=self.T, L=self.L, neig=2, svdMethod='svd').getRow()
+
         self.initial_value = self._estimate_gamma_min()
         self.thresh = ThreshAnalytical(omega_1=self.w1, omega_2=self.w_min, L=self.L, T_=self.T, k=self.k,
                                        initial_value=self.initial_value)
-        self.row = Hmatr(f=self.series, B=self.B, T=self.T, L=self.L, neig=2, svdMethod='svd').getRow()
+
         self.Q_hat = find_Q_hat(self.row, self.thresh.thresh)
 
     def _estimate_omega_1(self):
@@ -45,7 +50,7 @@ class System:
             autogrouping = grouping.auto.wcor
         ''')
         frequency = None
-        ssa = rssa.ssa(robjects.FloatVector(self.series[:len(self.series)/4]), L=self.L, neig=10, svd_method='svd')
+        ssa = rssa.ssa(robjects.FloatVector(self.series_homogen), L=self.L, neig=10, svd_method='svd')
         groups = autogrouping(ssa, nclust=3, groups=robjects.r('''1:10'''), method="complete")
         g_form = ""
         for group in groups:
@@ -63,7 +68,8 @@ class System:
                 if period != np.inf and np.round(mod, 1) == 1:
                     if periods.get(np.round(period, 5)) is not None:
                         periods[np.round(period, 5)] += 1
-                        if periods[np.round(period, 5)] == 2 and max_period < np.round(period, 5) < len(self.series)/4:
+                        if periods[np.round(period, 5)] == 2 and \
+                                max_period < np.round(period, 5) < len(self.series_homogen):
                             max_period = np.round(period, 5)
                             number = num
                     else:
@@ -78,9 +84,13 @@ class System:
         return frequency
 
     def _estimate_gamma_min(self):
-        return np.max(
-            Hmatr(f=self.series[:len(self.series)/4], B=self.B, T=self.T, L=self.L, neig=2, svdMethod='svd').getRow()
+        return np.quantile(
+            self.row[:len(self.series_homogen) - self.T],
+            0.75
         )
 
     def __call__(self, *args, **kwargs):
-        return self.Q_hat + self.T
+        if self.Q_hat is None:
+            print("No heterogeneity detected")
+        else:
+            return self.Q_hat + self.T
