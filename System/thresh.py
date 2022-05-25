@@ -1,10 +1,9 @@
-from typing import List
-
 import numpy as np
-from numpy import sin, cos, pi
 import rpy2.robjects as robjects
-from utils.utils import generate_series
+from numpy import sin, cos, pi
 from rpy2.robjects.packages import importr
+
+from utils.utils import generate_series
 
 rssa = importr('Rssa')
 
@@ -51,6 +50,10 @@ class ThreshAnalytical:
 
 
 class ThreshExact:
+    """
+    Вычисление gamma^* строковой функцией разладки для сгенерированного ряда с частотами omega_1 и omega_2
+    (без линейной аппроксимации)
+    """
     def __init__(self, omega_1, omega_2, L=0, B=0, T=0, s=5, neig=0, svdMethod='propack'):
         """
         :param omega_1:

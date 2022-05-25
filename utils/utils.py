@@ -14,6 +14,7 @@ def generate_series(w1, w2, Q, N):
     series = lambda n: np.sin(2 * np.pi * w1 * n) if n < Q - 1 else np.sin(2 * np.pi * w2 * n)
     return [series(i) for i in range(N)]
 
+
 def generate_series_amp(w1, w2, Q, N, c1, c2):
     """
     Генерирует ряд с разладкой в точке Q и частотами до и после w1 и w2 соответственно.
