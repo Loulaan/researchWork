@@ -132,7 +132,6 @@ dmypy.json
 *.aux
 *.bbl
 *.blg
-*.log
 *.nav
 *.out
 *.snm
