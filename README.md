@@ -1,5 +1,5 @@
-# Research Work
-Heterogeneity detection using SSA method
+# Change-point detection by the SSA method
+Change-point detection by the SSA method
 
 
 # Installation (Windows)
@@ -18,6 +18,9 @@ Heterogeneity detection using SSA method
 * `utils/coop_modelling.py` - частично повторяет функционал из `utils/modelling.py`, за исключением функции `modelling_series_statistics` - шум добавляется к ряду на каждой итерации моделирования и статистики считаются совместно. В данной версии функции в файле `utils/modelling.py`, статистики посчитаны заранее и от реализации шума не зависят.
 * `utils/utils.py` - дополнительные функции.
 
+## `tables`
+```Таблицы с результатами тестирований, логи.``` 
+
 ## `System`
 * `thresh.py` - классы порога срабатывания системы.
 * `main.py` - содержит класс системы и пример использования. Также есть код для тестирования и отображения графиков.
@@ -28,7 +31,6 @@ Heterogeneity detection using SSA method
 * `system.py` - система, описанная алгоритмом 5.
 * `estimate_freq.ipynb` - код для оценки частоты преиодики временного ряда.
 * `system_tests.ipynb` - тестирование системы.
-* `results*.csv` - логи результатов тестирования.
 
 ## `root`
 * `Analytical.ipynb` - тесты и информация об аналитической аппроксимации строковой функции неоднородности.
@@ -40,7 +42,7 @@ Heterogeneity detection using SSA method
 
 # Key words
 ```
-Heterogeneity, heterogeneity detection, heterogeneity analysis, change-point detection, change-point estimation, approximation, 
+Heterogeneity, heterogeneity detection, heterogeneity analysis, change-point,  change-point detection, change-point estimation, approximation, 
 time series, SSA, RSAA, heterogeneity detection function, heterogeneity index, heterogeneity matrix, trajectory matrix, 
 SVD, embedded vectors.
 ```
@@ -53,5 +55,19 @@ SVD, embedded vectors.
 
 # Annotation
 ```
+Временной ряд, управляемый некоторой линейной рекуррентной формулой является однородным. При внешнем воздействии ряд 
+подвергается мгновенному возмущению и перестает управляться данной формулой. Однородность ряда нарушается
+и возникает проблема изучения этой неоднородности. В данной работе рассматриваются типы неоднородности, заданные
+изменением частоты, амплитуды, фазовым сдвигом периодики и выбросом; численно сравниваются 
+функции обнаружения неоднородностей; упрощается, аппроксимируется и анализируется поведение строковой функции обнаружения, и,
+на основе полученных результатов, проектируется и тестируется система оценки момента возмущения. 
+```
 
+```
+We shall call a time series homogeneous if it is governed by some linear recurrent relation. Assume that due to an 
+outside action a homogeneous time series is being exposed to an instant perturbation; that is, it stops following the 
+original formulae and the problem of studying this heterogeneity arises. In this paper heterogeneity types defined by 
+change of frequency, amplitude, phase shift of seasonal component of signal and outlier are considered; heterogeneity 
+detection functions are compared numerically; the row detection function is simplified, approximated and it's behaviour
+is analyzed. Additionally, based on the results, the system of perturbation moment estimation is designed and tested.
 ```

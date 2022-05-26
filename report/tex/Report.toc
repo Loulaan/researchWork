@@ -1,6 +1,6 @@
 \babel@toc {russian}{}\relax 
 \contentsline {chapter}{\cyrillictext \CYRV \cyrv \cyre \cyrd \cyre \cyrn \cyri \cyre }{5}{chapter*.2}%
-\contentsline {chapter}{\chaptername ~1.\hskip 1em Singular spectrum analysis}{7}{chapter.1}%
+\contentsline {chapter}{\chaptername ~1.\hskip 1em Анализ сингулярного спектра}{7}{chapter.1}%
 \contentsline {section}{\numberline {1.1.\hskip 1em}Алгоритм базового метода SSA}{7}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1.\hskip 1em}Вложение}{7}{subsection.1.1.1}%
 \contentsline {subsection}{\numberline {1.1.2.\hskip 1em}Сингулярное разложение}{7}{subsection.1.1.2}%
@@ -45,8 +45,8 @@
 \contentsline {subsection}{\numberline {5.6.2.\hskip 1em}Упрощение: $ \omega _1 $}{52}{subsection.5.6.2}%
 \contentsline {section}{\numberline {5.7.\hskip 1em}Упрощенный алгоритм}{52}{section.5.7}%
 \contentsline {section}{\numberline {5.8.\hskip 1em}Тестирование}{53}{section.5.8}%
-\contentsline {chapter}{Заключение}{59}{chapter*.56}%
-\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{60}{chapter*.57}%
+\contentsline {chapter}{Заключение}{61}{chapter*.58}%
+\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{62}{chapter*.59}%
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
