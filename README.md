@@ -39,20 +39,6 @@ Change-point detection by the SSA method
 * `freqTests.ipynb` - тесты функции обнаружения неоднородности при разных частотах ряда. (А также попытки численного описания переходного интервала).
 
 
-
-# Key words
-```
-Heterogeneity, heterogeneity detection, heterogeneity analysis, change-point,  change-point detection, change-point estimation, approximation, 
-time series, SSA, RSAA, heterogeneity detection function, heterogeneity index, heterogeneity matrix, trajectory matrix, 
-SVD, embedded vectors.
-```
-
-```
-Разладка, определение разладки, анализ разладки, определение момента изменения структуры ряда, оценка момента изменения структуры ряда,
-аппроксимация, временные ряды, анализ сингулярного спектра, метод гусеница, пакет RSSA, функции обнаружения разладки,
-индекс неоднородности, матрица неоднородности, траекторная матрица, сингулярное разложение, вектора вложений.
-```
-
 # Annotation
 ```
 Временной ряд, управляемый некоторой линейной рекуррентной формулой является однородным. При внешнем воздействии ряд 
@@ -71,3 +57,21 @@ change of frequency, amplitude, phase shift of seasonal component of signal and 
 detection functions are compared numerically; the row detection function is simplified, approximated and it's behaviour
 is analyzed. Additionally, based on the results, the system of perturbation moment estimation is designed and tested.
 ```
+
+
+# Key words
+
+```
+Разладка, определение разладки, анализ разладки, определение момента изменения структуры ряда, оценка момента изменения структуры ряда,
+аппроксимация, временные ряды, анализ сингулярного спектра, метод гусеница, пакет RSSA, функции обнаружения разладки,
+индекс неоднородности, матрица неоднородности, траекторная матрица, сингулярное разложение, вектора вложений.
+```
+
+
+```
+Heterogeneity, heterogeneity detection, heterogeneity analysis, change-point,  change-point detection, change-point estimation, approximation, 
+time series, SSA, RSAA, heterogeneity detection function, heterogeneity index, heterogeneity matrix, trajectory matrix, 
+SVD, embedded vectors.
+```
+
+
