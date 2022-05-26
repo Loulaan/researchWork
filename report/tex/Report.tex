@@ -20,7 +20,7 @@
 % Включать подсекции в оглавление
 \setcounter{tocdepth}{2}
 
-\graphicspath{{images/}{code_snippets/}}
+\graphicspath{{images/}}
 \DeclareGraphicsExtensions{.png,.jpg}
 
 \newcommand\eqdef{\mathrel{\stackrel{\makebox[0pt]{\mbox{\normalfont\tiny def}}}{=}}}
@@ -1319,7 +1319,7 @@ $$ = \frac{\sum\limits_{l=1}^{n_B}\mathrm{dist}^2(X_l, \mathfrak{L}_r^{(1)}) + \
 		\item Строим траекторную матрицу ряда $ F_P $;
 		\item Применяем к ней $ \mathrm{SVD} $ - разложение;
 		\item Группируем компоненты на основе матрицы взвешенных корреляций;
-		\item Используем алгоритм $ \mathrm{ESPRIT} $ для оценки компонент $ \mathrm{LRR} $ для сигнала;
+		\item Используем алгоритм $ \mathrm{ESPRIT} $~\cite{epsrit} для оценки компонент $ \mathrm{LRR} $ для сигнала;
 		\item Выбираем компоненты, отвечающие за периодику и оцениваем частоту.	
 	\end{enumerate}
 \end{algorithm}
