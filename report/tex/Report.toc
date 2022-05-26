@@ -18,43 +18,41 @@
 \contentsline {section}{\numberline {3.1.\hskip 1em}Постановка задачи}{15}{section.3.1}%
 \contentsline {section}{\numberline {3.2.\hskip 1em}Организация численного эксперимента}{16}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1.\hskip 1em}Ряды без шума}{18}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2.\hskip 1em}Ряды с шумом}{24}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3.\hskip 1em}Выводы}{31}{section.3.3}%
-\contentsline {chapter}{\chaptername ~4.\hskip 1em Аналитическая оценка индекса неоднородности при изменении частоты гармоники}{32}{chapter.4}%
-\contentsline {section}{\numberline {4.1.\hskip 1em}Аппроксимация индекса однородности}{32}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1.\hskip 1em}Знаменатель}{33}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2.\hskip 1em}Числитель}{33}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2.\hskip 1em}Индекс неоднородности}{34}{section.4.2}%
-\contentsline {section}{\numberline {4.3.\hskip 1em}Проверка точности аппроксимации}{35}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1.\hskip 1em}Одинаковые частоты}{35}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2.\hskip 1em}$L\omega _1$ и $L\omega _2 $ целые, $\omega _1 \neq \omega _2 $}{35}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3.\hskip 1em}Зависимость от $ L $}{35}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4.\hskip 1em}Зависимость от разности $\omega _1$ и $ \omega _2 $}{36}{subsection.4.3.4}%
-\contentsline {chapter}{\chaptername ~5.\hskip 1em Система обнаружения структурной неоднородности ряда с автоматически выстраиваемым порогом срабатывания}{38}{chapter.5}%
-\contentsline {section}{\numberline {5.1.\hskip 1em}Оценка $ \gamma ^* $}{39}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1.\hskip 1em}Нижняя граница}{39}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2.\hskip 1em}Верхняя граница}{39}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2.\hskip 1em}Аппроксимация переходного интервала}{40}{section.5.2}%
-\contentsline {section}{\numberline {5.3.\hskip 1em}Алгоритм работы}{43}{section.5.3}%
-\contentsline {section}{\numberline {5.4.\hskip 1em}Оценка системы}{43}{section.5.4}%
-\contentsline {section}{\numberline {5.5.\hskip 1em}Параметры системы}{46}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1.\hskip 1em}Оценка параметров: T}{46}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2.\hskip 1em}Оценка параметров: B}{51}{subsection.5.5.2}%
-\contentsline {section}{\numberline {5.6.\hskip 1em}Обобщение}{51}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1.\hskip 1em}Упрощение: $ \sigma ^2 $}{52}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2.\hskip 1em}Упрощение: $ \omega _1 $}{52}{subsection.5.6.2}%
-\contentsline {section}{\numberline {5.7.\hskip 1em}Упрощенный алгоритм}{52}{section.5.7}%
-\contentsline {section}{\numberline {5.8.\hskip 1em}Тестирование}{53}{section.5.8}%
-\contentsline {chapter}{Заключение}{61}{chapter*.58}%
-\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{62}{chapter*.59}%
+\contentsline {subsection}{\numberline {3.2.2.\hskip 1em}Ряды с шумом}{22}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3.\hskip 1em}Выводы}{30}{section.3.3}%
+\contentsline {chapter}{\chaptername ~4.\hskip 1em Аналитическая оценка индекса неоднородности при изменении частоты гармоники}{31}{chapter.4}%
+\contentsline {section}{\numberline {4.1.\hskip 1em}Аппроксимация индекса однородности}{31}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1.\hskip 1em}Знаменатель}{32}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2.\hskip 1em}Числитель}{32}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2.\hskip 1em}Индекс неоднородности}{33}{section.4.2}%
+\contentsline {section}{\numberline {4.3.\hskip 1em}Проверка точности аппроксимации}{34}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1.\hskip 1em}Одинаковые частоты}{34}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2.\hskip 1em}$L\omega _1$ и $L\omega _2 $ целые, $\omega _1 \neq \omega _2 $}{34}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3.\hskip 1em}Зависимость от $ L $}{34}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4.\hskip 1em}Зависимость от разности $\omega _1$ и $ \omega _2 $}{35}{subsection.4.3.4}%
+\contentsline {chapter}{\chaptername ~5.\hskip 1em Система обнаружения структурной неоднородности ряда с автоматически выстраиваемым порогом срабатывания}{37}{chapter.5}%
+\contentsline {section}{\numberline {5.1.\hskip 1em}Оценка $ \gamma ^* $}{38}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1.\hskip 1em}Нижняя граница}{38}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2.\hskip 1em}Верхняя граница}{38}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2.\hskip 1em}Аппроксимация переходного интервала}{39}{section.5.2}%
+\contentsline {section}{\numberline {5.3.\hskip 1em}Алгоритм работы}{42}{section.5.3}%
+\contentsline {section}{\numberline {5.4.\hskip 1em}Оценка системы}{42}{section.5.4}%
+\contentsline {section}{\numberline {5.5.\hskip 1em}Параметры системы}{45}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1.\hskip 1em}Оценка параметров: T}{45}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2.\hskip 1em}Оценка параметров: B}{50}{subsection.5.5.2}%
+\contentsline {section}{\numberline {5.6.\hskip 1em}Обобщение}{50}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1.\hskip 1em}Упрощение: $ \sigma ^2 $}{51}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2.\hskip 1em}Упрощение: $ \omega _1 $}{51}{subsection.5.6.2}%
+\contentsline {section}{\numberline {5.7.\hskip 1em}Упрощенный алгоритм}{51}{section.5.7}%
+\contentsline {section}{\numberline {5.8.\hskip 1em}Тестирование}{52}{section.5.8}%
+\contentsline {chapter}{Заключение}{60}{chapter*.58}%
+\contentsline {chapter}{\cyrillictext \CYRS \cyrp \cyri \cyrs \cyro \cyrk \ \cyrl \cyri \cyrt \cyre \cyrr \cyra \cyrt \cyru \cyrr \cyrery }{61}{chapter*.59}%
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
-\babel@toc {english}{}\relax 
-\babel@toc {russian}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {english}{}\relax 

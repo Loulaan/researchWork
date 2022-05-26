@@ -427,19 +427,19 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 \begin{table}[!hhh]
 	\center
 	\caption{Значения моделирования.}
-	\begin{tabular}{lllll}
+	\begin{tabular}{l|llll}
 		Permanent ($\omega_1 \neq \omega_2$) & $ d_{n-1}^{(r)} $ & $ d_{n-1}^{(c)} $ & $ d_{n-1}^{(s)} $ & $ d_{n-1}^{(d)} $ \\
 		meanMax & 0.133376 & 0.110945 & 0.130618 & 0.126147 \\
 		95 procentile & 0.130877 & 0.110506 & 0.127974 & 0.124446 \\
-		&  &  &  &  \\
+		\hline
 		Temporary ($C_1 \neq C_2$) & $ d_{n-1}^{(r)} $ & $ d_{n-1}^{(c)} $ & $ d_{n-1}^{(s)} $ & $ d_{n-1}^{(d)} $ \\
 		meanMax & 0.036142 & 0.030146 & 0.035325 & 0.034518 \\
 		95 procentile & 0.035530 & 0.030024 & 0.034683 & 0.034116 \\
-		&  &  &  &  \\
+		\hline
 		Temporary ($\phi_1 \neq \phi_2$) & $ d_{n-1}^{(r)} $ & $ d_{n-1}^{(c)} $ & $ d_{n-1}^{(s)} $ & $ d_{n-1}^{(d)} $ \\
 		meanMax & 0.132096 & 0.114525 & 0.129501 & 0.124849 \\
 		95 procentile & 0.129943 & 0.114098 & 0.127145 & 0.123502 \\
-		&  &  &  &  \\
+		\hline
 		Temporary (Outlier) & $ d_{n-1}^{(r)} $ & $ d_{n-1}^{(c)} $ & $ d_{n-1}^{(s)} $ & $ d_{n-1}^{(d)} $ \\
 		meanMax & 0.132471 & 0.1108 & 0.129573 & 0.127397 \\
 		95 procentile & 0.130347 & 0.110320 & 0.127320 & 0.126176
@@ -469,15 +469,18 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 	\center
 	\caption{Характеристики функций неоднородности для постоянной разладки ($\omega_1 \neq \omega_2$).}
 	\small
-	\begin{tabular}{llllllll}
-		Row & 				   & 		  	  & 			 && Col & 		      & 			      \\
-		& Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
-		& $n_{overcome}$   & 320   	  & 320      &&     & 345       & 345 		  \\
-		&$D_{n_{overcome}}$& 0.134217		  &	0.134217	 &&     & 0.115557		  &   0.115557             \\
-		Sym & 				   & 		  	  & 			 && Diag& 		      & 			      \\
-		& Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
-		& $n_{overcome}$   & 321   	  & 321      &&     & 320      & 320		  \\
-		&$D_{n_{overcome}}$& 0.135379		  &	0.135379		 &&     & 0.134217		 &0.134217                   \\
+	\begin{tabular}{l|lll|lll}
+		 				   & Row		  	  & 			 &&  & 	Col	      & 			      \\
+		 				   \hline
+		 Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
+		 $n_{overcome}$   & 320   	  & 320      &&     & 345       & 345 		  \\
+		$D_{n_{overcome}}$& 0.134217		  &	0.134217	 &&     & 0.115557		  &   0.115557             \\
+		&&&&&& \\
+		  				   & Sym		  	  & 			 && & Diag		      & 			      \\
+		  				   \hline
+		 Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
+		 $n_{overcome}$   & 321   	  & 321      &&     & 320      & 320		  \\
+		$D_{n_{overcome}}$& 0.135379		  &	0.135379		 &&     & 0.134217		 &0.134217                   \\
 	\end{tabular}
 	\label{tab:PermanentHeterogeneity}
 \end{table}
@@ -485,8 +488,9 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 \begin{table}[!hhh]
 	\center
 	\caption{Значения функций неоднородности в моменты $ [Q, Q+10, Q+20, Q+30] $ при постоянной разладки ($\omega_1 \neq \omega_2$). }
-	\begin{tabular}{llllll}
+	\begin{tabular}{ll|llll}
 		&              & Row 	  & Col 	& Sym    & Diag  \\
+		\hline
 		& $D_Q$        & 0	  & 0 	& 0 & 0		\\
 		& $D_{Q+10}$   & 0.042795   & 0.002815  & 0.040179 & 0.042795	\\
 		& $D_{Q+20}$   & 0.146766   & 0.013995  & 0.135379 & 0.146766	\\
@@ -498,15 +502,18 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 \begin{table}[!hhh]
 	\center
 	\caption{Характеристики функций неоднородности для временной разладки ($ C_1 \neq C_2 $).}
-	\begin{tabular}{llllllll}
-		Row & 				   & 		  	  & 			 && Col & 		      & 			      \\
-		& Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
-		& $n_{overcome}$   & 317   	  & 317      &&     & 328       & 328 		  \\
-		&$D_{n_{overcome}}$& 0.037079		  &	0.037079	 &&     & 0.031576		  &   0.031576             \\
-		Sym & 				   & 		  	  & 			 && Diag& 		      & 			      \\
-		& Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
-		& $n_{overcome}$   & 327   	  & 326      &&     & 317      & 317		  \\
-		&$D_{n_{overcome}}$& 0.035488		  &	0.035066		 &&     & 0.037079		 & 0.037079             \\
+	\begin{tabular}{l|lll|lll}
+		 				   & Row		  	  & 			 &&  & 	Col	      & 			      \\
+		 				   \hline
+		 Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
+		 $n_{overcome}$   & 317   	  & 317      &&     & 328       & 328 		  \\
+		$D_{n_{overcome}}$& 0.037079		  &	0.037079	 &&     & 0.031576		  &   0.031576             \\
+		&&&&&& \\
+		 				   & Sym		  	  & 			 && & 	Diag	      & 			      \\
+		 				   \hline
+		 Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
+		 $n_{overcome}$   & 327   	  & 326      &&     & 317      & 317		  \\
+		 $D_{n_{overcome}}$& 0.035488		  &	0.035066		 &&     & 0.037079		 & 0.037079             \\
 	\end{tabular}
 	\label{tab:TemporaryHeterogeneityAmplitude}
 \end{table}
@@ -514,8 +521,9 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 \begin{table}[!hhh]
 	\center
 	\caption{Значения функций неоднородности в моменты $ [Q, Q+10, Q+20, Q+30] $ при временной разладки ($ C_1 \neq C_2 $). }
-	\begin{tabular}{llllll}
+	\begin{tabular}{ll|llll}
 		&              & Row 	  & Col 	& Sym    & Diag  \\
+		\hline
 		& $D_Q$        & 0	  & 0 	& 0 & 0		\\
 		& $D_{Q+10}$   & 0.018616   & 0.003571  & 0.015156 & 0.018616	\\
 		& $D_{Q+20}$   & 0.04911   & 0.018519  & 0.031535 & 0.04911	\\
@@ -529,15 +537,18 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 \begin{table}[!hhh]
 	\center
 	\caption{Характеристики функций неоднородности для временной разладки ($\phi_1 \neq \phi_2$).}
-	\begin{tabular}{llllllll}
-		Row & 				   & 		  	  & 			 && Col & 		      & 			      \\
-		& Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
-		& $n_{overcome}$   & 323   	  & 322      &&     & 336       & 336 		  \\
-		&$D_{n_{overcome}}$& 0.140235		  &	0.130778	 &&     & 0.120716		  &   0.120716             \\
-		Sym & 				   & 		  	  & 			 && Diag& 		      & 			      \\
-		& Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
-		& $n_{overcome}$   & 327   	  & 327      &&     & 322      & 322		  \\
-		&$D_{n_{overcome}}$& 0.131381		  &	0.131381		 &&     & 0.130778		 & 0.130778             \\
+	\begin{tabular}{l|lll|lll}
+		 				   & Row		  	  & 			 &&  & Col 		      & 			      \\
+		\hline
+		 Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
+		 $n_{overcome}$   & 323   	  & 322      &&     & 336       & 336 		  \\
+		$D_{n_{overcome}}$& 0.140235		  &	0.130778	 &&     & 0.120716		  &   0.120716             \\
+		&&&&&& \\
+		  				   & Sym 		  	  & 			 && & 	Diag	      & 			      \\
+		  				   \hline
+		 Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
+		 $n_{overcome}$   & 327   	  & 327      &&     & 322      & 322		  \\
+		$D_{n_{overcome}}$& 0.131381		  &	0.131381		 &&     & 0.130778		 & 0.130778             \\
 	\end{tabular}
 	\label{tab:TemporaryHeterogeneityShifted}
 \end{table}
@@ -546,8 +557,9 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 \begin{table}[!hhh]
 	\center
 	\caption{Значения функций неоднородности в моменты $ [Q, Q+10, Q+20, Q+30] $ при временной разладки ($\phi_1 \neq \phi_2$). }
-	\begin{tabular}{llllll}
+	\begin{tabular}{ll|llll}
 		&              & Row 	  & Col 	& Sym    & Diag  \\
+		\hline
 		& $D_Q$        & 0.000752	  & 0.000029 	& 0.000723 & 0.000752		\\
 		& $D_{Q+10}$   & 0.03919   & 0.00507  & 0.034446 & 0.03919	\\
 		& $D_{Q+20}$   & 0.12146   & 0.030249  & 0.096102 & 0.12146	\\
@@ -563,15 +575,18 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 \begin{table}[!hhh]
 	\center
 	\caption{Характеристики функций неоднородности для временной разладки (выброс).}
-	\begin{tabular}{llllllll}
-		Row & 				   & 		  	  & 			 && Col & 		      & 			      \\
-		& Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
-		& $n_{overcome}$   & 304   	  & 304      &&     &        &  		  \\
-		&$D_{n_{overcome}}$& 0.178852		  &	0.178852	 &&     & 		  &               \\
-		Sym & 				   & 		  	  & 			 && Diag& 		      & 			      \\
-		& Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
-		& $n_{overcome}$   & 304   	  & 304      &&     & 303      & 303		  \\
-		&$D_{n_{overcome}}$& 0.167006		  &	0.167006		 &&     & 0.128127		 & 0.128127             \\
+	\begin{tabular}{l|lll|lll}
+		 				   & Row		  	  & 			 &&  & Col		      & 			      \\
+		 				   \hline
+		 Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
+		 $n_{overcome}$   & 304   	  & 304      &&     &        &  		  \\
+		 $D_{n_{overcome}}$& 0.178852		  &	0.178852	 &&     & 		  &               \\
+		 &&&&&& \\
+		 				   & Sym		  	  & 			 && & Diag		      & 			      \\
+		 				   \hline
+		 Statistic        & Mean Max 	  & Mean 95 proc && 	& Mean Max     & Mean 95 proc     \\
+		 $n_{overcome}$   & 304   	  & 304      &&     & 303      & 303		  \\
+		$D_{n_{overcome}}$& 0.167006		  &	0.167006		 &&     & 0.128127		 & 0.128127             \\
 	\end{tabular}
 	\label{tab:TemporaryHeterogeneityOutlier}
 \end{table}
@@ -580,8 +595,9 @@ $ N = 700, \;\omega_1 = \frac{1}{10},\; \omega_2 = \frac{1}{5},\; C_1 = 1, \; C_
 \begin{table}[!hhh]
 	\center
 	\caption{Значения функций неоднородности в моменты $ [Q, Q+10, Q+20, Q+30] $ для временной разладки (выброс). }
-	\begin{tabular}{llllll}
+	\begin{tabular}{ll|llll}
 		&              & Row 	  & Col 	& Sym    & Diag  \\
+		\hline
 		& $D_Q$        & 0	  & 0 	& 0 & 0		\\
 		& $D_{Q+10}$   & 0.401244   & 0.00357  & 0.380619 & 0.401244	\\
 		& $D_{Q+20}$   & 0.546991   & 0.01851  & 0.528819 & 0.546991	\\
@@ -916,7 +932,7 @@ $$ \approx 1 - \frac{\frac{K_2 \cdot 2}{L} \cdot \left[ \left(  \frac{\sin(2\pi 
 
 
 \section{Проверка точности аппроксимации}
-При сравнении индекса неоднородности, вычисленного классическим способом и аналитически упрощенным, результаты оказались довольно похожи, причем при $L \rightarrow \infty $ оба значения сходятся друг к другу. Все тесты доступны в гитхаб репозитории~\cite{github} в файле \textbf{Analytical.ipynb}.
+При сравнении индекса неоднородности, вычисленного классическим способом и аналитически упрощенным, результаты оказались довольно похожи, причем при $L \rightarrow \infty $ оба значения сходятся друг к другу. Все тесты доступны в гитхаб репозитории~\cite{Kononykhin2022} в файле \textbf{Analytical.ipynb}.
 
 
 

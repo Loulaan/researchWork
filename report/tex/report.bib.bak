@@ -67,7 +67,7 @@
 
 @Electronic{github,
   author   = {Иван Кононыхин},
-  language = {ru},
+  language = {russian},
   month    = may,
   title    = {Код для НИР на тему «Обнаружение разладки с помощью метода SSA»},
   url      = {https://github.com/Loulaan/researchWork},
