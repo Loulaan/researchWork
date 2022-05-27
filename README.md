@@ -62,16 +62,12 @@ is analyzed. Additionally, based on the results, the system of perturbation mome
 # Key words
 
 ```
-Разладка, определение разладки, анализ разладки, определение момента изменения структуры ряда, оценка момента изменения структуры ряда,
-аппроксимация, временные ряды, анализ сингулярного спектра, метод гусеница, пакет RSSA, функции обнаружения разладки,
-индекс неоднородности, матрица неоднородности, траекторная матрица, сингулярное разложение, вектора вложений.
+Разладка, определение разладки, анализ разладки, определение момента изменения структуры ряда, оценка момента изменения структуры ряда, возмущение, момент возмущения, типы неоднородности, переходный интервал, базовый интервал, тестовый интервал, линейное пространство, базовое пространство, аппроксимация, временные ряды, анализ сингулярного спектра, метод гусеница, пакет RSSA, функции обнаружения разладки, индекс неоднородности, матрица неоднородности, траекторная матрица, сингулярное разложение, векторы вложений.
 ```
 
 
 ```
-Heterogeneity, heterogeneity detection, heterogeneity analysis, change-point,  change-point detection, change-point estimation, approximation, 
-time series, SSA, RSAA, heterogeneity detection function, heterogeneity index, heterogeneity matrix, trajectory matrix, 
-SVD, embedded vectors.
+Heterogeneity, heterogeneity detection, heterogeneity analysis, change-point,  change-point detection, change-point estimation, preturbation, preturbation moment, heterogeneity types, transition interval, base subseries, tests subseries, linear space, base space, approximation, time series, SSA, RSAA, heterogeneity detection function, heterogeneity index, heterogeneity matrix, trajectory matrix, SVD, embedded vectors.
 ```
 
 
