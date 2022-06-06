@@ -224,7 +224,7 @@
 		
 		\bigskip
 		{\color{blue} Постановка задачи:}
-		Аналитически упростить индекс неоднородности $ g(F^{(1)}; F^{(2)}) $ для строковой функции обнаружения $ d_{n-1}^{(r)} $, чтобы явно увидеть, как частоты ряда до и после момента $ Q $ влияют на его значения.
+		Аналитически упростить индекс неоднородности $ g(F^{(1)}; F^{(2)}) $ для строковой функции обнаружения $ d_{n-1}^{(r)} $, чтобы получить в явном виде зависимость от частот до и после разладки.
 		
 		\bigskip
 		{\color{blue} Результат:}
@@ -268,26 +268,13 @@
 		\begin{enumerate}
 			\item Входные данные: $ F_N $, $ k $, $ \Delta_{min} $.
 			\item Результат: $ \hat{Q}$.
-			\item Алгоритм:
-			\begin{enumerate}
-				\item Фиксируем $ B, T, L $.
-				\item Оцениваем $ \omega_1 $.
-				\item Оцениваем $ \gamma_{min} $ как $ 3 $-й квартиль  функции $ d_{n-1}^{(r)} $ на промежутке $ [0; \frac{N}{4} - T] $.
-				\item Вычисляем $ g_a(\omega_1, \omega_{min}) $, $ \omega_{min} = \omega_1 + \Delta_{min} $.
-				\item Строим прямую $ \gamma $, соединяющую $ \gamma_{min} $ и $ g_a(\omega_1, \omega_{min}) $;
-				\item Фиксируем $ \gamma^* = \gamma(k) $;
-				\item Определяем $ \hat{Q} $ как момент преодоления $ d_n $ значения $ \gamma^* $.
-			\end{enumerate}
 		\end{enumerate}
-	\end{frame}
-
-	\begin{frame}
-		\frametitle{Система обнаружения момента возмущения: пример работы}
-			\begin{figure}[!hhh]
-				\center{\includegraphics[width=1\linewidth]{imgs/example_system_work}}
-				\caption{Система. Пример работы.}
-				\label{pic:example_system_work}
-			\end{figure}
+	
+		\begin{figure}[!hhh]
+			\center{\includegraphics[width=1\linewidth]{imgs/example_system_work}}
+			\caption{Система. Пример работы.}
+			\label{pic:example_system_work}
+		\end{figure}
 	\end{frame}
 	
 	\begin{frame}
