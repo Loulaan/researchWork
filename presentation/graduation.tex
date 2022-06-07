@@ -142,55 +142,77 @@
 %		
 %		\bigskip
 %		
-%		{\color{blue} Функции обнаружения неоднородности:}
-%		\begin{enumerate}
-%			\item Строковая: Ряд $ d_{n-1}^{(r)} \eqdef g(F_{1, B};\; F_{n-T+1, n}), \;\; T \leq n \leq N. $
-%			
-%			\item Столбцовая: Ряд $ d_{n-1}^{(c)} \eqdef g(F_{n-B+1, n};\; F_{1, T}), \;\; B \leq n \leq N. $
-%			
-%			\item Диагональная: Ряд $ d_{n-1}^{(d)} \eqdef g(F_{n-T-B+1, n-T+1};\; F_{n-T+1, n}), \;\; T + B \leq n \leq N. $
-%			
-%			\item Симметричная: Ряд $ d_{n-1}^{(s)} \eqdef g(F_{n-B+1, n};\; F_{n-B+1, n}), \;\; B \leq n \leq N. $
-%			
-%		\end{enumerate}
+		{\color{blue} Обозначения функций обнаружения неоднородности:}
+		\begin{enumerate}
+			\item Строковая: $ d_{n-1}^{(r)} $
+			
+			\item Столбцовая: $ d_{n-1}^{(c)} $
+			
+			\item Диагональная: $ d_{n-1}^{(d)} $
+			
+			\item Симметричная: $ d_{n-1}^{(s)} $
+		\end{enumerate}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Сравнение функций обнаружения}
-		
-		{\color{blue} Постановка задачи:} 
-		Численно сравнить имеющиеся четыре функций обнаружения неоднородности и выбрать лучшую в смысле момента преодоления заданного порога $ \gamma^* $ и скорости роста для ряда $ F_N^{'} = F_N + \epsilon, \epsilon \sim N(0, \sigma^2) $.
+		\frametitle{Часть 1. Сравнение функций обнаружения}
+		{\color{blue} Задача:} 
+		Сравнить функции обнаружения неоднородности для разных видов разладки.
 		
 		\bigskip
+		{\color{blue} Ряд:}
+		$ F_N=(f_1, \dots, f_{N}) $, где $f_n = 
+		\begin{cases}
+			C_1\sin(2\pi\omega_1n + \phi_1),& n < Q, \\
+			C_2\sin(2\pi\omega_2n + \phi_2),& n \geq Q,
+		\end{cases}$
+		
+		\bigskip
+		{\color{blue} Параметры:}
+		\begin{enumerate}
+			\item $ N = 700 $.
+			\item $ Q = 301 $.
+			\item $ L = 60 $.
+			\item $ B = T = 100 $.
+		\end{enumerate}
+	
+		\bigskip
+		
 		{\color{blue} Задание неоднородности ряда $ F_N $:}
 		\begin{enumerate}
-			\item Фазовый сдвиг: $\phi_1 \neq \phi_2$.
+			\item Изменение частоты: $\omega_1 = \frac{1}{10}, \omega_2 = \frac{1}{5}$.
+			\item Изменение амплитуды: $C_1 = 1, C_2 = 2$.
+			\item Фазовый сдвиг: $\phi_1 = 0, \phi_2 = \frac{\pi}{2}$.
 			\item Выброс: $f_n = 
-							\begin{cases}
-								C_1\sin(2\pi\omega_1n + \phi_1), & n \neq Q, \\
-								10\cdot C_1, & n = Q.
-							\end{cases}
-						$
-			\item Изменение амплитуды: $C_1 \neq C_2$.
-			\item Изменение частоты: $\omega_1 \neq \omega_2$.
+			\begin{cases}
+				C_1\sin(2\pi\omega_1n + \phi_1), & n \neq Q, \\
+				10\cdot C_1, & n = Q.
+			\end{cases}
+			$
 		\end{enumerate}
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{Сравнение функций обнаружения}
-		\begin{figure}[!hhh]
-			\center{\includegraphics[width=\linewidth]{imgs/detectionNoisedTests}}
-			\caption{Функции обнаружения. Пример на одной реализации шума.}
-			\label{pic:heter_funcs}
-		\end{figure}
+		\frametitle{Часть 1. Сравнение функций обнаружения}
+			\begin{center}
+				{\includegraphics[width=\linewidth]{imgs/detectionTests}}
+			\end{center}
+			{\color{blue} Вывод:} Лучшие --- \textbf{строковая} $ d_{n-1}^{(r)} $ и \textbf{диагональная} $ d_{n-1}^{(d)} $ функции обнаружения.
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Аппроксимация индекса неоднородности}
-		Рассмотрим ряд $ F_N $ с неоднородностью, заданной изменением частоты периодики --- $ \omega_1 \neq \omega_2 $. Пусть $ C_1 = C_2 = 1 $.
+		\frametitle{Часть 2. Аппроксимация индекса неоднородности}
+		{\color{blue} Ряд:}
+		$ F_N=(f_1, \dots, f_{N}) $, где $f_n = 
+		\begin{cases}
+			C_1\sin(2\pi\omega_1n + \phi_1),& n < Q, \\
+			C_2\sin(2\pi\omega_2n + \phi_2),& n \geq Q.
+		\end{cases}$
+		\newline
+		$ \omega_1 \neq \omega_2 $. Пусть $ C_1 = C_2 = 1 $.
 		
 		\bigskip
-		{\color{blue} Постановка задачи:}
+		{\color{blue} Задача:}
 		Аналитически упростить индекс неоднородности $ g(F^{(1)}; F^{(2)}) $ для строковой функции обнаружения $ d_{n-1}^{(r)} $, чтобы получить в явном виде его зависимость от частот до и после разладки.
 		
 		\bigskip
@@ -205,7 +227,7 @@
 	
 
 	\begin{frame}
-		\frametitle{Аппроксимация индекса однородности: точность аппроксимации}
+		\frametitle{Часть 2. Аппроксимация индекса однородности: точность аппроксимации}
 			
 		\begin{figure}[!hhh]
 			\center{\includegraphics[width=0.9\linewidth]{imgs/approxCorrectness}}
@@ -215,7 +237,7 @@
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Аппроксимация переходного интервала}
+		\frametitle{Часть 2. Аппроксимация переходного интервала}
 		При достаточно маленьком значении $ L $ по отношению к $ T $ переходный интервал становится линейным.
 		
 		\begin{figure}[!hhh]
@@ -226,7 +248,7 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{Система обнаружения момента возмущения}
+		\frametitle{Часть 3. Система обнаружения момента возмущения}
 		{\color{blue} Постановка задачи:}
 		Создать систему, способную обнаружить разладку за заданный промежуток времени в синусоидальных временных рядах, порожденную изменением частоты. Сигнал о моменте возмущения --- превышение $ d_{n-1}^{(r)} $ порога $ \gamma^* $.
 		
@@ -245,7 +267,7 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{Оценка качества системы}
+		\frametitle{Часть 3. Оценка качества системы}
 		{\color{blue} Характеристики системы:}
 		\begin{itemize}
 			\item $ \mathrm{FP}(\gamma^*) $ при $ \hat{Q} < Q $.
@@ -268,7 +290,7 @@
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Оценка системы: параметр $ T $}
+		\frametitle{Часть 3. Оценка системы: параметр $ T $}
 		\begin{figure}[!hhh]
 			\center{\includegraphics[width=0.9\linewidth]{imgs/system_estimation_t=70.png}}
 			\caption{Работы системы. Оценка, $ T = 70 $.}
@@ -283,7 +305,7 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{Оценка системы: $ T - L $}
+		\frametitle{Часть 3. Оценка системы: $ T - L $}
 		\begin{figure}[!hhh]
 			\center{\includegraphics[width=0.9\linewidth]{imgs/system_estimation_one_iter_t=70.png}}
 			\caption{Работы системы. Одна итерация, $ T - L = 10 $.}
@@ -298,7 +320,7 @@
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Оценка системы: параметр $ B $}
+		\frametitle{Часть 3. Оценка системы: параметр $ B $}
 		\begin{figure}[!hhh]
 			\center{\includegraphics[width=0.9\linewidth]{imgs/row_diff_small_B.png}}
 			\caption{Функция $ d_n $. Реализации шума, $ B=90 $.}
@@ -377,7 +399,7 @@
 %	\end{frame}	
 	
 	\begin{frame}
-		\frametitle{Проблемы}
+		\frametitle{Часть 3. Проблемы}
 		\begin{figure}[!hhh]
 			\center{\includegraphics[width=0.8\linewidth]{imgs/example_system_work}}
 			\caption{Система. Пример работы.}
