@@ -21,6 +21,7 @@
 \usepackage{amsfonts}
 \usepackage{bm}
 \usepackage{graphicx}
+\usepackage{multicol}
 %\usepackage[usenames]{color}
 \usepackage{colortbl}
 \usepackage{euscript}
@@ -115,29 +116,43 @@
 
 	\begin{frame}
 		\frametitle{Введение: инструменты поиска неоднородности}	
-		
+%		\includegraphics[width=0.5\linewidth]{imgs/H-matrix}
+%		\includegraphics[width=0.5\linewidth]{imgs/det_funcs} 
+		\begin{multicols}{2}
+			
+			\begin{figure}
+				\center
+				\includegraphics[width=\linewidth, height=0.8\linewidth]{imgs/H-matrix}\caption{Матрица неоднородности}\par 
+			\end{figure}
+			\begin{figure}
+				\center
+				\includegraphics[width=\linewidth, height=0.8\linewidth]{imgs/det_funcs}
+				\caption{Функции обнаружения неоднородности}\par 
+			\end{figure}
+			
+		\end{multicols}
 	
 		\bigskip
 		
-		{\color{blue} Матрица неоднородности:}
-		
-		Матрица $ \mathbf{G} = \mathbf{G}_{B, T} $, состоящая из элементов $g_{ij}$:
-		$$g_{ij} = g(F_{i, i+B-1};\;F_{j, j+T-1}), $$ 
-		$$1 \leq i \leq N-B+1,\;\;\;\;\; 1 \leq j \leq N-T+1.$$
-		
-		\bigskip
-		
-		{\color{blue} Функции обнаружения неоднородности:}
-		\begin{enumerate}
-			\item Строковая: Ряд $ d_{n-1}^{(r)} \eqdef g(F_{1, B};\; F_{n-T+1, n}), \;\; T \leq n \leq N. $
-			
-			\item Столбцовая: Ряд $ d_{n-1}^{(c)} \eqdef g(F_{n-B+1, n};\; F_{1, T}), \;\; B \leq n \leq N. $
-			
-			\item Диагональная: Ряд $ d_{n-1}^{(d)} \eqdef g(F_{n-T-B+1, n-T+1};\; F_{n-T+1, n}), \;\; T + B \leq n \leq N. $
-			
-			\item Симметричная: Ряд $ d_{n-1}^{(s)} \eqdef g(F_{n-B+1, n};\; F_{n-B+1, n}), \;\; B \leq n \leq N. $
-			
-		\end{enumerate}
+%		{\color{blue} Матрица неоднородности:}
+%		
+%		Матрица $ \mathbf{G} = \mathbf{G}_{B, T} $, состоящая из элементов $g_{ij}$:
+%		$$g_{ij} = g(F_{i, i+B-1};\;F_{j, j+T-1}), $$ 
+%		$$1 \leq i \leq N-B+1,\;\;\;\;\; 1 \leq j \leq N-T+1.$$
+%		
+%		\bigskip
+%		
+%		{\color{blue} Функции обнаружения неоднородности:}
+%		\begin{enumerate}
+%			\item Строковая: Ряд $ d_{n-1}^{(r)} \eqdef g(F_{1, B};\; F_{n-T+1, n}), \;\; T \leq n \leq N. $
+%			
+%			\item Столбцовая: Ряд $ d_{n-1}^{(c)} \eqdef g(F_{n-B+1, n};\; F_{1, T}), \;\; B \leq n \leq N. $
+%			
+%			\item Диагональная: Ряд $ d_{n-1}^{(d)} \eqdef g(F_{n-T-B+1, n-T+1};\; F_{n-T+1, n}), \;\; T + B \leq n \leq N. $
+%			
+%			\item Симметричная: Ряд $ d_{n-1}^{(s)} \eqdef g(F_{n-B+1, n};\; F_{n-B+1, n}), \;\; B \leq n \leq N. $
+%			
+%		\end{enumerate}
 	\end{frame}
 
 	\begin{frame}
