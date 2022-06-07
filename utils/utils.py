@@ -24,7 +24,7 @@ def generate_series_amp(w1, w2, Q, N, c1, c2):
     :param N: Длина ряда
     :return:
     """
-    series = lambda n: c1 * np.sin(2 * np.pi * w1 * n) if n < Q - 1 else c2 * np.sin(2 * np.pi * w1 * n)
+    series = lambda n: c1 * np.sin(2 * np.pi * w1 * n) if n < Q - 1 else c2 * np.sin(2 * np.pi * w2 * n)
 
     return [series(i) for i in range(N)]
 
