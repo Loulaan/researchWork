@@ -201,39 +201,38 @@
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Часть 2. Аппроксимация индекса неоднородности}
+		\frametitle{Часть 2. Аппроксимация значения индекса неоднородности после переходного интервала}
 		{\color{blue} Ряд:}
 		$ F_N=(f_1, \dots, f_{N}) $, где $f_n = 
 		\begin{cases}
 			C_1\sin(2\pi\omega_1n + \phi_1),& n < Q, \\
 			C_2\sin(2\pi\omega_2n + \phi_2),& n \geq Q.
 		\end{cases}$
-		\newline
-		$ \omega_1 \neq \omega_2 $. Пусть $ C_1 = C_2 = 1 $.
+	
+		\bigskip
+		
+		{\color{blue} Параметры ряда:} $ \omega_1 \neq \omega_2 $, $ C_1 = C_2 = 1 $.
 		
 		\bigskip
 		{\color{blue} Задача:}
-		Аналитически упростить индекс неоднородности $ g(F^{(1)}; F^{(2)}) $ для строковой функции обнаружения $ d_{n-1}^{(r)} $, чтобы получить в явном виде его зависимость от частот до и после разладки.
+		Аппроксимировать индекс неоднородности $ g(F^{(1)}; F^{(2)}) $, $ F^{(1)} $ лежит до $ Q $, $ F^{(2)} $ после.
 		
 		\bigskip
 		{\color{blue} Результат:}
+		\begin{small}
+			$$ g_a(\omega_1, \omega_2) = 1 - \frac{\left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2 \right]}{\frac{L^2}{4}}, $$
+		\end{small}
 		
-		$$ g(F^{(1)}; F^{(2)}) = 1 - \frac{\sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2} \approx $$
-		$$ \approx 1 - \frac{\left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2 \right]}{\frac{L^2}{4}} = g_a(\omega_1, \omega_2), $$
 		где $ a = \omega_1 + \omega_2 $, $ b = \omega_1 - \omega_2 $.
-		
-		При $ \varepsilon \rightarrow 0 $ и $ L \rightarrow \infty, K_2 \rightarrow \infty $, $ |g(F^{(1)}; F^{(2)}) - g_a(\omega_1, \omega_2)| < \varepsilon $.
+		\begin{center}
+			{\includegraphics[width=0.7\linewidth]{imgs/example_approx.png}}
+			\end{center}
 	\end{frame}
 	
 
 	\begin{frame}
-		\frametitle{Часть 2. Аппроксимация индекса однородности: точность аппроксимации}
-			
-		\begin{figure}[!hhh]
-			\center{\includegraphics[width=0.9\linewidth]{imgs/approxCorrectness}}
-			\caption{Корректность аппроксимации $ g(\omega_1, \omega_2) $.}
-			\label{pic:approxCorrectness}
-		\end{figure}
+		\frametitle{Часть 2. Точность аппроксимации}
+		\center{\includegraphics[width=0.9\linewidth]{imgs/approxCorrectness}}
 	\end{frame}
 
 	\begin{frame}
@@ -249,8 +248,17 @@
 	
 	\begin{frame}
 		\frametitle{Часть 3. Система обнаружения момента возмущения}
-		{\color{blue} Постановка задачи:}
-		Создать систему, способную обнаружить разладку за заданный промежуток времени в синусоидальных временных рядах, порожденную изменением частоты. Сигнал о моменте возмущения --- превышение $ d_{n-1}^{(r)} $ порога $ \gamma^* $.
+		{\color{blue} Задача:}
+		Обнаружить разладку на интервале от $ Q $ до $ Q + k $, где $ Q $ --- неизвестный момент возмущения, а $ k $ --- максимально допустимое запаздывание.
+		
+		{\color{blue} Подход:} $ d_{n-1}^{(r)} > \gamma^* $ --- сигнал о моменте возмущения $ \hat{Q}$.
+		
+		\bigskip
+		{\color{blue} Ограничение:} $ \omega_2 > \omega_1 + \Delta_{min} = \omega_{min}$
+		
+		\bigskip
+		Как выбрать $ \gamma^* $? Построить аппроксимацию $ d_{n-1}^{(r)} $ и взять ее значение в точке $ k $.
+		
 		
 		\bigskip
 		{\color{blue} Описание системы:}
@@ -260,7 +268,7 @@
 		\end{enumerate}
 	
 		\begin{figure}[!hhh]
-			\center{\includegraphics[width=1\linewidth]{imgs/example_system_work}}
+			\center{\includegraphics[width=0.9\linewidth]{imgs/example_system_work}}
 			\caption{Система. Пример работы.}
 			\label{pic:example_system_work}
 		\end{figure}
