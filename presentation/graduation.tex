@@ -107,16 +107,15 @@
 
 		\bigskip
 		
-		{\color{blue} Индекс неоднородности} (Golyandina et all. Analysis of Time Series Structure, 2001):
+		{\color{blue} Индекс неоднородности} (Golyandina, Nekrutkin, Zhigljavsky. Analysis of Time Series Structure. 2001):
 		\small{
 			$$ g(F^{(1)}; F^{(2)}) = \frac{\sum\limits_{l=1}^{K_2}\mathrm{dist}^2(X_l^{(2)}, \mathfrak{L}_r^{(1)})}{\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2}. $$
 		}
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Введение: инструменты поиска неоднородности}	
-%		\includegraphics[width=0.5\linewidth]{imgs/H-matrix}
-%		\includegraphics[width=0.5\linewidth]{imgs/det_funcs} 
+		\bigskip
+		\frametitle{Введение: инструменты поиска неоднородности}
 		\begin{multicols}{2}
 			
 			\begin{figure}
@@ -128,19 +127,8 @@
 				\includegraphics[width=\linewidth, height=0.8\linewidth]{imgs/det_funcs}
 				\caption{Функции обнаружения неоднородности. $ B=T $.}\par 
 			\end{figure}
-			
 		\end{multicols}
 	
-		\bigskip
-		
-%		{\color{blue} Матрица неоднородности:}
-%		
-%		Матрица $ \mathbf{G} = \mathbf{G}_{B, T} $, состоящая из элементов $g_{ij}$:
-%		$$g_{ij} = g(F_{i, i+B-1};\;F_{j, j+T-1}), $$ 
-%		$$1 \leq i \leq N-B+1,\;\;\;\;\; 1 \leq j \leq N-T+1.$$
-%		
-%		\bigskip
-%		
 		{\color{blue} Обозначения функций обнаружения неоднородности:}
 		\begin{enumerate}
 			\item Строковая: $ d_{n-1}^{(r)} $
@@ -166,7 +154,7 @@
 			C_2\sin(2\pi\omega_2n + \phi_2),& n \geq Q,
 		\end{cases}$
 		
-		\bigskip
+%		\bigskip
 		{\color{blue} Параметры:}
 		\begin{enumerate}
 			\item $ N = 700 $.
@@ -179,9 +167,9 @@
 		
 		{\color{blue} Задание неоднородности ряда $ F_N $:}
 		\begin{enumerate}
-			\item Изменение частоты: $\omega_1 = \frac{1}{10}, \omega_2 = \frac{1}{5}$.
-			\item Изменение амплитуды: $C_1 = 1, C_2 = 2$.
-			\item Фазовый сдвиг: $\phi_1 = 0, \phi_2 = \frac{\pi}{2}$.
+			\item Изменение частоты: $\omega_1 = \frac{1}{10}, \omega_2 = \frac{1}{5}, C_1 = C_2 = 1, \phi_1 = \phi_2 = 0$.
+			\item Изменение амплитуды: $ C_1 = 1, C_2 = 2, \omega_1 = \omega_2 = \frac{1}{10}, \phi_1 = \phi_2 = 0 $.
+			\item Фазовый сдвиг: $ \phi_1 = 0, \phi_2 = \frac{\pi}{2}, \omega_1 = \omega_2 = \frac{1}{10}, C_1 = C_2 = 1 $.
 			\item Выброс: $f_n = 
 			\begin{cases}
 				C_1\sin(2\pi\omega_1n + \phi_1), & n \neq Q, \\
