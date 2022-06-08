@@ -63,7 +63,7 @@
 
 	\begin{frame}
 		\frametitle{Введение: постановка задачи}
-		Временной ряд \textbf{однороден}, если его структура постоянна. При внешнем воздействии ряд терпит возмущение, появляется разладка в его структуре и возникает задача найти момент возмущения.
+		\textbf{Однородный} ряд --- ряд с постоянной структурой. \textbf{Разладка} --- нарушение однородности ряда. 
 		
 		\bigskip
 		{\color{blue} Задача обнаружения разладки:}
@@ -107,10 +107,9 @@
 
 		\bigskip
 		
-		{\color{blue} Индекс неоднородности:} 
+		{\color{blue} Индекс неоднородности} (Golyandina et all. Analysis of Time Series Structure, 2001):
 		\small{
-			$$ g(F^{(1)}; F^{(2)}) = \frac{\sum\limits_{l=1}^{K_2}\mathrm{dist}^2(X_l^{(2)}, \mathfrak{L}_r^{(1)})}{\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2} =
-			1 - \frac{\sum\limits_{l=1}^{K_2}\;\sum\limits_{i=1}^{r}\langle X_l^{(2)}, U_i^{(1)}\rangle^2}{\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2}. $$
+			$$ g(F^{(1)}; F^{(2)}) = \frac{\sum\limits_{l=1}^{K_2}\mathrm{dist}^2(X_l^{(2)}, \mathfrak{L}_r^{(1)})}{\sum\limits_{l=1}^{K_2}\|X_l^{(2)}\|^2}. $$
 		}
 	\end{frame}
 
@@ -127,7 +126,7 @@
 			\begin{figure}
 				\center
 				\includegraphics[width=\linewidth, height=0.8\linewidth]{imgs/det_funcs}
-				\caption{Функции обнаружения неоднородности}\par 
+				\caption{Функции обнаружения неоднородности. $ B=T $.}\par 
 			\end{figure}
 			
 		\end{multicols}
@@ -395,15 +394,52 @@
 	
 	\begin{frame}
 		\frametitle{Часть 3. Проблемы}
-		\begin{figure}[!hhh]
-			\center{\includegraphics[width=0.8\linewidth]{imgs/example_system_work}}
-			\caption{Система. Пример работы.}
-		\end{figure}
-		\begin{figure}[!hhh]
-			\center{\includegraphics[width=0.8\linewidth]{imgs/diff_moment_growth_most_unique.png}}
-			\caption{Функция $ d_n $. Поведение функции при $ \omega_2 = \frac{1}{7} $ и $ \omega_2 = \frac{1}{9} $.}
-			\label{pic:diff_moment_growth_most_unique}
-		\end{figure}
+		{\color{blue} Параметры тестирования:} $ N = 800, Q=301, \omega_1=\frac{1}{10} , \Delta_{min}=\frac{1}{50}, \sigma=0.5, B=133, T=79, L=71, C_1=C_2=1$
+		
+		\bigskip
+		
+		\begin{table}[!hhh]
+			\center
+			\caption{Результаты тестирования.}
+			\begin{minipage}{.5\linewidth}
+				\caption{$ k=30 $}
+				\centering
+				\begin{tabular}{cccc}
+					\toprule
+					$ \omega_2 $ & $ FPR $ &    $ TPR $ &    $ FNR $ \\
+					1/3 &  0.0 &   0.99 &   0.01 \\
+					1/4 &  0.0 &   0.98 &   0.02 \\
+					1/5 &  0.0 &   0.99 &   0.01 \\
+					1/6 &  0.0 &  0.995 &  0.005 \\				
+					1/7 &  0.0 &  0.945 &  0.055 \\
+					1/8 &  0.0 &  0.855 &  0.145 \\
+					1/9 &  0.0 &    1.0 &    0.0 \\
+					\bottomrule
+				\end{tabular}
+			\end{minipage}%
+			\begin{minipage}{.5\linewidth}
+				\caption{$ k=15 $}
+				\centering
+				\begin{tabular}{cccc}
+					\toprule
+					$ \omega_2 $ & $ FPR $ &    $ TPR $ &    $ FNR $ \\
+					1/3 &  0.040 & 0.745 & 0.215  \\
+					1/4 &  0.040 & 0.745 & 0.215 \\
+					1/5 &  0.040 & 0.720 & 0.240 \\
+					1/6 &  0.040 & 0.820 & 0.140 \\				
+					1/7 &  0.040 & 0.340 & 0.660 \\
+					1/8 &  0.040 & 0.920 & 0.040  \\
+					1/9 &  0.050 & 0.950 & 0.000  \\
+					\bottomrule
+				\end{tabular}
+			\end{minipage}%
+		\end{table}
+	
+	
+		\bigskip
+		
+		{\color{blue} Выводы:} При большом $ k $ система работает хорошо, но аппроксимация нуждается в доработке.
+	
 	\end{frame}	
 	
 
