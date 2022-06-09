@@ -131,13 +131,13 @@
 	
 		{\color{blue} Обозначения функций обнаружения неоднородности:}
 		\begin{enumerate}
-			\item Строковая: $ d_{n-1}^{(r)} $
+			\item Строковая: $ d_n^{(r)} $
 			
-			\item Столбцовая: $ d_{n-1}^{(c)} $
+			\item Столбцовая: $ d_n^{(c)} $
 			
-			\item Диагональная: $ d_{n-1}^{(d)} $
+			\item Диагональная: $ d_n^{(d)} $
 			
-			\item Симметричная: $ d_{n-1}^{(s)} $
+			\item Симметричная: $ d_n^{(s)} $
 		\end{enumerate}
 	\end{frame}
 
@@ -154,15 +154,6 @@
 			C_2\sin(2\pi\omega_2n + \phi_2),& n \geq Q,
 		\end{cases}$
 		
-%		\bigskip
-		{\color{blue} Параметры:}
-		\begin{enumerate}
-			\item $ N = 700 $.
-			\item $ Q = 301 $.
-			\item $ L = 60 $.
-			\item $ B = T = 100 $.
-		\end{enumerate}
-	
 		\bigskip
 		
 		{\color{blue} Задание неоднородности ряда $ F_N $:}
@@ -176,6 +167,14 @@
 				10\cdot C_1, & n = Q.
 			\end{cases}
 			$
+		\end{enumerate}
+		
+		{\color{blue} Параметры:}
+		\begin{enumerate}
+			\item $ N = 700 $.
+			\item $ Q = 301 $.
+			\item $ L = 60 $.
+			\item $ B = T = 100 $.
 		\end{enumerate}
 	\end{frame}
 	
@@ -206,11 +205,11 @@
 		
 		\bigskip
 		{\color{blue} Результат:}
-		\begin{small}
-			$$ g_a(\omega_1, \omega_2) = 1 - \frac{\left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2 \right]}{\frac{L^2}{4}}, $$
-		\end{small}
+		\begin{footnotesize}
+			$$ g(F^{(1)}; F^{(2)}) \approx g_a(\omega_1, \omega_2) = 1 - \frac{\left[ \left(  \frac{\sin(2\pi Lb)}{4\pi b} - \frac{\sin(2\pi La)}{4\pi a}   \right)^2 + \left(  \frac{\cos(2\pi Lb) - 1}{4\pi b} - \frac{\cos(2\pi La) - 1}{4\pi a}  \right)^2 \right]}{\frac{L^2}{4}}, $$
+		\end{footnotesize}
 		
-		где $ a = \omega_1 + \omega_2 $, $ b = \omega_1 - \omega_2 $.
+		при больших $ L $ и $ K_2 $, где $ a = \omega_1 + \omega_2 $, $ b = \omega_1 - \omega_2 $.
 		\begin{center}
 			{\includegraphics[width=0.7\linewidth]{imgs/example_approx.png}}
 			\end{center}
@@ -227,7 +226,7 @@
 		При достаточно маленьком значении $ L $ по отношению к $ T $ переходный интервал становится линейным.
 		
 		\begin{figure}[!hhh]
-			\center{\includegraphics[width=0.9\linewidth]{imgs/row_linear_growth}}
+			\center{\includegraphics[width=\linewidth]{imgs/row_linear_growth}}
 			\caption{Линейность переходного интервала при большом значении $ T-L $.}
 			\label{pic:row_linear_growth}
 		\end{figure}
@@ -238,22 +237,21 @@
 		{\color{blue} Задача:}
 		Обнаружить разладку на интервале от $ Q $ до $ Q + k $, где $ Q $ --- неизвестный момент возмущения, а $ k $ --- максимально допустимое запаздывание.
 		
-		{\color{blue} Подход:} $ d_{n-1}^{(r)} > \gamma^* $ --- сигнал о моменте возмущения $ \hat{Q}$.
+		{\color{blue} Подход:} $ d_{n}^{(r)} > \gamma^* $ $ \rightarrow $ {\color{red} сигнал} о разладке в момент $ \hat{Q} $.
 		
 		\bigskip
-		{\color{blue} Ограничение:} $ \omega_2 > \omega_1 + \Delta_{min} = \omega_{min}$
-		
-		\bigskip
-		Как выбрать $ \gamma^* $? Построить аппроксимацию $ d_{n-1}^{(r)} $ и взять ее значение в точке $ k $.
-		
+		{\color{blue} Ограничение:} $ \Delta_{min}: |\omega_1 - \omega_2| \geq \Delta_{min}$. Обозначим $ \omega_{min} = \omega_1 + \Delta_{min} $.
 		
 		\bigskip
 		{\color{blue} Описание системы:}
 		\begin{enumerate}
 			\item Входные данные: $ F_N $, $ k $, $ \Delta_{min} $.
-			\item Результат: $ \hat{Q}$.
+			\item Результат: $ \hat{Q} \in [Q, Q+k]$.
 		\end{enumerate}
 	
+		\bigskip
+		{\color{red} Как выбрать $ \gamma^* $}\textbf{?} Значение в точке $ k $ аппроксимации переходного интервала функции $ d_{n}^{(r)} $.
+		
 		\begin{figure}[!hhh]
 			\center{\includegraphics[width=0.9\linewidth]{imgs/example_system_work}}
 			\caption{Система. Пример работы.}
@@ -382,7 +380,7 @@
 	
 	\begin{frame}
 		\frametitle{Часть 3. Проблемы}
-		{\color{blue} Параметры тестирования:} $ N = 800, Q=301, \omega_1=\frac{1}{10} , \Delta_{min}=\frac{1}{50}, \sigma=0.5, B=133, T=79, L=71, C_1=C_2=1$
+		{\color{blue} Параметры тестирования:} $ N = 800, Q=301, \omega_1=\frac{1}{10} , \Delta_{min}=\frac{1}{50}, \sigma=0.5, B=133, T=79, L=71, C_1=C_2=1, \phi_1=\phi_2=0$.
 		
 		\bigskip
 		
